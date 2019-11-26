@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">+cotas</string>
+    <string name="primary_screen_text">Main screen</string>
+    <string name="secondary_sceen_text">Detail screen</string>
+    <string name="go_to_detail">go to detail</string>
+    <string name="go_to_main">go to main</string>
 </resources>
