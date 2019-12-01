@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@android:style/Theme.Black.NoTitleBar">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleGravity="bottom|center_horizontal"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:title="Alvaro Quintana">
+
+            <ImageView
+                android:id="@+id/userImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5"
+                android:src="@color/colorPrimary"
+                android:contentDescription="header image background" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/photo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:src="@color/colorPrimaryDark"
+                android:fitsSystemWindows="true"
+                android:layout_centerInParent="true"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarProfile"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_arrow_back_white"/>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/levelContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aun eres un cachorro ¡consigue más puntos!"
+                        android:textColor="@color/black" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_info_black"
+                        android:padding="6dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Madrid, España"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp">
+                    <es.architectcoders.mascotas.ui.components.ReviewRating
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:numberStars="3" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(4)" />
+                </LinearLayout>
+
+
+                <!-- Following -->
+                <LinearLayout
+                    android:id="@+id/followContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/followingNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginEnd="3dp"/>
+                    <TextView
+                        android:id="@+id/followingText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="siguiendo"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"/>
+
+                    <TextView
+                        android:id="@+id/followedNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp" />
+                    <TextView
+                        android:id="@+id/followedText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="seguidores"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginStart="3dp" />
+                </LinearLayout>
+
+
+                <!-- Solds -->
+                <LinearLayout
+                    android:id="@+id/soldContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/soldNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginEnd="3dp"/>
+                    <TextView
+                        android:id="@+id/soldText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ventas"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"/>
+
+                    <TextView
+                        android:id="@+id/buyNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginStart="12dp" />
+                    <TextView
+                        android:id="@+id/buyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="compras"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginStart="3dp" />
+                </LinearLayout>
+
+                <!-- Tabs and ViewPager -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:tabMode="fixed"
+                        app:tabTextColor="@color/white"
+                        android:background="@color/colorPrimary"/>
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
