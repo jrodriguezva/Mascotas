@@ -5,6 +5,6 @@
     <enableFormatting>true</enableFormatting>
     <buildUponDefaultConfig>true</buildUponDefaultConfig>
     <failFast>true</failFast>
-    <rulesPath>$PROJECT_DIR$/detekt.yml</rulesPath>
+    <rulesPath>$PROJECT_DIR$/config/detekt/detekt.yml</rulesPath>
   </component>
 </project>
