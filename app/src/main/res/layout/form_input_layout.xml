@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+>
+
+    <EditText
+        android:id="@+id/title"
+        android:hint="@string/title_ad_form"
+        tools:targetApi="o"
+        style="@style/form_input_row"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/description"
+        style="@style/form_input_row"
+        android:hint="@string/description_ad_form"
+    />
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/form_add_row_margin_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_add_row_height"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/prize"
+            android:hint="@string/prize_ad_form"
+            style="@style/prize" />
+
+        <es.architectcoders.mascotas.Utils.CustomEditText
+            android:id="@+id/currency"
+            android:hint="@string/currency_ad_form"
+            style="@style/currency"
+            android:inputType="none"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/category"
+        style="@style/form_input_row"
+        android:hint="@string/category_ad_form"
+        android:inputType="none" />
+
+</LinearLayout>

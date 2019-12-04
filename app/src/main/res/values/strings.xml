@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">+cotas</string>
+    <string name="title_activity_create_ad">CreateAdActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="todo">TODO</string>
+
+    <string name="title_ad_form">Titulo</string>
+    <string name="description_ad_form">Descripción</string>
+    <string name="prize_ad_form">Precio</string>
+    <string name="currency_ad_form">€</string>
+    <string name="category_ad_form">Categoria</string>
+    <string name="upload_button_ad_form">SUBIR</string>
+
+
 </resources>

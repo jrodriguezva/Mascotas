@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/photoOne"
+            style="@style/CameraItem">
+
+            <ImageView
+                style="@style/CameraImg"
+                android:src="@drawable/ic_camera"></ImageView>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/photoTwo"
+            style="@style/CameraItem">
+
+            <ImageView
+                style="@style/CameraImg"
+                android:src="@drawable/ic_camera"></ImageView>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/photoThree"
+            style="@style/CameraItem">
+
+            <ImageView
+                style="@style/CameraImg"
+                android:src="@drawable/ic_camera"></ImageView>
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:baselineAligned="false"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/photoFour"
+            style="@style/CameraItem">
+
+            <ImageView
+                style="@style/CameraImg"
+                android:src="@drawable/ic_camera"></ImageView>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/photoFive"
+            style="@style/CameraItem">
+
+            <ImageView
+                style="@style/CameraImg"
+                android:src="@drawable/ic_camera"></ImageView>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/photoSix"
+            style="@style/CameraItem">
+
+            <ImageView
+                style="@style/CameraImg"
+                android:src="@drawable/ic_camera"></ImageView>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

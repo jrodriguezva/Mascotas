@@ -8,4 +8,51 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CameraItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="CameraImg">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:contentDescription">@string/todo</item>
+    </style>
+
+    <style name="form_input_row">
+        <item name="android:layout_marginTop">@dimen/form_add_row_margin_vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/form_add_row_height</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:ems">10</item>
+        <item name="android:inputType">textPersonName</item>
+    </style>
+
+    <style name="prize">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">6</item>
+        <item name="android:ems">10</item>
+        <item name="android:inputType">number</item>
+    </style>
+
+    <style name="currency">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">none</item>
+    </style>
+
 </resources>

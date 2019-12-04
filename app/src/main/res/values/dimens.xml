@@ -1,0 +1,9 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+
+    <dimen name="form_add_row_height">50dp</dimen>
+    <dimen name="form_add_row_margin_vertical">36dp</dimen>
+    <dimen name="form_add_button_height">62dp</dimen>
+
+</resources>
