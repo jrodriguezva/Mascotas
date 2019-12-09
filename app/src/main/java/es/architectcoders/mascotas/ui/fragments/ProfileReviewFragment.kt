@@ -13,6 +13,6 @@ class ProfileReviewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, @Nullable container: ViewGroup?,
                               @Nullable savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_profile_review, container, false)
+        return inflater.inflate(R.layout.profile_review_fragment, container, false)
     }
 }

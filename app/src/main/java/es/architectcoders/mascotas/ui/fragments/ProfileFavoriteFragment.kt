@@ -17,6 +17,6 @@ class ProfileFavoriteFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, @Nullable container: ViewGroup?, @Nullable savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_profile_favorite, container, false)
+        return inflater.inflate(R.layout.profile_favorite_fragment, container, false)
     }
 }

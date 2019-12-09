@@ -12,6 +12,6 @@ import es.architectcoders.mascotas.R
 class ProfileOnSaleFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, @Nullable container: ViewGroup?, @Nullable savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_profile_on_sale, container, false)
+        return inflater.inflate(R.layout.profile_on_sale_fragment, container, false)
     }
 }
