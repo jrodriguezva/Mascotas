@@ -3,15 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.ProfileOnSaleFragment"
-    android:background="#2196F3" >
+    tools:context=".ui.fragments.ProfileOnSaleFragment">
 
-    <TextView
-        android:id="@+id/tvCounter"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvOnSale"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        tools:text="PRODUCTOS EN VENTA" />
+        android:gravity="center" />
 </FrameLayout>
