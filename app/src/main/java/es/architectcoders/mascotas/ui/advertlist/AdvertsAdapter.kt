@@ -9,9 +9,11 @@ import es.architectcoders.mascotas.ui.common.basicDiffUtil
 import es.architectcoders.mascotas.ui.common.inflate
 import es.architectcoders.mascotas.ui.common.loadUrl
 import kotlinx.android.synthetic.main.view_advert.view.*
+import java.text.NumberFormat
 import java.util.*
 
-class AdvertsAdapter(private val listener: (MyFirebaseAdvert) -> Unit) :
+class AdvertsAdapter(private val listener: (MyFirebaseAdvert) -> Unit,
+                     private val favListener: (MyFirebaseAdvert) -> Unit) :
     RecyclerView.Adapter<AdvertsAdapter.ViewHolder>() {
 
     var adverts: List<MyFirebaseAdvert> by basicDiffUtil(
@@ -27,17 +29,19 @@ class AdvertsAdapter(private val listener: (MyFirebaseAdvert) -> Unit) :
     override fun getItemCount(): Int = adverts.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie = adverts[position]
-        holder.bind(movie)
-        holder.itemView.setOnClickListener { listener(movie) }
+        val advert = adverts[position]
+        holder.bind(advert)
+        holder.itemView.setOnClickListener { listener(advert) }
+        holder.itemView.advertFav.setOnClickListener { favListener(advert) }
     }
 
     class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         fun bind(advert: MyFirebaseAdvert) {
             itemView.advertTitle.text = advert.title
             itemView.advertCover.loadUrl(advert.photoUrl)
-            itemView.advertPrize.text = String.format(Locale.getDefault(),
-                "%.2d", advert.price)
+            itemView.advertPrize.text = NumberFormat.getCurrencyInstance(
+                Locale.getDefault()).format(advert.price)
+            itemView.advertRecent.visibility = if(advert.recent) View.VISIBLE else View.GONE
         }
     }
 

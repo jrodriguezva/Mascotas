@@ -1,54 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_margin"
+    android:background="@color/colorPrimaryDark"
     android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical"
-    android:padding="2dp">
+    android:padding="2dp"
+    tools:ignore="UnusedAttribute">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <es.architectcoders.mascotas.ui.common.AspectRatioImageView
-            android:id="@+id/advertCover"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            app:ratio="1.5"
-            tools:src="@tools:sample/backgrounds/scenic" />
-        <ImageView
-            android:id="@+id/advertRecent"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="top|end"
-            android:layout_margin="16dp"
-            android:src="@color/colorPrimary"
-            android:visibility="gone"
-            />
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/advertTitle"
-        android:layout_width="match_parent"
+    <es.architectcoders.mascotas.ui.common.AspectRatioImageView
+        android:id="@+id/advertCover"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/colorPrimaryDark"
-        android:gravity=""
-        android:lines="2"
-        android:minLines="2"
-        android:padding="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
-        tools:text="@tools:sample/lorem" />
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:ratio="1.5"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <ImageView
+        android:id="@+id/advertRecent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="@string/advertRecentCD"
+        android:minWidth="32dp"
+        android:minHeight="32dp"
+        android:src="@drawable/ic_recent_advert_white_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/advertCover" />
 
     <TextView
         android:id="@+id/advertPrize"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toEndOf="@+id/advertFav"
+        android:lines="1"
+        android:maxLines="1"
+        android:padding="@dimen/default_padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+        app:layout_constraintEnd_toStartOf="@+id/advertFav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/advertCover"
+        tools:text="@tools:sample/lorem/random" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/advertFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/advertFavCD"
+        android:padding="@dimen/default_padding"
+        android:src="@drawable/ic_favorite_border_white_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/advertPrize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/advertCover" />
+
+    <TextView
+        android:id="@+id/advertTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:gravity=""
+        android:maxLines="2"
+        android:padding="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/advertPrize"
+        tools:text="@tools:sample/lorem/random" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
