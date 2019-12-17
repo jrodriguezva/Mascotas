@@ -9,8 +9,6 @@ class Product : Parcelable {
     var name: String ?= null
     var prize: String ?= null
 
-    constructor() {}
-
     constructor(name: String, prize: String, imageURL: String) {
         this.name = name
         this.prize = prize

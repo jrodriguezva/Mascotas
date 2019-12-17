@@ -25,7 +25,7 @@
                 android:id="@+id/nameEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre"
+                android:hint="@string/name"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -41,7 +41,7 @@
                 android:id="@+id/surnameEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Apellido"
+                android:hint="@string/surname"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -57,7 +57,7 @@
                 android:id="@+id/addressEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Direccion"
+                android:hint="@string/address"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -73,7 +73,7 @@
                 android:id="@+id/postalAddressEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Direccion Postal"
+                android:hint="@string/postal_code"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -90,7 +90,7 @@
                 android:id="@+id/emailEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="E-mail"
+                android:hint="@string/email"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -101,6 +101,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-            android:text="Guardar" />
+            android:text="@string/save" />
     </LinearLayout>
 </LinearLayout>

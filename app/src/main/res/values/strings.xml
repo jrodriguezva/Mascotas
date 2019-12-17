@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">+cotas</string>
+    <string name="name">Nombre</string>
+    <string name="surname">Apellido</string>
+    <string name="address">Direccion</string>
+    <string name="postal_code">Direccion Postal</string>
+    <string name="email">E-mail</string>
+    <string name="save">Guardar</string>
+    <string name="example">example</string>
+    <string name="amount_example">999 €</string>
+    <string name="rating_example">(4)</string>
+    <string name="following_number_example">3</string>
+    <string name="following">siguiendo</string>
+    <string name="followed_example">2</string>
+    <string name="followed">seguidores</string>
+    <string name="sold_example">3</string>
+    <string name="sold">ventas</string>
+    <string name="buy_example">2</string>
+    <string name="buy">compras</string>
 </resources>
