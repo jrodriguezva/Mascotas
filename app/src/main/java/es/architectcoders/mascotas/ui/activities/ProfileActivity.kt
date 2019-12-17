@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import es.architectcoders.mascotas.ui.adapters.ProfilePagerAdapter
+import es.architectcoders.mascotas.ui.adapters.ProfilePageAdapter
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.ui.routers.goToEditProfileActivity
 import kotlinx.android.synthetic.main.profile_activity.*
@@ -17,7 +17,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.profile_activity)
         setSupportActionBar(toolbarProfile)
 
-        val fragmentAdapter = ProfilePagerAdapter(supportFragmentManager)
+        val fragmentAdapter = ProfilePageAdapter(supportFragmentManager)
         viewPager.adapter = fragmentAdapter
         tabs.setupWithViewPager(viewPager)
 

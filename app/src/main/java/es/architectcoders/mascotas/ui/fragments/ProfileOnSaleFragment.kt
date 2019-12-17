@@ -34,9 +34,9 @@ class ProfileOnSaleFragment : Fragment() {
         list.add(Product("Collar perro 4", "8€", "http://i.imgur.com/DvpvklR.png"))
         list.add(Product("Collar perro 5", "8€", "http://i.imgur.com/DvpvklR.png"))
 
-        rvOnSale!!.adapter = ProductAdaper(context!!, list)
+        rvOnSale?.adapter = ProductAdaper(context!!, list)
         rvOnSale.layoutManager = GridLayoutManager(context, 2)
-        rvOnSale.adapter!!.notifyDataSetChanged()
+        rvOnSale.adapter?.notifyDataSetChanged()
     }
 
 }

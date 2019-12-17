@@ -13,14 +13,9 @@ import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.data.models.Product
 import java.util.ArrayList
 
-class ProductAdaper(internal var context: Context, products: List<Product>) :
+class ProductAdaper(internal var context: Context, private val products: ArrayList<Product>) :
     RecyclerView.Adapter<ProductAdaper.ProductHolder>() {
 
-    private val productList: List<Product>
-
-    init {
-        this.productList = ArrayList(products)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -30,18 +25,18 @@ class ProductAdaper(internal var context: Context, products: List<Product>) :
     }
 
     override fun onBindViewHolder(holder: ProductHolder, position: Int) {
-        val product = productList[position]
+        val product = products[position]
         holder.name.text = product.name
         holder.prize.text = product.prize
         Glide.with(context).load(product.imageURL).apply(RequestOptions().circleCrop()).into(holder.imageProduct)
     }
 
     override fun getItemCount(): Int {
-        return productList.size
+        return products.size
     }
 
     fun getItem(position: Int): Product {
-        return productList[position]
+        return products[position]
     }
 
     class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {

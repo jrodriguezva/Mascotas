@@ -25,6 +25,7 @@ class EditProfileViewModel(private val repository: EditProfileRepository): ViewM
     }
 
     private val _model = MutableLiveData<UiModel>()
+
     val model: LiveData<UiModel>
         get() {
             if (_model.value == null) getUser()
@@ -76,7 +77,7 @@ class EditProfileViewModel(private val repository: EditProfileRepository): ViewM
                 _model.value = UiModel.ValidateForm(Field.Name("Required."))
                 valid1 = false
             }
-            name.length < 6 -> {
+            name.length < MAX_LENGTH_NAME -> {
                 _model.value = UiModel.ValidateForm(Field.Name("Name should be at least 6 character."))
                 valid1 = false
             }
@@ -91,7 +92,7 @@ class EditProfileViewModel(private val repository: EditProfileRepository): ViewM
                 _model.value = UiModel.ValidateForm(Field.Surname("Required."))
                 valid1 = false
             }
-            surname.length < 6 -> {
+            surname.length < MAX_LENGTH_SURNAME -> {
                 _model.value = UiModel.ValidateForm(Field.Surname("Surname should be at least 6 character."))
                 valid1 = false
             }
@@ -106,7 +107,7 @@ class EditProfileViewModel(private val repository: EditProfileRepository): ViewM
                 _model.value = UiModel.ValidateForm(Field.Address("Required."))
                 valid1 = false
             }
-            address.length < 6 -> {
+            address.length < MAX_LENGTH_ADDRESS -> {
                 _model.value = UiModel.ValidateForm(Field.Address("address should be at least 6 character."))
                 valid1 = false
             }
@@ -121,7 +122,7 @@ class EditProfileViewModel(private val repository: EditProfileRepository): ViewM
                 _model.value = UiModel.ValidateForm(Field.PostalCode("Required."))
                 valid1 = false
             }
-            postalCode.length < 4 -> {
+            postalCode.length < MAX_LENGTH_POSTAL_CODE -> {
                 _model.value = UiModel.ValidateForm(Field.PostalCode("The postal code should be at least 4 character."))
                 valid1 = false
             }
@@ -136,12 +137,20 @@ class EditProfileViewModel(private val repository: EditProfileRepository): ViewM
                 _model.value = UiModel.ValidateForm(Field.Email("Required."))
                 valid1 = false
             }
-            email.length < 6 -> {
+            email.length < MAX_LENGTH_EMAIL -> {
                 _model.value = UiModel.ValidateForm(Field.Email("The email should be at least 6 character."))
                 valid1 = false
             }
             else -> _model.value = UiModel.ValidateForm(Field.Email(null))
         }
         return valid1
+    }
+
+    companion object {
+        const val MAX_LENGTH_NAME = 6
+        const val MAX_LENGTH_SURNAME = 6
+        const val MAX_LENGTH_ADDRESS = 6
+        const val MAX_LENGTH_POSTAL_CODE = 4
+        const val MAX_LENGTH_EMAIL = 6
     }
 }

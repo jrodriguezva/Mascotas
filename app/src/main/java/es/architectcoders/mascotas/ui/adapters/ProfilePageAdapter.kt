@@ -8,14 +8,14 @@ import es.architectcoders.mascotas.ui.fragments.ProfileOnSaleFragment
 import es.architectcoders.mascotas.ui.fragments.ProfileReviewFragment
 
 
-class ProfilePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class ProfilePageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> {
+            PROFILE_ON_SALE_FRAGMENT -> {
                 ProfileOnSaleFragment()
             }
-            1 -> ProfileFavoriteFragment()
+            PROFILE_FAVORITE_FRAGMENT -> ProfileFavoriteFragment()
             else -> {
                 return ProfileReviewFragment()
             }
@@ -23,17 +23,23 @@ class ProfilePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     }
 
     override fun getCount(): Int {
-        return 3
+        return TOTAL_PAGE
     }
 
 
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
-            0 -> "En venta"
-            1 -> "Favoritos"
+            PROFILE_ON_SALE_FRAGMENT -> "En venta"
+            PROFILE_FAVORITE_FRAGMENT -> "Favoritos"
             else -> {
                 return "Reviews"
             }
         }
+    }
+
+    companion object {
+        const val PROFILE_ON_SALE_FRAGMENT = 0
+        const val PROFILE_FAVORITE_FRAGMENT = 1
+        const val TOTAL_PAGE = 3
     }
 }
