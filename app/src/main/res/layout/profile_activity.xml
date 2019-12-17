@@ -21,7 +21,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="bottom|center_horizontal"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:title="Alvaro Quintana">
+            app:title="@string/name_user">
 
             <ImageView
                 android:id="@+id/userImage"
@@ -30,7 +30,7 @@
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.5"
                 android:src="@color/colorPrimary"
-                android:contentDescription="header image background" />
+                android:contentDescription="@string/user_image" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/photo"
@@ -63,34 +63,44 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/levelContainer"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center">
                     <TextView
+                        android:id="@+id/textLevel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Aun eres un cachorro ¡consigue más puntos!"
-                        android:textColor="@color/black" />
+                        android:text="@string/user_level"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"  />
 
                     <ImageView
+                        android:id="@+id/iconLevelInfo"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_info_black"
-                        android:padding="6dp"/>
-                </LinearLayout>
+                        android:padding="6dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/icon_level_info" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Madrid, España"
+                    android:text="@string/madrid_spain"
                     android:textColor="@color/black"
                     android:layout_gravity="center"
                     android:gravity="center" />
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -99,19 +109,28 @@
                     android:layout_marginBottom="20dp">
 
                     <RatingBar
+                        android:id="@+id/ratingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         style="?android:attr/ratingBarStyleSmall"
                         android:numStars="5"
-                        android:rating="4"/>
+                        android:rating="4"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/rating_example"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="@id/ratingBar"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 <!-- Following -->
@@ -213,7 +232,7 @@
                 </LinearLayout>
 
                 <!-- Tabs and ViewPager -->
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -224,18 +243,20 @@
                         android:layout_height="wrap_content"
                         app:tabMode="fixed"
                         app:tabTextColor="@color/white"
-                        android:background="@color/colorPrimary"/>
+                        android:background="@color/colorPrimary"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/viewPager"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="tabs"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tabs" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 

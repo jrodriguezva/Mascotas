@@ -17,4 +17,9 @@
     <string name="sold">ventas</string>
     <string name="buy_example">2</string>
     <string name="buy">compras</string>
+    <string name="user_level">Aun eres un cachorro ¡consigue más puntos!</string>
+    <string name="madrid_spain">Madrid, España</string>
+    <string name="icon_level_info">icono nivel información</string>
+    <string name="user_image">header image background</string>
+    <string name="name_user">Alvaro Quintana</string>
 </resources>
