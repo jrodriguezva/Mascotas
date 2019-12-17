@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.data.models.Product
 import java.util.ArrayList
@@ -32,7 +33,7 @@ class ProductAdaper(internal var context: Context, products: List<Product>) :
         val product = productList[position]
         holder.name.text = product.name
         holder.prize.text = product.prize
-        Picasso.get().load(product.imageURL).into(holder.imageProduct)
+        Glide.with(context).load(product.imageURL).apply(RequestOptions().circleCrop()).into(holder.imageProduct)
     }
 
     override fun getItemCount(): Int {
