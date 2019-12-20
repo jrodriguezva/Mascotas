@@ -17,6 +17,7 @@
             style="@style/CameraItem">
 
             <ImageView
+                android:id="@+id/imgOne"
                 style="@style/CameraImg"
                 android:src="@drawable/ic_camera"></ImageView>
         </FrameLayout>
@@ -26,6 +27,7 @@
             style="@style/CameraItem">
 
             <ImageView
+                android:id="@+id/imgTwo"
                 style="@style/CameraImg"
                 android:src="@drawable/ic_camera"></ImageView>
         </FrameLayout>
@@ -35,6 +37,7 @@
             style="@style/CameraItem">
 
             <ImageView
+                android:id="@+id/imgThree"
                 style="@style/CameraImg"
                 android:src="@drawable/ic_camera"></ImageView>
         </FrameLayout>
@@ -53,6 +56,7 @@
             style="@style/CameraItem">
 
             <ImageView
+                android:id="@+id/imgFour"
                 style="@style/CameraImg"
                 android:src="@drawable/ic_camera"></ImageView>
         </FrameLayout>
@@ -62,6 +66,7 @@
             style="@style/CameraItem">
 
             <ImageView
+                android:id="@+id/imgFive"
                 style="@style/CameraImg"
                 android:src="@drawable/ic_camera"></ImageView>
         </FrameLayout>
@@ -71,6 +76,7 @@
             style="@style/CameraItem">
 
             <ImageView
+                android:id="@+id/imgSix"
                 style="@style/CameraImg"
                 android:src="@drawable/ic_camera"></ImageView>
         </FrameLayout>

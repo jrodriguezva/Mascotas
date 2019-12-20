@@ -11,7 +11,7 @@ class CreateAdActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_ad)
-        supportFragmentManager.beginTransaction().replace(container.id,CreateAdActivityFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(container.id,CreateAdFragment()).commit()
     }
 
 }

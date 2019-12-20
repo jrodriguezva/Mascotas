@@ -11,5 +11,10 @@
     <string name="category_ad_form">Categoria</string>
     <string name="upload_button_ad_form">SUBIR</string>
 
-
+    <string name="title">title</string>
+    <string name="description">description</string>
+    <string name="prize">prize</string>
+    <string name="currency">currency</string>
+    <string name="category">category</string>
+    <string name="images">images</string>
 </resources>
