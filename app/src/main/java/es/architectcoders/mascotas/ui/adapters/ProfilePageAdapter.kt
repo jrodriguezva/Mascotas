@@ -8,7 +8,7 @@ import es.architectcoders.mascotas.ui.fragments.ProfileOnSaleFragment
 import es.architectcoders.mascotas.ui.fragments.ProfileReviewFragment
 
 
-class ProfilePageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class ProfilePageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
