@@ -3,6 +3,7 @@ package es.architectcoders.mascotas.generate_ad
 import android.Manifest
 import android.app.Activity
 import android.content.ContentValues
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
@@ -63,7 +65,7 @@ class CreateAdFragment : Fragment(), CreateAdPresenter.CreateAdView, View.OnClic
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter = CreateAdPresenter(this)
+        presenter = CreateAdPresenter(this, context!!)
         presenter.onStart()
 
     }
@@ -174,11 +176,12 @@ class CreateAdFragment : Fragment(), CreateAdPresenter.CreateAdView, View.OnClic
         photoFour.setOnClickListener(this)
         photoFive.setOnClickListener(this)
         photoSix.setOnClickListener(this)
-
+        customClick(category)
         customClick(currency)
         db = FirebaseFirestore.getInstance()
         testReadDB()
-        currency.setOnClickListener { testWriteDB() }
+        category.setOnClickListener { showCategoryPopup() }
+        currency.setOnClickListener { showCurrencyPopup() }
         subirBtn.setOnClickListener {
         val newAd=ad(title?.text.toString(), description?.text.toString(), prize?.text.toString().toInt(),currency?.text.toString(),category?.text.toString(),ArrayList<String>())
             presenter.saveButtonPressed(newAd) }
@@ -215,6 +218,36 @@ class CreateAdFragment : Fragment(), CreateAdPresenter.CreateAdView, View.OnClic
     /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 PRIVATE METHODS
  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+     fun showCurrencyPopup() {
+        alert("Choose a currency Option") {
+            title = "Currency"
+            positiveButton("€") {currency.setText("€") }
+            negativeButton("$") {currency.setText("$") }
+
+        }.show()
+    }
+    fun showCategoryPopup() {
+        val builder =  AlertDialog.Builder(context!!)
+        builder.setTitle("Choose an animal")
+// add a list
+        val animals = arrayOf("dog", "cat", "bird", "fish", "exotic")
+        builder.setItems(animals) { dialog, which ->
+            when (which) {
+                0 -> { category.setText("dog") }
+                1 -> {category.setText("cat") }
+                2 -> { category.setText("bird")}
+                3 -> { category.setText("fish") }
+                4 -> { category.setText("exotic") }
+            }
+        }
+
+// create and show the alert dialog
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+
 
     private fun pickFromCamera() {
         val values = ContentValues()

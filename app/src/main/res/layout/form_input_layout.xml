@@ -41,9 +41,10 @@
             android:inputType="none"/>
     </LinearLayout>
 
-    <EditText
+    <es.architectcoders.mascotas.Utils.CustomEditText
         android:id="@+id/category"
-        style="@style/form_input_row"
+        android:gravity="left"
+        style="@style/form_input_row_category"
         android:hint="@string/category_ad_form"
         android:inputType="none" />
 
