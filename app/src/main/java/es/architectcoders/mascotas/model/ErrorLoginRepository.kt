@@ -1,6 +1,6 @@
 package es.architectcoders.mascotas.model
 
 sealed class ErrorLoginRepository {
-    object AuthenticationError : ErrorLoginRepository()
+    class AuthenticationError(val errorString: String?) : ErrorLoginRepository()
     object UserNotFoundError : ErrorLoginRepository()
 }

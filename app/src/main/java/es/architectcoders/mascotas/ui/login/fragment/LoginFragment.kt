@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.model.LoginRepository
+import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.common.observe
 import es.architectcoders.mascotas.ui.common.withViewModel
 import es.architectcoders.mascotas.ui.login.viewmodel.LoginViewModel
@@ -28,7 +29,7 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = withViewModel({ LoginViewModel(LoginRepository(FirebaseAuth.getInstance())) }) {
+        viewModel = withViewModel({ LoginViewModel(LoginRepository(FirebaseAuth.getInstance()), ResourceProvider(resources)) }) {
             observe(model, ::updateUI)
         }
         login.setOnClickListener {
@@ -46,8 +47,8 @@ class LoginFragment : Fragment() {
             }
             is LoginViewModel.UiModel.ValidateForm -> {
                 when (model.field) {
-                    is LoginViewModel.Field.Email -> usernameLayout.error = model.field.error
-                    is LoginViewModel.Field.Password -> passwordLayout.error = model.field.error
+                    is LoginViewModel.Field.Email -> usernameLayout.error = model.field.error?.let { it }
+                    is LoginViewModel.Field.Password -> passwordLayout.error = model.field.error?.let { it }
                 }
             }
             is LoginViewModel.UiModel.Navigation -> Unit

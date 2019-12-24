@@ -21,7 +21,7 @@ class LoginRepository(private val auth: FirebaseAuth) {
                     }
                 }.addOnFailureListener {
                     if (continuation.isActive) {
-                        continuation.resume(Either.Left(ErrorLoginRepository.AuthenticationError))
+                        continuation.resume(Either.Left(ErrorLoginRepository.AuthenticationError(it.message)))
                     }
                 }
         }
@@ -56,7 +56,7 @@ class LoginRepository(private val auth: FirebaseAuth) {
                 }
             }.addOnFailureListener {
                 if (continuation.isActive) {
-                    continuation.resume(Either.Left(ErrorLoginRepository.AuthenticationError))
+                    continuation.resume(Either.Left(ErrorLoginRepository.AuthenticationError(it.message)))
                 }
             }
         }
