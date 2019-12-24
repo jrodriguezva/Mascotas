@@ -13,8 +13,8 @@ import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.data.models.Product
 import java.util.ArrayList
 
-class ProductAdaper(internal var context: Context, private val products: ArrayList<Product>) :
-    RecyclerView.Adapter<ProductAdaper.ProductHolder>() {
+class ProductAdapter(internal var context: Context, private val products: ArrayList<Product>) :
+    RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {

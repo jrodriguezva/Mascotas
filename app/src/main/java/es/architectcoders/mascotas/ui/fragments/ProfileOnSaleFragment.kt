@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.data.models.Product
-import es.architectcoders.mascotas.ui.adapters.ProductAdaper
+import es.architectcoders.mascotas.ui.adapters.ProductAdapter
 import kotlinx.android.synthetic.main.profile_on_sale_fragment.*
 import androidx.recyclerview.widget.GridLayoutManager
 
@@ -34,7 +34,7 @@ class ProfileOnSaleFragment : Fragment() {
         list.add(Product("Collar perro 4", "8€", "http://i.imgur.com/DvpvklR.png"))
         list.add(Product("Collar perro 5", "8€", "http://i.imgur.com/DvpvklR.png"))
 
-        rvOnSale?.adapter = ProductAdaper(context!!, list)
+        rvOnSale?.adapter = ProductAdapter(context!!, list)
         rvOnSale.layoutManager = GridLayoutManager(context, 2)
         rvOnSale.adapter?.notifyDataSetChanged()
     }
