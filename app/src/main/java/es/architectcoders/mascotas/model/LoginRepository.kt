@@ -13,7 +13,7 @@ import kotlin.coroutines.resume
 class LoginRepository(private val auth: FirebaseAuth) {
 
     suspend fun signIn(email: String, password: String) =
-        suspendCancellableCoroutine<Either<String, Boolean>> { continuation ->
+        suspendCancellableCoroutine<Either<ErrorLoginRepository, Boolean>> { continuation ->
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
                     update {
@@ -21,7 +21,7 @@ class LoginRepository(private val auth: FirebaseAuth) {
                     }
                 }.addOnFailureListener {
                     if (continuation.isActive) {
-                        continuation.resume(Either.Left(it.message ?: "Error, Authentication failed."))
+                        continuation.resume(Either.Left(ErrorLoginRepository.AuthenticationError))
                     }
                 }
         }
@@ -49,14 +49,14 @@ class LoginRepository(private val auth: FirebaseAuth) {
     }
 
     suspend fun createAccount(email: String, password: String) =
-        suspendCancellableCoroutine<Either<String, Boolean>> { continuation ->
+        suspendCancellableCoroutine<Either<ErrorLoginRepository, Boolean>> { continuation ->
             auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
                 update {
                     if (continuation.isActive) continuation.resume(Either.Right(true))
                 }
             }.addOnFailureListener {
                 if (continuation.isActive) {
-                    continuation.resume(Either.Left(it.message ?: "Error, Authentication failed."))
+                    continuation.resume(Either.Left(ErrorLoginRepository.AuthenticationError))
                 }
             }
         }
@@ -74,6 +74,6 @@ class LoginRepository(private val auth: FirebaseAuth) {
                 val phone = phoneNumber
                 Right(MyFirebaseUser(email, name, photoUrl, phone))
             }
-        } ?: Either.Left("Error, User not found.")
+        } ?: Either.Left(ErrorLoginRepository.UserNotFoundError)
     }
 }

@@ -4,6 +4,11 @@
     <string name="sign_up">Sign up</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="error_user_not_found">Error, User not found.</string>
+    <string name="error_authentication">Error, Authentication failed.</string>
+    <string name="required">Required.</string>
+    <string name="error_password_length">The password should be at least 6 character.</string>
+    <string name="error_email_format">The email address is badly formatted.</string>
     <string name="name">Nombre</string>
     <string name="surname">Apellido</string>
     <string name="address">Direccion</string>
