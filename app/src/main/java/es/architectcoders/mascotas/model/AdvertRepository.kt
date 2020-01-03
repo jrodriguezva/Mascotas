@@ -9,8 +9,8 @@ class AdvertRepository {
     }
 
     private fun findDummyAdverts() = listOf (
-        MyFirebaseAdvert(0, "Advert title 1", "https://picsum.photos/200/300", 10.5, true),
-        MyFirebaseAdvert(1, "Advert title 2", "https://picsum.photos/200/300", 25.000, true),
-        MyFirebaseAdvert(2, "Advert title 3", "https://picsum.photos/200/300", 19.999, false)
+        MyFirebaseAdvert(0, "Advert title 1", "", 10.5, true),
+        MyFirebaseAdvert(1, "Advert title 2", "", 25.000, true),
+        MyFirebaseAdvert(2, "Advert title 3", "", 19.999, false)
         )
 }

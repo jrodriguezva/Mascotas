@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/ic_add_circle_white_24dp"
-        android:contentDescription="@string/addAdvertCD"
+        android:contentDescription="@string/add_advert"
         android:minWidth="64dp"
         android:minHeight="64dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -39,10 +39,12 @@ class AdvertListFragment : Fragment() {
 
     private fun updateUI(model: AdvertListViewModel.UiModel) {
         progress.visibility =
-            if (model is AdvertListViewModel.UiModel.Loading)
+            if (model is AdvertListViewModel.UiModel.Loading) {
                 View.VISIBLE
-            else
+            }
+            else {
                 View.GONE
+            }
 
         when (model) {
             is AdvertListViewModel.UiModel.Content -> {

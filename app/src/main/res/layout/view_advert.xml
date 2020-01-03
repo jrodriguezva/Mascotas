@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/default_margin"
+    android:layout_margin="@dimen/advert_margin"
     android:background="@color/colorPrimaryDark"
     android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical"
     android:padding="2dp"
     tools:ignore="UnusedAttribute">
 
-    <es.architectcoders.mascotas.ui.common.AspectRatioImageView
+    <ImageView
         android:id="@+id/advertCover"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -19,18 +19,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:ratio="1.5"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        android:contentDescription="@string/advert_cover"/>
 
     <ImageView
         android:id="@+id/advertRecent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_margin="@dimen/advert_image_margin"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:contentDescription="@string/advertRecentCD"
+        android:contentDescription="@string/advert_recent"
         android:minWidth="32dp"
         android:minHeight="32dp"
         android:src="@drawable/ic_recent_advert_white_24dp"
@@ -48,12 +47,11 @@
         android:layout_toEndOf="@+id/advertFav"
         android:lines="1"
         android:maxLines="1"
-        android:padding="@dimen/default_padding"
+        android:padding="@dimen/advert_text_padding"
         android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
         app:layout_constraintEnd_toStartOf="@+id/advertFav"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/advertCover"
-        tools:text="@tools:sample/lorem/random" />
+        app:layout_constraintTop_toBottomOf="@+id/advertCover"/>
 
     <ImageView
         android:id="@+id/advertFav"
@@ -62,8 +60,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:contentDescription="@string/advertFavCD"
-        android:padding="@dimen/default_padding"
+        android:contentDescription="@string/advert_fav"
+        android:padding="@dimen/advert_image_padding"
         android:src="@drawable/ic_favorite_border_white_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/advertPrize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +84,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/advertPrize"
-        tools:text="@tools:sample/lorem/random" />
+        app:layout_constraintTop_toBottomOf="@+id/advertPrize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

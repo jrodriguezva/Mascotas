@@ -38,7 +38,12 @@ class AdvertsAdapter(private val listener: (MyFirebaseAdvert) -> Unit,
     class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         fun bind(advert: MyFirebaseAdvert) {
             itemView.advertTitle.text = advert.title
-            itemView.advertCover.loadUrl(advert.photoUrl)
+            if(advert.photoUrl.isEmpty()) {
+                itemView.advertCover.setImageResource(R.drawable.ic_launcher_background)
+            }
+            else {
+                itemView.advertCover.loadUrl(advert.photoUrl)
+            }
             itemView.advertPrize.text = NumberFormat.getCurrencyInstance(
                 Locale.getDefault()).format(advert.price)
             itemView.advertRecent.visibility = if(advert.recent) View.VISIBLE else View.GONE
