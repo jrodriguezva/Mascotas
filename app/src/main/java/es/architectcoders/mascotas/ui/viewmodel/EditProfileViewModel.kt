@@ -4,11 +4,10 @@ import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import es.architectcoders.mascotas.ui.model.EditProfileRepository
 import kotlinx.coroutines.launch
 import androidx.lifecycle.viewModelScope
 
-class EditProfileViewModel(private val repository: EditProfileRepository): ViewModel() {
+class EditProfileViewModel : ViewModel() {
     sealed class UiModel {
         object Navigation : UiModel()
         class ValidateForm(val field: Field) : UiModel()

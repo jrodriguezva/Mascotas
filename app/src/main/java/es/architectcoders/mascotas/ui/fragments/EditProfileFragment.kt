@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import es.architectcoders.mascotas.R
-import es.architectcoders.mascotas.ui.model.EditProfileRepository
 import es.architectcoders.mascotas.ui.viewmodel.EditProfileViewModel
 import kotlinx.android.synthetic.main.edit_profile_activity.*
-import kotlinx.android.synthetic.main.edit_profile_fragment.*
 
 class EditProfileFragment: Fragment(){
     companion object {
