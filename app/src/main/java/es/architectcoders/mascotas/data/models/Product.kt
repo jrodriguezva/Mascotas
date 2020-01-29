@@ -1,7 +1,8 @@
 package es.architectcoders.mascotas.data.models
 
-import android.os.Parcel
 import android.os.Parcelable
-import java.io.Serializable
+import kotlinx.android.parcel.Parcelize
 
-data class Product (var name: String, var prize: String, var imageURL: String) : Serializable
+
+@Parcelize
+data class Product (val name: String, val prize: String, val imageURL: String) : Parcelable
