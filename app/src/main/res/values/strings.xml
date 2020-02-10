@@ -22,4 +22,8 @@
     <string name="icon_level_info">icono nivel información</string>
     <string name="user_image">header image background</string>
     <string name="name_user">Alvaro Quintana</string>
+    <string name="advert_recent">Recent advert</string>
+    <string name="add_advert">Add advert</string>
+    <string name="advert_fav">Advert fav</string>
+    <string name="advert_cover">Advert cover</string>
 </resources>

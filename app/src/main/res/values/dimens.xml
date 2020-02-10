@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="advert_image_padding">8dp</dimen>
+    <dimen name="advert_text_padding">8dp</dimen>
+    <dimen name="advert_margin">6dp</dimen>
+    <dimen name="advert_image_margin">6dp</dimen>
+</resources>

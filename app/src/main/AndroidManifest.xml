@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.MainActivity">
-        </activity>
+        <activity android:name=".ui.activities.MainActivity"></activity>
         <activity android:name=".ui.activities.ProfileActivity" >
+        <activity android:name=".ui.advertlist.AdvertListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
