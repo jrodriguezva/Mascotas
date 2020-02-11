@@ -14,7 +14,6 @@
     <string name="surname">Apellido</string>
     <string name="address">Direccion</string>
     <string name="postal_code">Direccion Postal</string>
-    <string name="email">E-mail</string>
     <string name="save">Guardar</string>
     <string name="example">example</string>
     <string name="amount_example">999 €</string>
