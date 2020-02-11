@@ -1,7 +1,9 @@
-package es.architectcoders.mascotas
+package es.architectcoders.mascotas.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import es.architectcoders.mascotas.R
+
 
 class MainActivity : AppCompatActivity() {
 
