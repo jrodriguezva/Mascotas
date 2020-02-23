@@ -244,6 +244,7 @@
                         app:tabMode="fixed"
                         app:tabTextColor="@color/white"
                         android:background="@color/colorPrimary"
+                        app:tabSelectedTextColor="@color/colorPrimaryDark"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
