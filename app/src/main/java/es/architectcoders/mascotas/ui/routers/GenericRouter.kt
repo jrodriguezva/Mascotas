@@ -2,8 +2,8 @@ package es.architectcoders.mascotas.ui.routers
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import es.architectcoders.mascotas.ui.activities.EditProfileActivity
-import es.architectcoders.mascotas.ui.activities.ProfileActivity
+import es.architectcoders.mascotas.ui.profileEdit.activities.EditProfileActivity
+import es.architectcoders.mascotas.ui.profile.activities.ProfileActivity
 
 
 fun AppCompatActivity.goToEditProfileActivity(){

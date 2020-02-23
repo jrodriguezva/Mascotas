@@ -1,11 +1,11 @@
-package es.architectcoders.mascotas.ui.adapters
+package es.architectcoders.mascotas.ui.profile.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import es.architectcoders.mascotas.ui.fragments.ProfileFavoriteFragment
-import es.architectcoders.mascotas.ui.fragments.ProfileOnSaleFragment
-import es.architectcoders.mascotas.ui.fragments.ProfileReviewFragment
+import es.architectcoders.mascotas.ui.profile.fragments.ProfileFavoriteFragment
+import es.architectcoders.mascotas.ui.profile.fragments.ProfileOnSaleFragment
+import es.architectcoders.mascotas.ui.profile.fragments.ProfileReviewFragment
 
 
 class ProfilePageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {

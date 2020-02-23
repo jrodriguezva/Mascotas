@@ -1,4 +1,4 @@
-package es.architectcoders.mascotas.ui.fragments
+package es.architectcoders.mascotas.ui.profile.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.data.models.Product
-import es.architectcoders.mascotas.ui.adapters.ProductAdapter
+import es.architectcoders.mascotas.ui.profile.adapters.ProductAdapter
 import kotlinx.android.synthetic.main.profile_on_sale_fragment.*
 import androidx.recyclerview.widget.GridLayoutManager
 

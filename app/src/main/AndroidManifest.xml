@@ -11,15 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.MainActivity"></activity>
         <activity android:name=".ui.advertlist.AdvertListActivity"></activity>
-        <activity android:name=".ui.activities.ProfileActivity" >
+        <activity android:name=".ui.profile.activities.ProfileActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.EditProfileActivity" ></activity>
+        <activity android:name=".ui.profileEdit.activities.EditProfileActivity" ></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package es.architectcoders.mascotas.ui.fragments
+package es.architectcoders.mascotas.ui.profile.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

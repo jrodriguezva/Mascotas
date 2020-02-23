@@ -1,4 +1,4 @@
-package es.architectcoders.mascotas.ui.viewmodel
+package es.architectcoders.mascotas.ui.profileEdit.viewmodel
 
 import android.text.TextUtils
 import androidx.lifecycle.LiveData
@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.launch
 import androidx.lifecycle.viewModelScope
 
-class EditProfileViewModel : ViewModel() {
+class ProfileEditViewModel : ViewModel() {
     sealed class UiModel {
         object Navigation : UiModel()
         class ValidateForm(val field: Field) : UiModel()

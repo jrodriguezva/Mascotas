@@ -1,4 +1,4 @@
-package es.architectcoders.mascotas.ui.adapters
+package es.architectcoders.mascotas.ui.profile.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
