@@ -26,4 +26,7 @@
     <string name="add_advert">Add advert</string>
     <string name="advert_fav">Advert fav</string>
     <string name="advert_cover">Advert cover</string>
+    <string name="edit_profile">Editar perfil</string>
+    <string name="profile">Profile</string>
+    <string name="edit">Edit</string>
 </resources>
