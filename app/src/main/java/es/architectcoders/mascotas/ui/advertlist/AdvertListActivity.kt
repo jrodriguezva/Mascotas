@@ -26,8 +26,6 @@ class AdvertListActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         setSupportActionBar(toolbarAdvertlist)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = getString(R.string.app_name)
         menuInflater.inflate(R.menu.menu_advertlist, menu)
 
