@@ -1,10 +1,19 @@
 <resources>
     <string name="app_name">+cotas</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="error_user_not_found">Error, User not found.</string>
+    <string name="error_authentication">Error, Authentication failed.</string>
+    <string name="required">Required.</string>
+    <string name="error_password_length">The password should be at least 6 character.</string>
+    <string name="error_email_format">The email address is badly formatted.</string>
+    <string name="application_logo">application logo</string>
     <string name="name">Nombre</string>
     <string name="surname">Apellido</string>
     <string name="address">Direccion</string>
     <string name="postal_code">Direccion Postal</string>
-    <string name="email">E-mail</string>
     <string name="save">Guardar</string>
     <string name="example">example</string>
     <string name="amount_example">999 €</string>

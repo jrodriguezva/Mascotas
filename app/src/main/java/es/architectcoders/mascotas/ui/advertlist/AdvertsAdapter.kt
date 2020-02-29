@@ -39,7 +39,7 @@ class AdvertsAdapter(private val listener: (MyFirebaseAdvert) -> Unit,
         fun bind(advert: MyFirebaseAdvert) {
             itemView.advertTitle.text = advert.title
             if(advert.photoUrl.isEmpty()) {
-                itemView.advertCover.setImageResource(R.drawable.ic_launcher_background)
+                itemView.advertCover.setImageResource(R.drawable.ic_launcher_foreground)
             }
             else {
                 itemView.advertCover.loadUrl(advert.photoUrl)

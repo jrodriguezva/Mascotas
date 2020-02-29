@@ -1,5 +1,7 @@
 package es.architectcoders.mascotas.ui.advertlist
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,6 +12,10 @@ import es.architectcoders.mascotas.ui.routers.goToProfileActivity
 import kotlinx.android.synthetic.main.advertlist_activity.*
 
 class AdvertListActivity : AppCompatActivity() {
+
+    companion object {
+        fun newInstance(context: Context) = Intent(context,AdvertListActivity::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
