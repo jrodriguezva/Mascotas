@@ -58,7 +58,8 @@
             app:layout_constraintBottom_toTopOf="@+id/passwordLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logo">
+            app:layout_constraintTop_toBottomOf="@+id/logo"
+            app:error_msg="@{viewmodel.emailError}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/usernameEdit"
@@ -66,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_person"
                 android:drawablePadding="@dimen/space_8dp"
+                android:text="@{viewmodel.user.email}"
                 android:hint="@string/email"
                 android:inputType="text" />
 
@@ -79,7 +81,8 @@
             app:layout_constraintBottom_toTopOf="@+id/login"
             app:layout_constraintEnd_toEndOf="@+id/usernameLayout"
             app:layout_constraintStart_toStartOf="@+id/usernameLayout"
-            app:layout_constraintTop_toBottomOf="@+id/usernameLayout">
+            app:layout_constraintTop_toBottomOf="@+id/usernameLayout"
+            app:error_msg="@{viewmodel.passError}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordEdit"
