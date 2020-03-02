@@ -57,9 +57,6 @@ class LoginFragment : Fragment() {
             is LoginViewModel.UiModel.Navigation -> activity?.startActivity<AdvertListActivity> {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             }.also { activity?.finish() }
-            is LoginViewModel.UiModel.Loading -> {
-                progress.visibility = if (model.show) View.VISIBLE else View.GONE
-            }
             is LoginViewModel.UiModel.Error -> {
                 Snackbar.make(container, model.errorString, Snackbar.LENGTH_SHORT).show()
             }

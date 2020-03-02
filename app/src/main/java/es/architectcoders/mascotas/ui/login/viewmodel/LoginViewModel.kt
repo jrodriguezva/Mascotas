@@ -22,7 +22,6 @@ class LoginViewModel(private val repository: LoginRepository, private val resour
         class Content(val user: MyFirebaseUser?) : UiModel()
         object Navigation : UiModel()
         class ValidateForm(val field: Field) : UiModel()
-        class Loading(val show: Boolean) : UiModel()
         class Error(val errorString: String) : UiModel()
     }
 
@@ -35,6 +34,9 @@ class LoginViewModel(private val repository: LoginRepository, private val resour
         private const val PASSWORD_MAX_LENGTH = 6
     }
 
+    private val _loading = MutableLiveData<Boolean>(false)
+    val loading :LiveData<Boolean> = _loading
+
     private val _model = MutableLiveData<UiModel>()
     val model: LiveData<UiModel>
         get() {
@@ -44,9 +46,9 @@ class LoginViewModel(private val repository: LoginRepository, private val resour
 
     private fun getUser() {
         viewModelScope.launch {
-            _model.value = UiModel.Loading(true)
+            _loading.value = true
             _model.value = UiModel.Content(repository.getCurrentUser().orNull())
-            _model.value = UiModel.Loading(false)
+            _loading.value = false
         }
     }
 
@@ -55,9 +57,9 @@ class LoginViewModel(private val repository: LoginRepository, private val resour
             return
         }
         viewModelScope.launch {
-            _model.value = UiModel.Loading(true)
+            _loading.value = true
             repository.signIn(email, password).fold(::handleFailure) { handleSuccess() }
-            _model.value = UiModel.Loading(false)
+            _loading.value = false
         }
     }
 
@@ -66,9 +68,9 @@ class LoginViewModel(private val repository: LoginRepository, private val resour
             return
         }
         viewModelScope.launch {
-            _model.value = UiModel.Loading(true)
+            _loading.value = true
             repository.createAccount(email, password).fold(::handleFailure) { handleSuccess() }
-            _model.value = UiModel.Loading(false)
+            _loading.value = false
         }
     }
 
