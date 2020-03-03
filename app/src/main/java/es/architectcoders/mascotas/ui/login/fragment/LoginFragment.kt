@@ -41,13 +41,6 @@ class LoginFragment : Fragment() {
         }
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
-        login.setOnClickListener {
-            viewModel.signIn(usernameEdit.text.toString(), passwordEdit.text.toString())
-        }
-        register.setOnClickListener {
-            viewModel.createAccount(usernameEdit.text.toString(), passwordEdit.text.toString())
-        }
     }
 
     private fun navigate(event: Event<Int>) {
