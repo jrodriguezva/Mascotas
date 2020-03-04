@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import es.architectcoders.mascotas.R
+import es.architectcoders.mascotas.databinding.AdvertlistFragmentBinding
 import es.architectcoders.mascotas.model.AdvertRepository
+import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.advertlist.AdvertsAdapter
 import es.architectcoders.mascotas.ui.advertlist.viewmodel.AdvertListViewModel
 import es.architectcoders.mascotas.ui.common.observe
@@ -21,39 +22,30 @@ class AdvertListFragment : Fragment() {
     }
 
     private lateinit var viewModel: AdvertListViewModel
-    private lateinit var adapter : AdvertsAdapter
-
-
+    private lateinit var adapter: AdvertsAdapter
+    private lateinit var binding: AdvertlistFragmentBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.advertlist_fragment, container, false)
+        binding = AdvertlistFragmentBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = withViewModel({ AdvertListViewModel(AdvertRepository()) }) {
-            observe(model, ::updateUI)
+            observe(nav, ::navigate)
         }
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewmodel = viewModel
         adapter = AdvertsAdapter(viewModel::onAdvertClicked, viewModel::onAdvertFavClicked)
         recycler.adapter = adapter
     }
 
-    private fun updateUI(model: AdvertListViewModel.UiModel) {
-        progress.visibility =
-            if (model is AdvertListViewModel.UiModel.Loading) {
-                View.VISIBLE
-            }
-            else {
-                View.GONE
-            }
-
-        when (model) {
-            is AdvertListViewModel.UiModel.Content -> {
-                adapter.adverts = model.adverts
-            }
-            is AdvertListViewModel.UiModel.Navigation -> TODO("DetailActivity pending")
-            is AdvertListViewModel.UiModel.Error -> {
-                Snackbar.make(container, model.errorString, Snackbar.LENGTH_SHORT).show()
-            }
+    private fun navigate(event: Event<Long>) {
+        event.getContentIfNotHandled()?.apply {
+            Snackbar.make(container, "Pending: navigate to detail of product $this", Snackbar.LENGTH_SHORT).show()
+//            activity?.startActivity<AdvertDetail> {
+//                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+//            }.also { activity?.finish() }
         }
     }
 }
