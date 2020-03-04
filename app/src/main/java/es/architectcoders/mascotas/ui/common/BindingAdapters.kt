@@ -21,10 +21,3 @@ fun View.setVisible(visible: Boolean?) {
 fun TextInputLayout.setErrorMsg(msg: String?) {
     error = msg
 }
-
-@BindingAdapter("advert_items")
-fun RecyclerView.setAdvertItems(users: List<MyFirebaseAdvert>?) {
-    (adapter as? AdvertsAdapter)?.let {
-        it.adverts = users ?: emptyList()
-    }
-}

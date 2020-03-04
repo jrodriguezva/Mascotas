@@ -2,6 +2,7 @@ package es.architectcoders.mascotas.ui.advertlist
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.model.MyFirebaseAdvert
@@ -48,5 +49,12 @@ class AdvertsAdapter(
             itemView.advertPrize.text = NumberFormat.getCurrencyInstance(Locale.getDefault()).format(advert.price)
             itemView.advertRecent.visibility = if (advert.recent) View.VISIBLE else View.GONE
         }
+    }
+}
+
+@BindingAdapter("advert_items")
+fun RecyclerView.setAdvertItems(users: List<MyFirebaseAdvert>?) {
+    (adapter as? AdvertsAdapter)?.let {
+        it.adverts = users ?: emptyList()
     }
 }
