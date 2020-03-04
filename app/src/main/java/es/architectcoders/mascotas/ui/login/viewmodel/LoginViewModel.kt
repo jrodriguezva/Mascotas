@@ -13,40 +13,47 @@ import es.architectcoders.mascotas.model.ErrorLoginRepository.AuthenticationErro
 import es.architectcoders.mascotas.model.ErrorLoginRepository.UserNotFoundError
 import es.architectcoders.mascotas.model.LoginRepository
 import es.architectcoders.mascotas.model.MyFirebaseUser
+import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: LoginRepository, private val resourceProvider: ResourceProvider) : ViewModel() {
 
-    sealed class UiModel {
-        class Content(val user: MyFirebaseUser?) : UiModel()
-        object Navigation : UiModel()
-        class ValidateForm(val field: Field) : UiModel()
-        class Loading(val show: Boolean) : UiModel()
-        class Error(val errorString: String) : UiModel()
-    }
-
-    sealed class Field {
-        class Email(val error: String?) : Field()
-        class Password(val error: String?) : Field()
-    }
-
     companion object {
         private const val PASSWORD_MAX_LENGTH = 6
     }
 
-    private val _model = MutableLiveData<UiModel>()
-    val model: LiveData<UiModel>
-        get() {
-            if (_model.value == null) getUser()
-            return _model
-        }
+    private val _emailError = MutableLiveData<String?>()
+    val emailError: LiveData<String?> = _emailError
+
+    private val _passError = MutableLiveData<String?>()
+    val passError: LiveData<String?> = _passError
+
+    private val _loading = MutableLiveData<Boolean>(false)
+    val loading: LiveData<Boolean> = _loading
+
+    private val _user = MutableLiveData<MyFirebaseUser>()
+    val user: LiveData<MyFirebaseUser> = _user
+
+    private val _nav = MutableLiveData<Event<Int>>()
+    val nav: LiveData<Event<Int>> = _nav
+
+    private val _error = MutableLiveData<Event<String>>()
+    val error: LiveData<Event<String>> = _error
+
+    init {
+        refresh()
+    }
+
+    private fun refresh() {
+        getUser()
+    }
 
     private fun getUser() {
         viewModelScope.launch {
-            _model.value = UiModel.Loading(true)
-            _model.value = UiModel.Content(repository.getCurrentUser().orNull())
-            _model.value = UiModel.Loading(false)
+            _loading.value = true
+            _user.value = repository.getCurrentUser().orNull()
+            _loading.value = false
         }
     }
 
@@ -55,9 +62,9 @@ class LoginViewModel(private val repository: LoginRepository, private val resour
             return
         }
         viewModelScope.launch {
-            _model.value = UiModel.Loading(true)
+            _loading.value = true
             repository.signIn(email, password).fold(::handleFailure) { handleSuccess() }
-            _model.value = UiModel.Loading(false)
+            _loading.value = false
         }
     }
 
@@ -66,30 +73,22 @@ class LoginViewModel(private val repository: LoginRepository, private val resour
             return
         }
         viewModelScope.launch {
-            _model.value = UiModel.Loading(true)
+            _loading.value = true
             repository.createAccount(email, password).fold(::handleFailure) { handleSuccess() }
-            _model.value = UiModel.Loading(false)
+            _loading.value = false
         }
     }
 
     private fun handleSuccess() {
-        _model.value = UiModel.Navigation
+        _nav.value = Event(0)
     }
 
     private fun handleFailure(error: ErrorLoginRepository) {
         when (error) {
-            is AuthenticationError -> _model.value = UiModel.Error(
-                error.errorString ?: resourceProvider.getString(
-                    R.string
-                        .error_authentication
-                )
-            )
-            is UserNotFoundError -> _model.value = UiModel.Error(
-                resourceProvider.getString(
-                    R.string
-                        .error_user_not_found
-                )
-            )
+            is AuthenticationError ->
+                _error.value = Event(error.errorString ?: resourceProvider.getString(R.string.error_authentication))
+            is UserNotFoundError ->
+                _error.value = Event(resourceProvider.getString(R.string.error_user_not_found))
         }
     }
 
@@ -105,14 +104,16 @@ class LoginViewModel(private val repository: LoginRepository, private val resour
         var valid1 = valid
         when {
             TextUtils.isEmpty(password) -> {
-                _model.value = UiModel.ValidateForm(Field.Password(resourceProvider.getString(R.string.required)))
+                _passError.value = resourceProvider.getString(R.string.required)
                 valid1 = false
             }
             password.length < PASSWORD_MAX_LENGTH -> {
-                _model.value = UiModel.ValidateForm(Field.Password(resourceProvider.getString(R.string.error_password_length)))
+                _passError.value = resourceProvider.getString(R.string.error_password_length)
                 valid1 = false
             }
-            else -> _model.value = UiModel.ValidateForm(Field.Password(null))
+            else -> {
+                _passError.value = null
+            }
         }
         return valid1
     }
@@ -121,14 +122,16 @@ class LoginViewModel(private val repository: LoginRepository, private val resour
         var valid1 = valid
         when {
             TextUtils.isEmpty(email) -> {
-                _model.value = UiModel.ValidateForm(Field.Email(resourceProvider.getString(R.string.required)))
+                _emailError.value = resourceProvider.getString(R.string.required)
                 valid1 = false
             }
             !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                _model.value = UiModel.ValidateForm(Field.Email(resourceProvider.getString(R.string.error_email_format)))
+                _emailError.value = resourceProvider.getString(R.string.error_email_format)
                 valid1 = false
             }
-            else -> _model.value = UiModel.ValidateForm(Field.Email(null))
+            else -> {
+                _emailError.value = null
+            }
         }
         return valid1
     }

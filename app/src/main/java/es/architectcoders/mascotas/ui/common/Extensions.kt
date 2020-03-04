@@ -7,4 +7,3 @@ import androidx.lifecycle.Observer
 fun <T, L : LiveData<T>> LifecycleOwner.observe(liveData: L, body: (T) -> Unit) {
     liveData.observe(this, Observer(body))
 }
-
