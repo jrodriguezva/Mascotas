@@ -1,89 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/advert_margin"
-    android:background="@color/color_primary_variant"
-    android:foreground="?attr/selectableItemBackground"
-    android:orientation="vertical"
-    android:padding="2dp"
-    tools:ignore="UnusedAttribute">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/advertCover"
-        android:layout_width="0dp"
+    <data>
+        <variable
+            name="advert"
+            type="es.architectcoders.mascotas.model.MyFirebaseAdvert" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/advert_cover"/>
+        android:layout_margin="@dimen/advert_margin"
+        android:background="@color/color_primary_variant"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:padding="2dp"
+        tools:ignore="UnusedAttribute">
 
-    <ImageView
-        android:id="@+id/advertRecent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="@dimen/advert_image_margin"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:contentDescription="@string/advert_recent"
-        android:minWidth="32dp"
-        android:minHeight="32dp"
-        android:src="@drawable/ic_recent_advert_white_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/advertCover" />
+        <ImageView
+            android:id="@+id/advertCover"
+            android:layout_width="0dp"
+            android:layout_height="128dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/advert_cover"
+            app:load_url="@{advert.photoUrl}"
+            tools:src="@tools:sample/avatars"/>
 
-    <TextView
-        android:id="@+id/advertPrize"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_toEndOf="@+id/advertFav"
-        android:lines="1"
-        android:maxLines="1"
-        android:padding="@dimen/advert_text_padding"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
-        app:layout_constraintEnd_toStartOf="@+id/advertFav"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/advertCover"/>
+        <ImageView
+            android:id="@+id/advertRecent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/advert_image_margin"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:contentDescription="@string/advert_recent"
+            android:minWidth="32dp"
+            android:minHeight="32dp"
+            app:visible="@{advert.recent}"
+            android:src="@drawable/ic_recent_advert_white_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/advertCover" />
 
-    <ImageView
-        android:id="@+id/advertFav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/advert_fav"
-        android:padding="@dimen/advert_image_padding"
-        android:src="@drawable/ic_favorite_border_white_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/advertPrize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/advertCover" />
+        <TextView
+            android:id="@+id/advertPrize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/advertFav"
+            android:lines="1"
+            android:maxLines="1"
+            android:text="@{advert.price}"
+            android:padding="@dimen/advert_text_padding"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+            app:layout_constraintEnd_toStartOf="@+id/advertFav"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/advertCover" />
 
-    <TextView
-        android:id="@+id/advertTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:ellipsize="end"
-        android:gravity=""
-        android:maxLines="2"
-        android:padding="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/advertPrize" />
+        <ImageView
+            android:id="@+id/advertFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/advert_fav"
+            android:padding="@dimen/advert_image_padding"
+            android:src="@drawable/ic_favorite_border_white_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/advertPrize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/advertCover" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/advertTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:gravity=""
+            android:maxLines="2"
+            android:padding="8dp"
+            android:text="@{advert.title}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/advertPrize" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

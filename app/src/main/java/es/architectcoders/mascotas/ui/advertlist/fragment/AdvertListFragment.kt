@@ -22,7 +22,6 @@ class AdvertListFragment : Fragment() {
     }
 
     private lateinit var viewModel: AdvertListViewModel
-    private lateinit var adapter: AdvertsAdapter
     private lateinit var binding: AdvertlistFragmentBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = AdvertlistFragmentBinding.inflate(inflater)
@@ -36,8 +35,7 @@ class AdvertListFragment : Fragment() {
         }
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
-        adapter = AdvertsAdapter(viewModel::onAdvertClicked, viewModel::onAdvertFavClicked)
-        recycler.adapter = adapter
+        binding.recycler.adapter = AdvertsAdapter(viewModel::onAdvertClicked, viewModel::onAdvertFavClicked)
     }
 
     private fun navigate(event: Event<Long>) {
