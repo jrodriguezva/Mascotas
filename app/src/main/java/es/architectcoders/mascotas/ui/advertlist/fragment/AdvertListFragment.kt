@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import es.architectcoders.data.repository.AdvertRepository
 import com.google.android.material.snackbar.Snackbar
 import es.architectcoders.mascotas.databinding.AdvertlistFragmentBinding
-import es.architectcoders.mascotas.model.AdvertRepository
 import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.advertlist.AdvertsAdapter
 import es.architectcoders.mascotas.ui.advertlist.viewmodel.AdvertListViewModel

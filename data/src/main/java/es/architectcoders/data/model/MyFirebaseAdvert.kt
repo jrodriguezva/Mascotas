@@ -1,7 +1,7 @@
-package es.architectcoders.mascotas.model
+package es.architectcoders.data.model
 
 import java.text.NumberFormat
-import java.util.Locale
+import java.util.*
 
 data class MyFirebaseAdvert(
     var id: Long,

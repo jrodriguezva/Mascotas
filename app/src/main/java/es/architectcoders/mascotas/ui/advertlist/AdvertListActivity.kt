@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.ui.advertlist.fragment.AdvertListFragment
-import es.architectcoders.mascotas.ui.login.fragment.LoginFragment
 
 class AdvertListActivity : AppCompatActivity() {
 
