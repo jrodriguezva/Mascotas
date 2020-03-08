@@ -5,8 +5,8 @@
       tools:context=".ui.activities.MainActivity">
 
     <item
-        android:id="@+id/btnSave"
+        android:id="@+id/btnProfile"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_save_white"
-        android:title="Save"/>
+        android:icon="@drawable/ic_person_white"
+        android:title="@string/profile"/>
 </menu>

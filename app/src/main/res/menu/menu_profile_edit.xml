@@ -5,8 +5,8 @@
       tools:context=".ui.activities.MainActivity">
 
     <item
-        android:id="@+id/btnEdit"
+        android:id="@+id/btnSave"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_edit_white"
-        android:title="@string/edit"/>
+        android:icon="@drawable/ic_save_white"
+        android:title="@string/save"/>
 </menu>

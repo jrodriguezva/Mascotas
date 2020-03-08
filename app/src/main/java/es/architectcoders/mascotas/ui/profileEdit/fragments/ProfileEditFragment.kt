@@ -1,4 +1,4 @@
-package es.architectcoders.mascotas.ui.fragments
+package es.architectcoders.mascotas.ui.profileEdit.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,15 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import es.architectcoders.mascotas.R
-import es.architectcoders.mascotas.ui.viewmodel.EditProfileViewModel
+import es.architectcoders.mascotas.ui.profileEdit.viewmodel.ProfileEditViewModel
 import kotlinx.android.synthetic.main.edit_profile_activity.*
 
-class EditProfileFragment: Fragment(){
+class ProfileEditFragment: Fragment(){
     companion object {
-        fun newInstance() = EditProfileFragment()
+        fun newInstance() =
+            ProfileEditFragment()
     }
 
-    private lateinit var viewModel: EditProfileViewModel
+    private lateinit var editViewModel: ProfileEditViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.edit_profile_fragment, containerEditProfile, false)
@@ -23,12 +24,12 @@ class EditProfileFragment: Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
        /*
-        viewModel = withViewModel({ LoginViewModel(EditProfileRepository(FirebaseAuth.getInstance())) }) {
+        editViewModel = withViewModel({ LoginViewModel(EditProfileRepository(FirebaseAuth.getInstance())) }) {
             observe(model, ::updateUI)
         }
 
         updateUserButton.setOnClickListener {
-            viewModel.updateUser(
+            editViewModel.updateUser(
                 nameEdit.text.toString(),
                 surnameEdit.text.toString(),
                 addressEdit.text.toString(),

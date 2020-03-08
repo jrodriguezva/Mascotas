@@ -1,10 +1,10 @@
-package es.architectcoders.mascotas.ui.activities
+package es.architectcoders.mascotas.ui.profile.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import es.architectcoders.mascotas.ui.adapters.ProfilePageAdapter
+import es.architectcoders.mascotas.ui.profile.adapters.ProfilePageAdapter
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.ui.routers.goToEditProfileActivity
 import kotlinx.android.synthetic.main.profile_activity.*
