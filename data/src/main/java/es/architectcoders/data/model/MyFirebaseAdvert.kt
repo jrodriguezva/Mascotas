@@ -10,5 +10,7 @@ data class MyFirebaseAdvert(
     var price: Double,
     var recent: Boolean
 ) {
-    fun getPrice(): String = NumberFormat.getCurrencyInstance(Locale.getDefault()).format(price)
+    fun priceToCurrencyString(): String {
+        return NumberFormat.getCurrencyInstance(Locale.getDefault()).format(price)
+    }
 }
