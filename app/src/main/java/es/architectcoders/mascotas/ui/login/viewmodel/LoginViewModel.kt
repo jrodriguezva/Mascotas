@@ -7,12 +7,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.orNull
+import es.architectcoders.data.model.MyFirebaseUser
 import es.architectcoders.data.repository.ErrorLoginRepository
 import es.architectcoders.data.repository.ErrorLoginRepository.AuthenticationError
 import es.architectcoders.data.repository.ErrorLoginRepository.UserNotFoundError
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.model.LoginRepository
-import es.architectcoders.mascotas.model.MyFirebaseUser
 import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import kotlinx.coroutines.launch

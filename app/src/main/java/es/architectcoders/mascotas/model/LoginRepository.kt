@@ -5,6 +5,7 @@ import arrow.core.Either
 import arrow.core.Right
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import es.architectcoders.data.model.MyFirebaseUser
 import es.architectcoders.data.repository.ErrorLoginRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine

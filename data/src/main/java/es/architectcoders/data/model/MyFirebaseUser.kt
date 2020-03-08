@@ -1,4 +1,4 @@
-package es.architectcoders.mascotas.model
+package es.architectcoders.data.model
 
 data class MyFirebaseUser(
     var email: String? = "",
