@@ -1,4 +1,4 @@
-package es.architectcoders.mascotas.model
+package es.architectcoders.data.repository
 
 sealed class ErrorLoginRepository {
     class AuthenticationError(val errorString: String?) : ErrorLoginRepository()
