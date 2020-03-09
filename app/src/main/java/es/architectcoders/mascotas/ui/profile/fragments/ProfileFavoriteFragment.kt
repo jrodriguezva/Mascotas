@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import es.architectcoders.data.repository.AdvertRepository
 import es.architectcoders.mascotas.R
+import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.advertlist.AdvertsAdapter
+import es.architectcoders.mascotas.ui.advertlist.viewmodel.AdvertListViewModel
 import es.architectcoders.mascotas.ui.common.observe
 import es.architectcoders.mascotas.ui.common.withViewModel
 import es.architectcoders.mascotas.ui.profile.viewmodel.ProfileViewModel
@@ -54,10 +56,19 @@ class ProfileFavoriteFragment : Fragment() {
             is ProfileViewModel.UiModel.Content -> {
                 adapter.adverts = model.adverts
             }
-            is ProfileViewModel.UiModel.Navigation -> TODO("DetailActivity pending")
+            is ProfileViewModel.UiModel.Navigation -> {
+                viewModel = withViewModel({ ProfileViewModel(AdvertRepository()) }) {
+                    observe(nav, ::navigateToDetailAdvert)
+                }
+            }
             is ProfileViewModel.UiModel.Error -> {
                 Snackbar.make(container, model.errorString, Snackbar.LENGTH_SHORT).show()
             }
+        }
+    }
+    private fun navigateToDetailAdvert(event: Event<Long>) {
+        event.getContentIfNotHandled()?.apply {
+            Snackbar.make(container, "Pending: navigate to detail of product $this", Snackbar.LENGTH_SHORT).show()
         }
     }
 }

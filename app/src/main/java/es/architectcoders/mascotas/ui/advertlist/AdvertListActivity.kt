@@ -8,7 +8,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.ui.advertlist.fragment.AdvertListFragment
-import es.architectcoders.mascotas.ui.routers.goToProfileActivity
+import es.architectcoders.mascotas.ui.common.startActivity
+import es.architectcoders.mascotas.ui.profileEdit.activities.ProfileEditActivity
 import kotlinx.android.synthetic.main.advertlist_activity.*
 
 class AdvertListActivity : AppCompatActivity() {
@@ -42,8 +43,15 @@ class AdvertListActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == R.id.btnProfile) {
-            goToProfileActivity()
+            navigateToProfile()
         }
         return super.onOptionsItemSelected(menuItem)
+    }
+
+
+    private fun navigateToProfile() {
+        startActivity<ProfileEditActivity> {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        }.also { finish() }
     }
 }

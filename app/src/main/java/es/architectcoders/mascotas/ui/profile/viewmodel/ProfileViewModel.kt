@@ -1,6 +1,5 @@
 package es.architectcoders.mascotas.ui.profile.viewmodel
 
-import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,9 +7,11 @@ import kotlinx.coroutines.launch
 import androidx.lifecycle.viewModelScope
 import es.architectcoders.domain.MyFirebaseAdvert
 import es.architectcoders.data.repository.AdvertRepository
+import es.architectcoders.mascotas.ui.Event
 
 class ProfileViewModel(private val repository: AdvertRepository) : ViewModel() {
-
+    private val _nav = MutableLiveData<Event<Long>>()
+    val nav: LiveData<Event<Long>> = _nav
     private val _model = MutableLiveData<UiModel>()
     val model: LiveData<UiModel>
         get() {
@@ -33,10 +34,10 @@ class ProfileViewModel(private val repository: AdvertRepository) : ViewModel() {
     }
 
     fun onAdvertClicked(advert: MyFirebaseAdvert) {
-        TODO("Open advert ${advert.id}")
+        _nav.value = Event(advert.id)
     }
 
     fun onAdvertFavClicked(advert: MyFirebaseAdvert) {
-        TODO("Fav advert ${advert.id}")
+        _nav.value = Event(advert.id)
     }
 }
