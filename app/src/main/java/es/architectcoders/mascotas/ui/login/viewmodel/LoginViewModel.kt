@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.orNull
-import es.architectcoders.data.model.MyFirebaseUser
+import es.architectcoders.domain.MyFirebaseUser
 import es.architectcoders.data.repository.ErrorLoginRepository
 import es.architectcoders.data.repository.ErrorLoginRepository.AuthenticationError
 import es.architectcoders.data.repository.ErrorLoginRepository.UserNotFoundError
@@ -32,8 +32,8 @@ class LoginViewModel(private val repository: LoginRepository, private val resour
     private val _loading = MutableLiveData<Boolean>(false)
     val loading: LiveData<Boolean> = _loading
 
-    private val _user = MutableLiveData<MyFirebaseUser>()
-    val user: LiveData<MyFirebaseUser> = _user
+    private val _user = MutableLiveData<es.architectcoders.domain.MyFirebaseUser>()
+    val user: LiveData<es.architectcoders.domain.MyFirebaseUser> = _user
 
     private val _nav = MutableLiveData<Event<Int>>()
     val nav: LiveData<Event<Int>> = _nav

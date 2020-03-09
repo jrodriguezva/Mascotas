@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import es.architectcoders.data.model.MyFirebaseAdvert
+import es.architectcoders.domain.MyFirebaseAdvert
 import es.architectcoders.data.repository.AdvertRepository
 import es.architectcoders.mascotas.ui.Event
 import kotlinx.coroutines.launch

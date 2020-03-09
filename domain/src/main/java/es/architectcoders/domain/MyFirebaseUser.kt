@@ -1,4 +1,4 @@
-package es.architectcoders.data.model
+package es.architectcoders.domain
 
 data class MyFirebaseUser(
     var email: String? = "",

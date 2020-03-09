@@ -6,7 +6,7 @@
     <data>
         <variable
             name="advert"
-            type="es.architectcoders.data.model.MyFirebaseAdvert" />
+            type="es.architectcoders.domain.MyFirebaseAdvert" />
 
     </data>
 

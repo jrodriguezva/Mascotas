@@ -5,7 +5,6 @@ import arrow.core.Either
 import arrow.core.Right
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-import es.architectcoders.data.model.MyFirebaseUser
 import es.architectcoders.data.repository.ErrorLoginRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -74,7 +73,7 @@ class LoginRepository(private val auth: FirebaseAuth) {
                 val name = displayName
                 val photoUrl = photoUrl?.toString()
                 val phone = phoneNumber
-                Right(MyFirebaseUser(email, name, photoUrl, phone))
+                Right(es.architectcoders.domain.MyFirebaseUser(email, name, photoUrl, phone))
             }
         } ?: Either.Left(ErrorLoginRepository.UserNotFoundError)
     }

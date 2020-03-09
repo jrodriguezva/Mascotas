@@ -1,4 +1,4 @@
-package es.architectcoders.data.model
+package es.architectcoders.domain
 
 import java.text.NumberFormat
 import java.util.*

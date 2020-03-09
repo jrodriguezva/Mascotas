@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.launch
 import androidx.lifecycle.viewModelScope
-import es.architectcoders.data.model.MyFirebaseAdvert
+import es.architectcoders.domain.MyFirebaseAdvert
 import es.architectcoders.data.repository.AdvertRepository
 
 class ProfileViewModel(private val repository: AdvertRepository) : ViewModel() {

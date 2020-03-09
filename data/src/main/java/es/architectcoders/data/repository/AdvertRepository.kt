@@ -1,6 +1,6 @@
 package es.architectcoders.data.repository
 
-import es.architectcoders.data.model.MyFirebaseAdvert
+import es.architectcoders.domain.MyFirebaseAdvert
 
 
 class AdvertRepository {
