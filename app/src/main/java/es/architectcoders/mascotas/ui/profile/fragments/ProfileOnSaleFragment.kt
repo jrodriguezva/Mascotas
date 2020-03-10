@@ -17,6 +17,7 @@ import es.architectcoders.mascotas.ui.advertlist.AdvertsAdapter
 import es.architectcoders.mascotas.ui.common.observe
 import es.architectcoders.mascotas.ui.common.withViewModel
 import es.architectcoders.mascotas.ui.profile.viewmodel.ProfileViewModel
+import es.architectcoders.usescases.FindRelevantAdverts
 import kotlinx.android.synthetic.main.advertlist_fragment.*
 
 
@@ -34,7 +35,7 @@ class ProfileOnSaleFragment : Fragment() {
         val mLayoutManager = LinearLayoutManager(context)
         rvOnSale.layoutManager = mLayoutManager
 
-        viewModel = withViewModel({ ProfileViewModel(AdvertRepository()) }) {
+        viewModel = withViewModel({ ProfileViewModel(FindRelevantAdverts(AdvertRepository())) }) {
             observe(model, ::updateUI)
         }
         adapter = AdvertsAdapter(viewModel::onAdvertClicked, viewModel::onAdvertFavClicked)
@@ -57,7 +58,7 @@ class ProfileOnSaleFragment : Fragment() {
                 adapter.adverts = model.adverts
             }
             is ProfileViewModel.UiModel.Navigation -> {
-                viewModel = withViewModel({ ProfileViewModel(AdvertRepository()) }) {
+                viewModel = withViewModel({ ProfileViewModel(FindRelevantAdverts(AdvertRepository())) }) {
                     observe(nav, ::navigateToDetailAdvert)
                 }
             }

@@ -13,6 +13,7 @@ import es.architectcoders.mascotas.ui.advertlist.AdvertsAdapter
 import es.architectcoders.mascotas.ui.advertlist.viewmodel.AdvertListViewModel
 import es.architectcoders.mascotas.ui.common.observe
 import es.architectcoders.mascotas.ui.common.withViewModel
+import es.architectcoders.usescases.FindRelevantAdverts
 import kotlinx.android.synthetic.main.advertlist_fragment.*
 
 class AdvertListFragment : Fragment() {
@@ -30,7 +31,7 @@ class AdvertListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = withViewModel({ AdvertListViewModel(AdvertRepository()) }) {
+        viewModel = withViewModel({ AdvertListViewModel(FindRelevantAdverts(AdvertRepository())) }) {
             observe(nav, ::navigate)
         }
         binding.lifecycleOwner = viewLifecycleOwner

@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import es.architectcoders.mascotas.ui.profile.adapters.ProfilePageAdapter
 import es.architectcoders.mascotas.R
-import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.profileEdit.activities.ProfileEditActivity
 import kotlinx.android.synthetic.main.profile_activity.*
 import es.architectcoders.mascotas.ui.common.startActivity

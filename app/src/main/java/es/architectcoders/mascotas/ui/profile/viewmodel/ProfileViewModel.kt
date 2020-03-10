@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.launch
 import androidx.lifecycle.viewModelScope
 import es.architectcoders.domain.MyFirebaseAdvert
-import es.architectcoders.data.repository.AdvertRepository
 import es.architectcoders.mascotas.ui.Event
+import es.architectcoders.usescases.FindRelevantAdverts
 
-class ProfileViewModel(private val repository: AdvertRepository) : ViewModel() {
+class ProfileViewModel(private val findRelevantAdverts: FindRelevantAdverts) : ViewModel() {
     private val _nav = MutableLiveData<Event<Long>>()
     val nav: LiveData<Event<Long>> = _nav
     private val _model = MutableLiveData<UiModel>()
@@ -29,7 +29,7 @@ class ProfileViewModel(private val repository: AdvertRepository) : ViewModel() {
     private fun refresh() {
         viewModelScope.launch {
             _model.value = UiModel.Loading
-            _model.value = UiModel.Content(repository.findRelevantAdverts())
+            _model.value = UiModel.Content(findRelevantAdverts.invoke())
         }
     }
 
