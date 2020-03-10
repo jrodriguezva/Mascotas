@@ -4,24 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
     tools:context=".ui.profileEdit.activities.ProfileEditActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarProfileEdit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/color_primary"
         app:layout_constraintBottom_toTopOf="@+id/containerEditProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/color_white"
         app:navigationIcon="@drawable/ic_arrow_back_white" />
 
     <FrameLayout
         android:id="@+id/containerEditProfile"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

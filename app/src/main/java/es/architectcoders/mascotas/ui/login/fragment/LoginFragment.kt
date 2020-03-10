@@ -7,17 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import es.architectcoders.mascotas.databinding.LoginFragmentBinding
-import es.architectcoders.mascotas.model.LoginRepository
 import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.advertlist.AdvertListActivity
-import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.common.observe
 import es.architectcoders.mascotas.ui.common.startActivity
-import es.architectcoders.mascotas.ui.common.withViewModel
 import es.architectcoders.mascotas.ui.login.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.login_fragment.*
+import org.koin.android.scope.currentScope
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
 
@@ -25,7 +23,7 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by currentScope.viewModel(this)
     private lateinit var binding: LoginFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -33,9 +31,9 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = withViewModel({ LoginViewModel(LoginRepository(FirebaseAuth.getInstance()), ResourceProvider(resources)) }) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.apply {
             observe(nav, ::navigate)
             observe(error, ::showError)
         }

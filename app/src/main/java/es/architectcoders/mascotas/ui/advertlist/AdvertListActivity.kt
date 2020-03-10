@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.ui.advertlist.fragment.AdvertListFragment
 import es.architectcoders.mascotas.ui.common.startActivity
-import es.architectcoders.mascotas.ui.profileEdit.activities.ProfileEditActivity
+import es.architectcoders.mascotas.ui.profile.activities.ProfileActivity
 import kotlinx.android.synthetic.main.advertlist_activity.*
 
 class AdvertListActivity : AppCompatActivity() {
@@ -50,8 +50,8 @@ class AdvertListActivity : AppCompatActivity() {
 
 
     private fun navigateToProfile() {
-        startActivity<ProfileEditActivity> {
+        startActivity<ProfileActivity> {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        }.also { finish() }
+        }
     }
 }

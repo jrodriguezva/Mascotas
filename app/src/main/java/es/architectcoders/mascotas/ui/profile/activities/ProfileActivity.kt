@@ -50,6 +50,6 @@ class ProfileActivity : AppCompatActivity() {
     private fun navigateToEditProfile() {
         startActivity<ProfileEditActivity> {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        }.also { finish() }
+        }
     }
 }
