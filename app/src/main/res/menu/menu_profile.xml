@@ -8,5 +8,5 @@
         android:id="@+id/btnEdit"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_edit_white"
-        android:title="Edit"/>
+        android:title="@string/edit"/>
 </menu>

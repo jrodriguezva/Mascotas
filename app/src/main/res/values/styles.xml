@@ -19,17 +19,17 @@
 
     <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/color_primary</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/color_primary</item>
     </style>
 
     <style name="EditTextTheme">
-        <item name="android:colorFocusedHighlight">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:colorFocusedHighlight">@color/color_primary</item>
+        <item name="colorAccent">@color/color_primary</item>
     </style>
 
     <style name="Widget.MyTheme.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">

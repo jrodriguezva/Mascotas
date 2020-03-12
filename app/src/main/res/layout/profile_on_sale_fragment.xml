@@ -3,11 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.ProfileOnSaleFragment">
+    android:background="@color/color_blue_light"
+    tools:context=".ui.profile.fragments.ProfileOnSaleFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvOnSale"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center" />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progressOnSale"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
 </FrameLayout>

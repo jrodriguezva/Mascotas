@@ -14,10 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/MyTheme.DayNight"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".ui.activities.MainActivity" />
-        <activity android:name=".ui.advertlist.AdvertListActivity" />
-        <activity android:name=".ui.activities.ProfileActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:windowSoftInputMode="adjustResize">
@@ -26,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.EditProfileActivity" />
+        <activity android:name=".ui.advertlist.AdvertListActivity" />
+        <activity android:name=".ui.profile.activities.ProfileActivity" />
+        <activity android:name=".ui.profileEdit.activities.ProfileEditActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

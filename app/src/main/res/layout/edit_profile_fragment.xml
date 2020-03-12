@@ -6,8 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.EditProfileActivity"
-    android:layout_margin="12dp" >
+    tools:context=".ui.profileEdit.activities.ProfileEditActivity" >
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameLayout"

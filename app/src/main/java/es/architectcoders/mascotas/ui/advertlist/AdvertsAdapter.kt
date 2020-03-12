@@ -3,9 +3,9 @@ package es.architectcoders.mascotas.ui.advertlist
 import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import es.architectcoders.domain.MyFirebaseAdvert
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.databinding.ViewAdvertBinding
-import es.architectcoders.mascotas.model.MyFirebaseAdvert
 import es.architectcoders.mascotas.ui.common.basicDiffUtil
 import es.architectcoders.mascotas.ui.common.bindingInflate
 import kotlinx.android.synthetic.main.view_advert.view.*
