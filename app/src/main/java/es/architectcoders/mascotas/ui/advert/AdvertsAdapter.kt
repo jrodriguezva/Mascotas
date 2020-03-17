@@ -1,9 +1,9 @@
-package es.architectcoders.mascotas.ui.advertlist
+package es.architectcoders.mascotas.ui.advert
 
 import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import es.architectcoders.domain.MyFirebaseAdvert
+import es.architectcoders.domain.Advert
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.databinding.ViewAdvertBinding
 import es.architectcoders.mascotas.ui.common.basicDiffUtil
@@ -11,12 +11,12 @@ import es.architectcoders.mascotas.ui.common.bindingInflate
 import kotlinx.android.synthetic.main.view_advert.view.*
 
 class AdvertsAdapter(
-    private val listener: (MyFirebaseAdvert) -> Unit,
-    private val favListener: (MyFirebaseAdvert) -> Unit
+    private val listener: (Advert) -> Unit,
+    private val favListener: (Advert) -> Unit
 ) :
     RecyclerView.Adapter<AdvertsAdapter.ViewHolder>() {
 
-    var adverts: List<MyFirebaseAdvert> by basicDiffUtil(
+    var adverts: List<Advert> by basicDiffUtil(
         emptyList(),
         areItemsTheSame = { old, new -> old.id == new.id }
     )
@@ -42,7 +42,7 @@ class AdvertsAdapter(
 }
 
 @BindingAdapter("advert_items")
-fun RecyclerView.setAdvertItems(users: List<MyFirebaseAdvert>?) {
+fun RecyclerView.setAdvertItems(users: List<Advert>?) {
     (adapter as? AdvertsAdapter)?.let {
         it.adverts = users ?: emptyList()
     }

@@ -4,6 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="space_8dp">8dp</dimen>
     <dimen name="space_16dp">16dp</dimen>
+    <dimen name="space_40dp">40dp</dimen>
 
     <dimen name="advert_image_padding">8dp</dimen>
     <dimen name="advert_text_padding">8dp</dimen>

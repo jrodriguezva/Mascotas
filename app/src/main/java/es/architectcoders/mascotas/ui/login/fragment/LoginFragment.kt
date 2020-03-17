@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import es.architectcoders.mascotas.databinding.LoginFragmentBinding
 import es.architectcoders.mascotas.ui.Event
-import es.architectcoders.mascotas.ui.advertlist.AdvertListActivity
+import es.architectcoders.mascotas.ui.advert.AdvertListActivity
 import es.architectcoders.mascotas.ui.common.observe
 import es.architectcoders.mascotas.ui.common.startActivity
 import es.architectcoders.mascotas.ui.login.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.login_fragment.*
-import org.koin.android.scope.currentScope
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.scope.lifecycleScope
+import org.koin.androidx.viewmodel.scope.viewModel
 
 class LoginFragment : Fragment() {
 
@@ -23,7 +23,7 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
-    private val viewModel: LoginViewModel by currentScope.viewModel(this)
+    private val viewModel: LoginViewModel by lifecycleScope.viewModel(this)
     private lateinit var binding: LoginFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

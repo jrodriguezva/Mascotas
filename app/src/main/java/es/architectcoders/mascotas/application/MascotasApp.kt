@@ -1,4 +1,4 @@
-package es.architectcoders.mascotas.ui
+package es.architectcoders.mascotas.application
 
 import android.app.Application
 

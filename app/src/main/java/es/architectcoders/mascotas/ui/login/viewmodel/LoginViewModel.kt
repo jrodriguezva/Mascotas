@@ -6,12 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import arrow.core.orNull
-import es.architectcoders.domain.MyFirebaseUser
 import es.architectcoders.data.repository.ErrorLoginRepository
 import es.architectcoders.data.repository.ErrorLoginRepository.AuthenticationError
 import es.architectcoders.data.repository.ErrorLoginRepository.UserNotFoundError
+import es.architectcoders.data.repository.LoginRepository
+import es.architectcoders.domain.User
 import es.architectcoders.mascotas.R
-import es.architectcoders.mascotas.model.LoginRepository
 import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.viewmodel.ScopedViewModel
@@ -37,8 +37,8 @@ class LoginViewModel(
     private val _loading = MutableLiveData<Boolean>(false)
     val loading: LiveData<Boolean> = _loading
 
-    private val _user = MutableLiveData<es.architectcoders.domain.MyFirebaseUser>()
-    val user: LiveData<es.architectcoders.domain.MyFirebaseUser> = _user
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User> = _user
 
     private val _nav = MutableLiveData<Event<Int>>()
     val nav: LiveData<Event<Int>> = _nav
@@ -51,13 +51,11 @@ class LoginViewModel(
     }
 
     private fun refresh() {
-        getUser()
-    }
-
-    private fun getUser() {
         viewModelScope.launch {
             _loading.value = true
-            _user.value = repository.getCurrentUser().orNull()
+            repository.getCurrentUser().orNull()?.let {
+                _nav.value = Event(0)
+            }
             _loading.value = false
         }
     }
