@@ -18,3 +18,4 @@ fun <T : ViewDataBinding> ViewGroup.bindingInflate(
     attachToRoot: Boolean = true
 ): T =
     DataBindingUtil.inflate(LayoutInflater.from(context), layoutRes, this, attachToRoot)
+

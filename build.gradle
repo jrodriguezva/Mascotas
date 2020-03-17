@@ -2,8 +2,8 @@
 
 buildscript {
     ext.detekt = '1.2.0'
-    ext.kotlin_version = '1.3.61'
-    ext.gradle_version = '3.6.0'
+    ext.kotlin_version = '1.3.70'
+    ext.gradle_version = '3.6.1'
     ext.google_services_version = '4.3.3'
     repositories {
         google()
@@ -27,37 +27,40 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
     ext {
         androidLibs = [
-                coroutines          : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3',
-                arrow               : 'io.arrow-kt:arrow-core-data:0.10.3',
-                appcompat           : 'androidx.appcompat:appcompat:1.1.0',
-                recyclerview        : 'androidx.recyclerview:recyclerview:1.0.0',
-                constraintLayout    : 'androidx.constraintlayout:constraintlayout:1.1.3',
-                material            : 'com.google.android.material:material:1.2.0-alpha05',
-                firebaseAuth        : 'com.google.firebase:firebase-auth:19.2.0',
-                firebaseAnalytics   : 'com.google.firebase:firebase-analytics:17.2.1',
-                annotation          : 'androidx.annotation:annotation:1.1.0',
-                lifecycle           : 'android.arch.lifecycle:extensions:1.1.1'
+                coroutines       : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4',
+                arrow            : 'io.arrow-kt:arrow-core-data:0.10.3',
+                appcompat        : 'androidx.appcompat:appcompat:1.1.0',
+                recyclerview     : 'androidx.recyclerview:recyclerview:1.0.0',
+                constraintLayout : 'androidx.constraintlayout:constraintlayout:1.1.3',
+                material         : 'com.google.android.material:material:1.2.0-alpha05',
+                firebaseAuth     : 'com.google.firebase:firebase-auth:19.3.0',
+                firebaseAnalytics: 'com.google.firebase:firebase-analytics:17.2.1',
+                firestore        : 'com.google.firebase:firebase-firestore-ktx:21.4.1',
+                annotation       : 'androidx.annotation:annotation:1.1.0',
+                lifecycle        : 'android.arch.lifecycle:extensions:1.1.1',
+                imagepicker      : 'com.github.dhaval2404:imagepicker:1.6'
         ]
 
         detektPlugin = [
-                detektPlugins       : "io.gitlab.arturbosch.detekt:detekt-formatting:1.2.1"
+                detektPlugins: "io.gitlab.arturbosch.detekt:detekt-formatting:1.2.1"
         ]
 
         androidKtxLibs = [
-                androidxCore        : 'androidx.core:core-ktx:1.2.0',
-                fragment            : 'androidx.fragment:fragment-ktx:1.2.2',
-                lifecycleViewModel  : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0',
+                androidxCore      : 'androidx.core:core-ktx:1.2.0',
+                fragment          : 'androidx.fragment:fragment-ktx:1.2.2',
+                lifecycleViewModel: 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0',
         ]
 
         androidKaptLibs = [
-                glideCompiler       : 'com.github.bumptech.glide:compiler:4.10.0'
+                glideCompiler: 'com.github.bumptech.glide:compiler:4.10.0'
         ]
 
         kotlinLibs = [
-                stdlib    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+                stdlib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
         ]
 
         libs = [
@@ -66,7 +69,7 @@ allprojects {
                 retrofit                 : 'com.squareup.retrofit2:retrofit:2.6.0',
                 retrofitGsonConverter    : 'com.squareup.retrofit2:converter-gson:2.6.0',
                 retrofitCoroutinesAdapter: 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2',
-                koin                     : "org.koin:koin-android-viewmodel:2.0.1"
+                koin                     : "org.koin:koin-androidx-viewmodel:2.1.4"
         ]
 
         testLibs = [

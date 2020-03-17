@@ -1,4 +1,4 @@
-package es.architectcoders.mascotas.ui.advertlist
+package es.architectcoders.mascotas.ui.advert
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import es.architectcoders.mascotas.R
-import es.architectcoders.mascotas.ui.advertlist.fragment.AdvertListFragment
+import es.architectcoders.mascotas.ui.advert.fragment.AdvertListFragment
 import es.architectcoders.mascotas.ui.common.startActivity
 import es.architectcoders.mascotas.ui.profile.activities.ProfileActivity
 import kotlinx.android.synthetic.main.advertlist_activity.*
@@ -15,13 +15,13 @@ import kotlinx.android.synthetic.main.advertlist_activity.*
 class AdvertListActivity : AppCompatActivity() {
 
     companion object {
-        fun newInstance(context: Context) = Intent(context,AdvertListActivity::class.java)
+        fun newInstance(context: Context) = Intent(context, AdvertListActivity::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.advertlist_activity)
-        setSupportActionBar(toolbarAdvertlist)
+        setSupportActionBar(toolbarAdvert)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, AdvertListFragment.newInstance())
@@ -30,16 +30,15 @@ class AdvertListActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        setSupportActionBar(toolbarAdvertlist)
+        setSupportActionBar(toolbarAdvert)
         supportActionBar?.title = getString(R.string.app_name)
         menuInflater.inflate(R.menu.menu_advertlist, menu)
 
-        toolbarAdvertlist.setNavigationOnClickListener {
+        toolbarAdvert.setNavigationOnClickListener {
             finish()
         }
         return true
     }
-
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == R.id.btnProfile) {
@@ -47,7 +46,6 @@ class AdvertListActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(menuItem)
     }
-
 
     private fun navigateToProfile() {
         startActivity<ProfileActivity> {

@@ -1,19 +1,21 @@
-package es.architectcoders.mascotas.model
+package es.architectcoders.mascotas.datasource
 
 import android.net.Uri
 import arrow.core.Either
 import arrow.core.Right
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import es.architectcoders.data.datasource.LoginDataSource
 import es.architectcoders.data.repository.ErrorLoginRepository
+import es.architectcoders.domain.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 
-class LoginRepository(private val auth: FirebaseAuth) {
+class LoginDataSourceImpl(private val auth: FirebaseAuth) : LoginDataSource {
 
-    suspend fun signIn(email: String, password: String) =
+    override suspend fun signIn(email: String, password: String) =
         suspendCancellableCoroutine<Either<ErrorLoginRepository, Boolean>> { continuation ->
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
@@ -26,6 +28,35 @@ class LoginRepository(private val auth: FirebaseAuth) {
                     }
                 }
         }
+
+    override suspend fun createAccount(email: String, password: String) =
+        suspendCancellableCoroutine<Either<ErrorLoginRepository, Boolean>> { continuation ->
+            auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
+                update {
+                    if (continuation.isActive) continuation.resume(Either.Right(true))
+                }
+            }.addOnFailureListener {
+                if (continuation.isActive) {
+                    continuation.resume(Either.Left(ErrorLoginRepository.AuthenticationError(it.message)))
+                }
+            }
+        }
+
+    override suspend fun signOut() = withContext(Dispatchers.IO) {
+        auth.signOut()
+    }
+
+    override suspend fun getCurrentUser() = withContext(Dispatchers.IO) {
+        auth.currentUser?.let {
+            with(it) {
+                val email = email
+                val name = displayName
+                val photoUrl = photoUrl?.toString()
+                val phone = phoneNumber
+                Right(User(email, name, photoUrl, phone))
+            }
+        } ?: Either.Left(ErrorLoginRepository.UserNotFoundError)
+    }
 
     private fun update(taskSuccess: () -> Unit) {
         if (auth.currentUser?.photoUrl == null) {
@@ -47,34 +78,5 @@ class LoginRepository(private val auth: FirebaseAuth) {
         } else {
             taskSuccess()
         }
-    }
-
-    suspend fun createAccount(email: String, password: String) =
-        suspendCancellableCoroutine<Either<ErrorLoginRepository, Boolean>> { continuation ->
-            auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
-                update {
-                    if (continuation.isActive) continuation.resume(Either.Right(true))
-                }
-            }.addOnFailureListener {
-                if (continuation.isActive) {
-                    continuation.resume(Either.Left(ErrorLoginRepository.AuthenticationError(it.message)))
-                }
-            }
-        }
-
-    suspend fun signOut() = withContext(Dispatchers.IO) {
-        auth.signOut()
-    }
-
-    suspend fun getCurrentUser() = withContext(Dispatchers.IO) {
-        auth.currentUser?.let {
-            with(it) {
-                val email = email
-                val name = displayName
-                val photoUrl = photoUrl?.toString()
-                val phone = phoneNumber
-                Right(es.architectcoders.domain.MyFirebaseUser(email, name, photoUrl, phone))
-            }
-        } ?: Either.Left(ErrorLoginRepository.UserNotFoundError)
     }
 }

@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import
+            alias="NumberExtension"
+            type="es.architectcoders.mascotas.ui.common.NumberExtensionKt" />
+
         <variable
             name="advert"
-            type="es.architectcoders.domain.MyFirebaseAdvert" />
+            type="es.architectcoders.domain.Advert" />
 
     </data>
 
@@ -24,13 +29,13 @@
             android:id="@+id/advertCover"
             android:layout_width="0dp"
             android:layout_height="128dp"
+            android:contentDescription="@string/advert_cover"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/advert_cover"
-            app:load_url="@{advert.photoUrl}"
-            tools:src="@tools:sample/avatars"/>
+            app:load_base64="@{advert.photoBase64}"
+            tools:src="@tools:sample/avatars" />
 
         <ImageView
             android:id="@+id/advertRecent"
@@ -43,10 +48,10 @@
             android:contentDescription="@string/advert_recent"
             android:minWidth="32dp"
             android:minHeight="32dp"
-            app:visible="@{advert.recent}"
             android:src="@drawable/ic_recent_advert_white_24dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/advertCover" />
+            app:layout_constraintTop_toTopOf="@+id/advertCover"
+            app:visible="@{advert.recent}" />
 
         <TextView
             android:id="@+id/advertPrize"
@@ -59,8 +64,8 @@
             android:layout_toEndOf="@+id/advertFav"
             android:lines="1"
             android:maxLines="1"
-            android:text="@{advert.priceToCurrencyString()}"
             android:padding="@dimen/advert_text_padding"
+            android:text="@{NumberExtension.toCurrencyString(advert.price)}"
             android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
             app:layout_constraintEnd_toStartOf="@+id/advertFav"
             app:layout_constraintStart_toStartOf="parent"
