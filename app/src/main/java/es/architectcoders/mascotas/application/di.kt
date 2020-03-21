@@ -11,6 +11,8 @@ import es.architectcoders.data.repository.LoginRepository
 import es.architectcoders.mascotas.datasource.FirestoreDataSourceImpl
 import es.architectcoders.mascotas.datasource.LoginDataSourceImpl
 import es.architectcoders.mascotas.ui.advert.fragment.AdvertListFragment
+import es.architectcoders.mascotas.ui.advert.fragment.AdvertDetailFragment
+import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertDetailViewModel
 import es.architectcoders.mascotas.ui.advert.fragment.NewAdvertFragment
 import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertListViewModel
 import es.architectcoders.mascotas.ui.advert.viewmodel.NewAdvertViewModel
@@ -19,6 +21,7 @@ import es.architectcoders.mascotas.ui.login.fragment.LoginFragment
 import es.architectcoders.mascotas.ui.login.viewmodel.LoginViewModel
 import es.architectcoders.usescases.CreateAdvert
 import es.architectcoders.usescases.FindRelevantAdverts
+import es.architectcoders.usescases.GetAdvert
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
@@ -64,6 +67,11 @@ private val scopesModule = module {
     scope(named<NewAdvertFragment>()) {
         viewModel { NewAdvertViewModel(get(), get()) }
         scoped { CreateAdvert(get()) }
+    }
+
+    scope(named<AdvertDetailFragment>()) {
+        viewModel { (id: String) -> AdvertDetailViewModel(id, get()) }
+        scoped { GetAdvert(get()) }
     }
 
     scope(named<AdvertListFragment>()) {
