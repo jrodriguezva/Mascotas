@@ -30,6 +30,7 @@
         <activity android:name=".ui.profile.activities.ProfileActivity" />
         <activity android:name=".ui.profileEdit.activities.ProfileEditActivity" />
         <activity android:name=".ui.advert.NewAdvertActivity" />
+        <activity android:name=".ui.advert.AdvertDetailActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

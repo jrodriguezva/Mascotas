@@ -7,4 +7,5 @@ import es.architectcoders.domain.Advert
 interface FirestoreDataSource {
     suspend fun addAdvert(advert: Advert): Either<RepositoryException, Advert>
     suspend fun getAdverts(): List<Advert>
+    suspend fun getAdvert(id: String): Advert
 }

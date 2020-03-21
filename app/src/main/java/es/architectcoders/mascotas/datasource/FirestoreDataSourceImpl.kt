@@ -19,6 +19,7 @@ class FirestoreDataSourceImpl(private val database: FirebaseFirestore) : Firesto
                 .add(advert)
                 .addOnSuccessListener { documentReference ->
                     advert.id = documentReference.id
+                    documentReference.update("id", advert.id)
                     continuation.resume(advert.right())
                 }
                 .addOnFailureListener {
@@ -36,6 +37,21 @@ class FirestoreDataSourceImpl(private val database: FirebaseFirestore) : Firesto
                 }
                 .addOnFailureListener {
                     continuation.resume(emptyList())
+                }
+        }
+    }
+
+    override suspend fun getAdvert(id: String): Advert {
+        return suspendCancellableCoroutine { continuation ->
+            val collection = database.collection(COLLECTION_ADVERTS)
+            collection.get()
+                .addOnSuccessListener {
+                    continuation.resume(
+                        it.toObjects<Advert>().find {
+                            advert -> advert.id == id } ?: Advert())
+                }
+                .addOnFailureListener {
+                    continuation.resume(Advert())
                 }
         }
     }
