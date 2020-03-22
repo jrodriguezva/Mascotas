@@ -1,269 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_white"
-    tools:context=".ui.profileEdit.activities.ProfileEditActivity">
+    android:background="@color/color_primary_light">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:fitsSystemWindows="true">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_primary"
+        android:gravity="center"
+        android:theme="@style/Theme.Toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/color_white" />
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="@color/color_primary"
-            app:expandedTitleGravity="bottom|center_horizontal"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:title="@string/name_user">
-
-            <ImageView
-                android:id="@+id/userImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_collapseMode="pin"
-                app:layout_collapseParallaxMultiplier="0.5"
-                android:src="@color/color_primary"
-                android:contentDescription="@string/user_image" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/photo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="70dp"
-                android:src="@color/color_primary_dark"
-                android:fitsSystemWindows="true"
-                android:layout_centerInParent="true"
-                app:layout_collapseMode="pin"/>
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarProfile"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/color_primary"
-                app:titleTextColor="@color/color_white"
-                android:elevation="0dp"
-                app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_arrow_back_white"/>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/levelContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center">
-                    <TextView
-                        android:id="@+id/textLevel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/user_level"
-                        android:textColor="@color/color_black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"  />
-
-                    <ImageView
-                        android:id="@+id/iconLevelInfo"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_info_black"
-                        android:padding="6dp"
-                        android:layout_margin="12dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="@string/icon_level_info" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:text="@string/madrid_spain"
-                    android:textColor="@color/color_black"
-                    android:layout_gravity="center"
-                    android:gravity="center" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_marginBottom="20dp">
-
-                    <RatingBar
-                        android:id="@+id/ratingBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:numStars="5"
-                        android:rating="4"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/rating_example"
-                        android:textColor="@color/color_black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="@id/ratingBar"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <!-- Following -->
-                <LinearLayout
-                    android:id="@+id/followContainer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/followingNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/following_number_example"
-                        android:textColor="@color/color_black"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginEnd="3dp"/>
-                    <TextView
-                        android:id="@+id/followingText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/following"
-                        android:textColor="@color/color_black"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginEnd="10dp"/>
-
-                    <TextView
-                        android:id="@+id/followedNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/followed_example"
-                        android:textColor="@color/color_black"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginStart="10dp" />
-                    <TextView
-                        android:id="@+id/followedText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/followed"
-                        android:textColor="@color/color_black"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginStart="3dp" />
-                </LinearLayout>
-
-
-                <!-- Solds -->
-                <LinearLayout
-                    android:id="@+id/soldContainer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_marginBottom="20dp">
-
-                    <TextView
-                        android:id="@+id/soldNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/sold_example"
-                        android:textColor="@color/color_black"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginEnd="3dp"/>
-                    <TextView
-                        android:id="@+id/soldText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/sold"
-                        android:textColor="@color/color_black"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginEnd="10dp"/>
-
-                    <TextView
-                        android:id="@+id/buyNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/buy_example"
-                        android:textColor="@color/color_black"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginStart="12dp" />
-                    <TextView
-                        android:id="@+id/buyText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/buy"
-                        android:textColor="@color/color_black"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginStart="3dp" />
-                </LinearLayout>
-
-                <!-- Tabs and ViewPager -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:tabMode="fixed"
-                        app:tabTextColor="@color/color_white"
-                        android:background="@color/color_primary"
-                        app:tabSelectedTextColor="@color/color_primary_dark"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/viewPager"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tabs" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarProfile" />
+</androidx.constraintlayout.widget.ConstraintLayout>

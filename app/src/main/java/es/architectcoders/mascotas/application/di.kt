@@ -19,6 +19,8 @@ import es.architectcoders.mascotas.ui.advert.viewmodel.NewAdvertViewModel
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.login.fragment.LoginFragment
 import es.architectcoders.mascotas.ui.login.viewmodel.LoginViewModel
+import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
+import es.architectcoders.mascotas.ui.profile.viewmodel.ProfileViewModel
 import es.architectcoders.usescases.CreateAdvert
 import es.architectcoders.usescases.FindRelevantAdverts
 import es.architectcoders.usescases.GetAdvert
@@ -76,6 +78,11 @@ private val scopesModule = module {
 
     scope(named<AdvertListFragment>()) {
         viewModel { AdvertListViewModel(get()) }
+        scoped { FindRelevantAdverts(get()) }
+    }
+
+    scope(named<ProfileFragment>()) {
+        viewModel { ProfileViewModel(get()) }
         scoped { FindRelevantAdverts(get()) }
     }
 }
