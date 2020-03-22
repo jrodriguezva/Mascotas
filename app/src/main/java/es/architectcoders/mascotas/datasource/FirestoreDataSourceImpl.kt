@@ -8,6 +8,7 @@ import com.google.firebase.firestore.ktx.toObjects
 import es.architectcoders.data.datasource.FirestoreDataSource
 import es.architectcoders.data.repository.RepositoryException
 import es.architectcoders.domain.Advert
+import es.architectcoders.domain.User
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
@@ -56,7 +57,43 @@ class FirestoreDataSourceImpl(private val database: FirebaseFirestore) : Firesto
         }
     }
 
+    override suspend fun getAdvertsByAuthor(author: String): List<Advert> {
+        return suspendCancellableCoroutine { continuation ->
+            val collection = database.collection(COLLECTION_ADVERTS)
+            collection.get()
+                .addOnSuccessListener {
+                    continuation.resume(
+                        it.toObjects<Advert>().filter { advert ->
+                            advert.author == author
+                        })
+                }
+                .addOnFailureListener {
+                    continuation.resume(emptyList())
+                }
+        }
+    }
+
+    override suspend fun getUser(uid: String): User {
+        return suspendCancellableCoroutine { continuation ->
+            val collection = database.collection(COLLECTION_USER)
+            collection.document(uid)
+                .get()
+                .addOnSuccessListener {
+                    continuation.resume(
+                        it.toObject(User::class.java) ?: User())
+                }
+                .addOnFailureListener {
+                    continuation.resume(User())
+                }
+        }
+    }
+
+    override suspend fun saveUser(user: User): Either<RepositoryException, User> {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         const val COLLECTION_ADVERTS = "adverts"
+        const val COLLECTION_USER = "user"
     }
 }

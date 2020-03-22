@@ -39,20 +39,20 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/photo"
+                        android:id="@+id/userPhoto"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
                         android:fitsSystemWindows="true"
-                        app:load_base64="@{user.photoUrl}"
+                        app:load_base64="@{user.photoBase64}"
                         app:layout_collapseMode="pin" />
 
                     <TextView
                         android:id="@+id/textName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:text="@{user.name}"
+                        app:text="@{viewmodel.textName}"
                         android:layout_gravity="center"
                         android:textColor="@color/color_black"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -123,7 +123,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/rating_example"
+                            app:text="@{viewmodel.ratingCount}"
                             android:textColor="@color/color_black"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintLeft_toLeftOf="@id/ratingBar"
