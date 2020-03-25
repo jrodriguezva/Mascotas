@@ -20,7 +20,9 @@ import es.architectcoders.mascotas.ui.advert.viewmodel.NewAdvertViewModel
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.login.fragment.LoginFragment
 import es.architectcoders.mascotas.ui.login.viewmodel.LoginViewModel
+import es.architectcoders.mascotas.ui.profile.fragments.EditProfileFragment
 import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
+import es.architectcoders.mascotas.ui.profile.viewmodel.EditProfileViewModel
 import es.architectcoders.mascotas.ui.profile.viewmodel.ProfileViewModel
 import es.architectcoders.usescases.*
 import kotlinx.coroutines.CoroutineDispatcher
@@ -85,5 +87,11 @@ private val scopesModule = module {
         viewModel { ProfileViewModel(get(), get(), get()) }
         scoped { FindAdvertsByAuthor(get()) }
         scoped { GetUser(get()) }
+    }
+
+    scope(named<EditProfileFragment>()) {
+        viewModel { EditProfileViewModel(get(), get(), get(), get()) }
+        scoped { GetUser(get()) }
+        scoped { SaveUser(get()) }
     }
 }

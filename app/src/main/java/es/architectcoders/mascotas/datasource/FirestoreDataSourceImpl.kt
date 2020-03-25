@@ -73,10 +73,10 @@ class FirestoreDataSourceImpl(private val database: FirebaseFirestore) : Firesto
         }
     }
 
-    override suspend fun getUser(uid: String): User {
+    override suspend fun getUser(email: String): User {
         return suspendCancellableCoroutine { continuation ->
             val collection = database.collection(COLLECTION_USER)
-            collection.document(uid)
+            collection.document(email)
                 .get()
                 .addOnSuccessListener {
                     continuation.resume(
@@ -89,7 +89,19 @@ class FirestoreDataSourceImpl(private val database: FirebaseFirestore) : Firesto
     }
 
     override suspend fun saveUser(user: User): Either<RepositoryException, User> {
-        TODO("Not yet implemented")
+        return suspendCancellableCoroutine { continuation ->
+            user.email?.let {
+                database.collection(COLLECTION_USER)
+                    .document(it)
+                    .set(user)
+                    .addOnSuccessListener {
+                        continuation.resume(user.right())
+                    }
+                    .addOnFailureListener {
+                        continuation.resume(RepositoryException.NoConnectionException.left())
+                    }
+            }
+        }
     }
 
     companion object {

@@ -10,6 +10,6 @@ interface FirestoreDataSource {
     suspend fun getAdverts(): List<Advert>
     suspend fun getAdvert(id: String): Advert
     suspend fun getAdvertsByAuthor(author: String): List<Advert>
-    suspend fun getUser(uid: String): User
+    suspend fun getUser(email: String): User
     suspend fun saveUser(user: User): Either<RepositoryException, User>
 }

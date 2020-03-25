@@ -24,8 +24,8 @@ class ProfileViewModel(
     private val _adverts = MutableLiveData<List<Advert>>()
     val adverts: LiveData<List<Advert>> = _adverts
 
-    private val _photoBase64 = MutableLiveData<String>()
-    val photoBase64: LiveData<String> = _photoBase64
+    private val _photoUrl = MutableLiveData<String>()
+    val photoUrl: LiveData<String> = _photoUrl
     private val _textName = MutableLiveData<String>()
     val textName: LiveData<String> = _textName
     private val _address = MutableLiveData<String>()
@@ -44,17 +44,17 @@ class ProfileViewModel(
         refresh(ProfileFragment.TYPES.ON_SALE)
     }
 
-    private fun getUserData() {
+    fun getUserData() {
         viewModelScope.launch {
             getUser.invoke(loginRepository.getCurrentUser().orNull()?.let { user ->
-                user.uid?.let {
+                user.email?.let {
                     val userData = getUser.invoke(it)
                     _textName.value = userData.name + " " + userData.surname
                     _address.value = userData.city + ", " + userData.country
                     _level.value = userData.level
                     _rating.value = userData.rating
                     _ratingCount.value = "(" + userData.ratingCount + ")"
-                    //_photoBase64.value = user.photoBase64
+                    //_photoUrl.value = user.photoUrl
                 }
             }.toString())
         }
@@ -66,7 +66,7 @@ class ProfileViewModel(
             when(tabSelected) {
                 ProfileFragment.TYPES.ON_SALE -> {
                     loginRepository.getCurrentUser().orNull().let { user ->
-                        _adverts.value = user?.uid?.let {
+                        _adverts.value = user?.email?.let {
                             findAdvertsByAuthor.invoke(it) } }
                 }
                 ProfileFragment.TYPES.FAVORITES -> _adverts.value = emptyList()

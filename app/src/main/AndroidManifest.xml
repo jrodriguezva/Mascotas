@@ -28,7 +28,7 @@
         </activity>
         <activity android:name=".ui.advert.AdvertListActivity" />
         <activity android:name=".ui.profile.activities.ProfileActivity" />
-        <activity android:name=".ui.profileEdit.activities.ProfileEditActivity" />
+        <activity android:name=".ui.profile.activities.EditProfileActivity" />
         <activity android:name=".ui.advert.NewAdvertActivity" />
         <activity android:name=".ui.advert.AdvertDetailActivity" />
 

@@ -55,6 +55,10 @@ class ProfileFragment : Fragment() {
         })
     }
 
+    override fun onResume() {
+        viewModel.getUserData()
+        super.onResume()
+    }
 
     private fun navigate(event: Event<AdvertNavigationEvent>) {
         event.getContentIfNotHandled().apply {

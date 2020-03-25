@@ -1,107 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.profileEdit.activities.ProfileEditActivity" >
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <data>
+        <variable
+            name="viewmodel"
+            type="es.architectcoders.mascotas.ui.profile.viewmodel.EditProfileViewModel" />
+
+        <variable
+            name="user"
+            type="es.architectcoders.domain.User" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameEdit"
+        android:layout_height="match_parent"
+        tools:context=".ui.profile.activities.EditProfileActivity">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userPhoto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal"
+            android:fitsSystemWindows="true"
+            app:layout_collapseMode="pin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:load_base64="@{viewmodel.photoUrl}" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/name"
-            android:inputType="text" />
+            app:layout_constraintTop_toBottomOf="@id/userPhoto"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:error_msg="@{viewmodel.nameError}"
+            android:layout_margin="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name"
+                android:text="@{viewmodel.name}"
+                android:inputType="text" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/surnameLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/nameLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"  >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/surnameEdit"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/surnameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/surname"
-            android:inputType="text" />
+            app:layout_constraintTop_toBottomOf="@id/nameLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:error_msg="@{viewmodel.surnameError}"
+            android:layout_margin="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/surnameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/surname"
+                android:text="@{viewmodel.surname}"
+                android:inputType="text" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/addressLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/surnameLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/addressEdit"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/cityLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/address"
-            android:inputType="text" />
+            app:layout_constraintTop_toBottomOf="@id/surnameLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:error_msg="@{viewmodel.cityError}"
+            android:layout_margin="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cityEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/city"
+                app:text="@{viewmodel.city}"
+                android:inputType="text" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/postalAddressLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/addressLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/postalAddressEdit"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/countryLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/postal_code"
-            android:inputType="text" />
+            app:layout_constraintTop_toBottomOf="@id/cityLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:error_msg="@{viewmodel.countryError}"
+            android:layout_margin="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/countryEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/country"
+                android:inputType="text"
+                android:text="@{viewmodel.country}" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/postalAddressLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailEdit"
+        <TextView
+            android:id="@+id/emailTitleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:inputType="text" />
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="32dp"
+            android:textStyle="bold"
+            android:text="@string/email"
+            app:layout_constraintTop_toBottomOf="@id/countryLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/emailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            app:text="@{viewmodel.email}"
+            app:layout_constraintTop_toBottomOf="@id/emailTitleText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/updateUserButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:text="@string/save"
-        app:layout_constraintTop_toBottomOf="@id/emailLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ratingContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/emailText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:numStars="5"
+                app:rating="@{viewmodel.rating}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/ratingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:text="@{viewmodel.ratingCount}"
+                android:textColor="@color/color_black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/ratingBar"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/titleLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_label"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/ratingContainer"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/textLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:text="@{viewmodel.level}"
+            app:layout_constraintTop_toBottomOf="@id/titleLevel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/updateUserButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:text="@string/save"
+            app:layout_constraintTop_toBottomOf="@id/textLevel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="20dp"
+            android:onClick="@{(view) -> viewmodel.updateUser(nameEdit.getText().toString(), surnameEdit.getText().toString(), cityEdit.getText().toString(), countryEdit.getText().toString(), emailText.getText().toString(), textLevel.getText().toString(), ratingBar.getRating(), ratingCount.getText().toString())}"/>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progressEditProfile"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{viewmodel.loading}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

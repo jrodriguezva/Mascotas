@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import es.architectcoders.mascotas.R
-import es.architectcoders.mascotas.ui.profileEdit.activities.ProfileEditActivity
 import kotlinx.android.synthetic.main.profile_activity.*
 import es.architectcoders.mascotas.ui.common.startActivity
 import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
@@ -48,7 +47,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun navigateToEditProfile() {
-        startActivity<ProfileEditActivity> {
+        startActivity<EditProfileActivity> {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         }
     }

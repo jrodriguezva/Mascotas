@@ -49,11 +49,7 @@ class LoginDataSourceImpl(private val auth: FirebaseAuth) : LoginDataSource {
     override suspend fun getCurrentUser() = withContext(Dispatchers.IO) {
         auth.currentUser?.let {
             with(it) {
-                val email = email
-                val name = displayName
-                val photoUrl = photoUrl?.toString()
-                val phone = phoneNumber
-                Right(User(email, name, photoUrl, phone))
+                Right(User(email = email, name = displayName, photoUrl = photoUrl?.toString()))
             }
         } ?: Either.Left(ErrorLoginRepository.UserNotFoundError)
     }
