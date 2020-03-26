@@ -7,17 +7,24 @@ import androidx.lifecycle.viewModelScope
 import arrow.core.orNull
 import es.architectcoders.data.repository.LoginRepository
 import es.architectcoders.domain.Advert
+import es.architectcoders.domain.User
+import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.advert.viewmodel.event.AdvertNavigationEvent
+import es.architectcoders.mascotas.ui.common.ResourceProvider
+import es.architectcoders.mascotas.ui.common.intToRating
 import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
 import es.architectcoders.usescases.FindAdvertsByAuthor
 import es.architectcoders.usescases.GetUser
+import es.architectcoders.usescases.SaveUser
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val findAdvertsByAuthor: FindAdvertsByAuthor,
     private val loginRepository: LoginRepository,
-    private var getUser: GetUser) : ViewModel() {
+    private var getUser: GetUser,
+    private var saveUser: SaveUser,
+    private val resourceProvider: ResourceProvider) : ViewModel() {
 
     private val _loading = MutableLiveData(true)
     val loading: LiveData<Boolean> = _loading
@@ -39,6 +46,8 @@ class ProfileViewModel(
     private val _nav = MutableLiveData<Event<AdvertNavigationEvent>>()
     val nav: LiveData<Event<AdvertNavigationEvent>> = _nav
 
+    lateinit var userData: User
+
     init {
         getUserData()
         refresh(ProfileFragment.TYPES.ON_SALE)
@@ -48,17 +57,33 @@ class ProfileViewModel(
         viewModelScope.launch {
             getUser.invoke(loginRepository.getCurrentUser().orNull()?.let { user ->
                 user.email?.let {
-                    val userData = getUser.invoke(it)
-                    _textName.value = userData.name + " " + userData.surname
-                    _address.value = userData.city + ", " + userData.country
-                    _level.value = userData.level
-                    _rating.value = userData.rating
-                    _ratingCount.value = "(" + userData.ratingCount + ")"
-                    //_photoUrl.value = user.photoUrl
+                    userData = getUser.invoke(it)
+
+                    if (userData.email.isNullOrBlank()) {
+                        user.level = resourceProvider.getString(R.string.base_level_user)
+                        saveUser.invoke(user).fold( { handleFailure() }, { handleSuccess(user) } )
+                    } else {
+                        fillUserData(userData)
+                    }
                 }
             }.toString())
         }
     }
+
+    private fun fillUserData(userData: User) {
+        _textName.value = userData.name + " " + userData.surname
+        _address.value = userData.city + ", " + userData.country
+        _level.value = userData.level
+        _rating.value = userData.rating
+        _ratingCount.value = userData.ratingCount?.intToRating()
+        _photoUrl.value = userData.photoUrl
+    }
+
+    private fun handleFailure() {}
+    private fun handleSuccess(userData: User) {
+        fillUserData(userData)
+    }
+
 
     fun refresh(tabSelected: ProfileFragment.TYPES) {
         viewModelScope.launch {

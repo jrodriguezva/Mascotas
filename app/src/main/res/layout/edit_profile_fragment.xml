@@ -5,13 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import
+            alias="TextUtils"
+            type="android.text.TextUtils" />
+
         <variable
             name="viewmodel"
             type="es.architectcoders.mascotas.ui.profile.viewmodel.EditProfileViewModel" />
-
-        <variable
-            name="user"
-            type="es.architectcoders.domain.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +20,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.profile.activities.EditProfileActivity">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:src="@drawable/ic_photo_camera"
+            android:paddingTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:invisible="@{viewmodel.photoUrl!=null}"
+            android:onClick="@{() -> viewmodel.clickOnPicker()}"
+            android:contentDescription="@string/user_image" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userPhoto"
@@ -31,6 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> viewmodel.clickOnPicker()}"
             app:load_base64="@{viewmodel.photoUrl}" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -202,7 +216,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_margin="20dp"
-            android:onClick="@{(view) -> viewmodel.updateUser(nameEdit.getText().toString(), surnameEdit.getText().toString(), cityEdit.getText().toString(), countryEdit.getText().toString(), emailText.getText().toString(), textLevel.getText().toString(), ratingBar.getRating(), ratingCount.getText().toString())}"/>
+            android:onClick="@{() -> viewmodel.updateUser()}"/>
 
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/progressEditProfile"

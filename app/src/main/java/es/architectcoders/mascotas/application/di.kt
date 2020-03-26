@@ -69,7 +69,7 @@ private val scopesModule = module {
     }
 
     scope(named<NewAdvertFragment>()) {
-        viewModel { NewAdvertViewModel(get(), get()) }
+        viewModel { NewAdvertViewModel(get(), get(), get()) }
         scoped { CreateAdvert(get()) }
     }
 
@@ -84,9 +84,10 @@ private val scopesModule = module {
     }
 
     scope(named<ProfileFragment>()) {
-        viewModel { ProfileViewModel(get(), get(), get()) }
+        viewModel { ProfileViewModel(get(), get(), get(), get(), get()) }
         scoped { FindAdvertsByAuthor(get()) }
         scoped { GetUser(get()) }
+        scoped { SaveUser(get()) }
     }
 
     scope(named<EditProfileFragment>()) {
