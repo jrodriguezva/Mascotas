@@ -27,7 +27,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="18dp">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -36,7 +37,7 @@
                     android:onClick="@{() -> viewmodel.clickOnPicker()}"
                     android:paddingTop="30dp"
                     android:src="@drawable/ic_photo_camera"
-                    app:invisible="@{viewmodel.photoUrl!=null}"
+                    app:visible="@{viewmodel.photoUrl.empty}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -224,12 +225,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:layout_marginTop="12dp"
                     android:onClick="@{(view) -> viewmodel.updateUser(nameEdit.getText().toString(), surnameEdit.getText().toString(), cityEdit.getText().toString(), countryEdit.getText().toString())}"
                     android:text="@string/save"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textLevel" />
+                    app:layout_constraintTop_toBottomOf="@id/textLevel"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <androidx.core.widget.ContentLoadingProgressBar
                     android:id="@+id/progressEditProfile"

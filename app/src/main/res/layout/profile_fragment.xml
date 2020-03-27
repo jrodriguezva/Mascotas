@@ -39,7 +39,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:invisible="@{viewmodel.photoUrl!=null}"
+                        app:visible="@{viewmodel.photoUrl.empty}"
                         android:contentDescription="@string/user_image" />
 
 
@@ -103,12 +103,13 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
-                        android:id="@+id/textAdress"
+                        android:id="@+id/textAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:gravity="center"
                         app:text="@{viewmodel.address}"
+                        app:visible="@{viewmodel.address.empty}"
                         android:textColor="@color/color_black"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -124,7 +125,7 @@
                         android:orientation="horizontal"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textAdress" >
+                        app:layout_constraintTop_toBottomOf="@id/textAddress" >
 
                         <RatingBar
                             android:id="@+id/ratingBar"

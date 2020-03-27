@@ -25,10 +25,14 @@ class EditProfileViewModel(
     private val resourceProvider: ResourceProvider) : ViewModel() {
 
     companion object {
-        const val MIN_LENGTH_NAME = 5
-        const val MIN_LENGTH_SURNAME = 5
-        const val MIN_LENGTH_COUNTRY = 5
-        const val MIN_LENGTH_CITY = 5
+        const val MIN_LENGTH_NAME = 2
+        const val MAX_LENGTH_NAME = 15
+        const val MIN_LENGTH_SURNAME = 2
+        const val MAX_LENGTH_SURNAME = 15
+        const val MIN_LENGTH_COUNTRY = 2
+        const val MAX_LENGTH_COUNTRY = 15
+        const val MIN_LENGTH_CITY = 2
+        const val MAX_LENGTH_CITY = 15
     }
 
     private val _error = MutableLiveData<Event<String>>()
@@ -152,7 +156,11 @@ class EditProfileViewModel(
                 valid1 = false
             }
             name.length < MIN_LENGTH_NAME -> {
-                _nameError.value = resourceProvider.getString(R.string.error_name_length)
+                _nameError.value = resourceProvider.getString(R.string.error_min_name_length)
+                valid1 = false
+            }
+            name.length > MAX_LENGTH_NAME -> {
+                _nameError.value = resourceProvider.getString(R.string.error_max_name_length)
                 valid1 = false
             }
             else -> _nameError.value = null
@@ -167,7 +175,11 @@ class EditProfileViewModel(
                 valid1 = false
             }
             surname.length < MIN_LENGTH_SURNAME -> {
-                _surnameError.value = resourceProvider.getString(R.string.error_surname_length)
+                _surnameError.value = resourceProvider.getString(R.string.error_min_surname_length)
+                valid1 = false
+            }
+            surname.length > MAX_LENGTH_SURNAME -> {
+                _surnameError.value = resourceProvider.getString(R.string.error_max_surname_length)
                 valid1 = false
             }
             else -> _surnameError.value = null
@@ -183,7 +195,11 @@ class EditProfileViewModel(
                 valid1 = false
             }
             city.length < MIN_LENGTH_CITY -> {
-                _cityError.value = resourceProvider.getString(R.string.error_city_length)
+                _cityError.value = resourceProvider.getString(R.string.error_min_city_length)
+                valid1 = false
+            }
+            city.length > MAX_LENGTH_CITY -> {
+                _cityError.value = resourceProvider.getString(R.string.error_max_city_length)
                 valid1 = false
             }
             else -> _cityError.value = null
@@ -199,7 +215,12 @@ class EditProfileViewModel(
                 valid1 = false
             }
             country.length < MIN_LENGTH_COUNTRY -> {
-                _countryError.value = resourceProvider.getString(R.string.error_country_length)
+                _countryError.value = resourceProvider.getString(R.string.error_min_country_length)
+
+                valid1 = false
+            }
+            country.length > MAX_LENGTH_COUNTRY -> {
+                _countryError.value = resourceProvider.getString(R.string.error_max_country_length)
 
                 valid1 = false
             }

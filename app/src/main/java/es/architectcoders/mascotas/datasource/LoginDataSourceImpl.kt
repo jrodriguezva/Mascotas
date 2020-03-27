@@ -61,7 +61,6 @@ class LoginDataSourceImpl(private val auth: FirebaseAuth) : LoginDataSource {
                 val nickname = email.substring(0, index)
                 val profileUpdates = UserProfileChangeRequest.Builder()
                     .setDisplayName(nickname)
-                    .setPhotoUri(Uri.parse("http://lorempixel.com/400/200"))
                     .build()
 
                 auth.currentUser?.updateProfile(profileUpdates)
