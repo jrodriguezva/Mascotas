@@ -8,6 +8,7 @@ import es.architectcoders.data.datasource.FirestoreDataSource
 import es.architectcoders.data.datasource.LoginDataSource
 import es.architectcoders.data.repository.AdvertRepository
 import es.architectcoders.data.repository.LoginRepository
+import es.architectcoders.data.repository.UserRepository
 import es.architectcoders.mascotas.datasource.FirestoreDataSourceImpl
 import es.architectcoders.mascotas.datasource.LoginDataSourceImpl
 import es.architectcoders.mascotas.ui.advert.fragment.AdvertListFragment
@@ -19,9 +20,11 @@ import es.architectcoders.mascotas.ui.advert.viewmodel.NewAdvertViewModel
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.login.fragment.LoginFragment
 import es.architectcoders.mascotas.ui.login.viewmodel.LoginViewModel
-import es.architectcoders.usescases.CreateAdvert
-import es.architectcoders.usescases.FindRelevantAdverts
-import es.architectcoders.usescases.GetAdvert
+import es.architectcoders.mascotas.ui.profile.fragments.EditProfileFragment
+import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
+import es.architectcoders.mascotas.ui.profile.viewmodel.EditProfileViewModel
+import es.architectcoders.mascotas.ui.profile.viewmodel.ProfileViewModel
+import es.architectcoders.usescases.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
@@ -57,6 +60,7 @@ private val appModule = module {
 val dataModule = module {
     factory { LoginRepository(get()) }
     factory { AdvertRepository(get()) }
+    factory { UserRepository(get()) }
 }
 
 private val scopesModule = module {
@@ -65,7 +69,7 @@ private val scopesModule = module {
     }
 
     scope(named<NewAdvertFragment>()) {
-        viewModel { NewAdvertViewModel(get(), get()) }
+        viewModel { NewAdvertViewModel(get(), get(), get()) }
         scoped { CreateAdvert(get()) }
     }
 
@@ -77,5 +81,18 @@ private val scopesModule = module {
     scope(named<AdvertListFragment>()) {
         viewModel { AdvertListViewModel(get()) }
         scoped { FindRelevantAdverts(get()) }
+    }
+
+    scope(named<ProfileFragment>()) {
+        viewModel { ProfileViewModel(get(), get(), get(), get(), get()) }
+        scoped { FindAdvertsByAuthor(get()) }
+        scoped { GetUser(get()) }
+        scoped { SaveUser(get()) }
+    }
+
+    scope(named<EditProfileFragment>()) {
+        viewModel { EditProfileViewModel(get(), get(), get(), get()) }
+        scoped { GetUser(get()) }
+        scoped { SaveUser(get()) }
     }
 }

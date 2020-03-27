@@ -1,15 +1,14 @@
-package es.architectcoders.mascotas.ui.profileEdit.activities
+package es.architectcoders.mascotas.ui.profile.activities
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import es.architectcoders.mascotas.R
-import es.architectcoders.mascotas.ui.profileEdit.fragments.ProfileEditFragment
+import es.architectcoders.mascotas.ui.profile.fragments.EditProfileFragment
 import kotlinx.android.synthetic.main.edit_profile_activity.*
 
 
-class ProfileEditActivity : AppCompatActivity() {
+class EditProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +17,10 @@ class ProfileEditActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.containerEditProfile, ProfileEditFragment.newInstance())
+                .replace(R.id.containerEditProfile, EditProfileFragment.newInstance())
                 .commitNow()
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         setSupportActionBar(toolbarProfileEdit)
@@ -35,12 +33,5 @@ class ProfileEditActivity : AppCompatActivity() {
             finish()
         }
         return true
-    }
-
-    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
-        if (menuItem.itemId == R.id.btnSave) {
-            finish()
-        }
-        return super.onOptionsItemSelected(menuItem)
     }
 }

@@ -17,14 +17,8 @@
         </item>
     </style>
 
-    <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/color_primary</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/color_primary</item>
+    <style name="Theme.Toolbar" parent="android:Theme.Holo">
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white</item>
     </style>
 
     <style name="EditTextTheme">

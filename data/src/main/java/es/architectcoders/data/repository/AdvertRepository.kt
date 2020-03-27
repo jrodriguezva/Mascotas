@@ -9,5 +9,7 @@ class AdvertRepository(private val firestoreDataSource: FirestoreDataSource) {
 
     suspend fun findRelevantAdverts(): List<Advert> = firestoreDataSource.getAdverts()
 
+    suspend fun findAdvertsByAuthor(author: String): List<Advert> = firestoreDataSource.getAdvertsByAuthor(author)
+
     suspend fun createAdvert(advert: Advert) = firestoreDataSource.addAdvert(advert)
 }

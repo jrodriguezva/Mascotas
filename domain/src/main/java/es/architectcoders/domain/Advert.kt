@@ -5,5 +5,6 @@ data class Advert(
     var title: String = "",
     var photoBase64: String? = null,
     var price: String = "",
-    var recent: Boolean = false
+    var recent: Boolean = false,
+    var author: String = ""
 )
