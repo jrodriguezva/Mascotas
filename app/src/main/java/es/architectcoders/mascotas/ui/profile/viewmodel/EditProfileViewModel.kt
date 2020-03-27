@@ -108,16 +108,16 @@ class EditProfileViewModel(
         }
     }
 
-    fun updateUser() {
+    fun updateUser(name: String, surname: String, city: String, country:String) {
 
-        if (!validateForm(_name.value!!, _surname.value!!, _country.value!!, _city.value!!)) {
+        if (!validateForm(name, surname, city, country)) {
             return
         }
 
         viewModelScope.launch {
             _loading.value = true
 
-            userData = User(name = _name.value, surname = _surname.value, country = _country.value, city = _city.value,
+            userData = User(name = name, surname = surname, country = country, city = city,
                 email = _email.value, level = _level.value, rating = _rating.value?.toInt(),
                 ratingCount = _ratingCount.value?.ratingCountToInt(), photoUrl = _photoUrl.value)
             
@@ -135,7 +135,7 @@ class EditProfileViewModel(
         _error.value = Event(resourceProvider.getString(R.string.error_save_user))
     }
 
-    private fun validateForm(name: String, surname: String, country: String, city: String): Boolean {
+    private fun validateForm(name: String, surname: String, city: String, country: String): Boolean {
         var valid = true
         valid = validateName(name, valid)
         valid = validateSurname(surname, valid)

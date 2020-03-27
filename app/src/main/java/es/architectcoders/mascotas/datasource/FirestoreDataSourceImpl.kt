@@ -60,12 +60,9 @@ class FirestoreDataSourceImpl(private val database: FirebaseFirestore) : Firesto
     override suspend fun getAdvertsByAuthor(author: String): List<Advert> {
         return suspendCancellableCoroutine { continuation ->
             val collection = database.collection(COLLECTION_ADVERTS)
-            collection.get()
+            collection.whereEqualTo("author", author).get()
                 .addOnSuccessListener {
-                    continuation.resume(
-                        it.toObjects<Advert>().filter { advert ->
-                            advert.author == author
-                        })
+                    continuation.resume(it.toObjects())
                 }
                 .addOnFailureListener {
                     continuation.resume(emptyList())
