@@ -56,7 +56,7 @@ class AdvertsRepositoryTest {
         runBlocking {
             val adverts = listOf(Advert(id = "1"), Advert(id = "2"), Advert(id = "3"))
             whenever(firestoreDataSource.getAdvertsByAuthor(any())).thenReturn(adverts)
-            val result = advertsRepository.findAdvertsByAuthor(any())
+            val result = advertsRepository.findAdvertsByAuthor("1")
             assertEquals(adverts, result)
         }
     }
