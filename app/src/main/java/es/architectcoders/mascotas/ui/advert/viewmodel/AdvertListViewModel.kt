@@ -7,23 +7,38 @@ import androidx.lifecycle.viewModelScope
 import es.architectcoders.domain.Advert
 import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.advert.viewmodel.event.AdvertNavigationEvent
+import es.architectcoders.mascotas.ui.viewmodel.ScopedViewModel
 import es.architectcoders.usescases.FindRelevantAdverts
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
-class AdvertListViewModel(private val findRelevantAdverts: FindRelevantAdverts) : ViewModel() {
+class AdvertListViewModel(
+    private val findRelevantAdverts: FindRelevantAdverts,
+    uiDispatcher: CoroutineDispatcher
+) : ScopedViewModel(uiDispatcher) {
 
     private val _loading = MutableLiveData<Boolean>(true)
     val loading: LiveData<Boolean> = _loading
     private val _adverts = MutableLiveData<List<Advert>>()
-    val adverts: LiveData<List<Advert>> = _adverts
+    val adverts: LiveData<List<Advert>>
+        get() {
+            if (_adverts.value == null) refresh()
+            return _adverts
+        }
+
     private val _nav = MutableLiveData<Event<AdvertNavigationEvent>>()
     val nav: LiveData<Event<AdvertNavigationEvent>> = _nav
 
     init {
-        refresh()
+        initScope()
     }
 
-    private fun refresh() {
+    override fun onCleared() {
+        destroyScope()
+        super.onCleared()
+    }
+
+    fun refresh() {
         viewModelScope.launch {
             _loading.value = true
             _adverts.value = findRelevantAdverts.invoke()
