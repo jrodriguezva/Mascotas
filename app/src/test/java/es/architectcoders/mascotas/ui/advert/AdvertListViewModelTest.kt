@@ -46,8 +46,10 @@ class AdvertListViewModelTest {
         runBlocking {
             val adverts = listOf(Advert(id = "1"), Advert(id = "2"))
             whenever(findRelevantAdverts.invoke()).thenReturn(adverts)
+            vm.loading.observeForever(loadingObserver)
             vm.adverts.observeForever(advertsObserver)
             verify(advertsObserver).onChanged(adverts)
+            verify(loadingObserver).onChanged(false)
         }
     }
 }
