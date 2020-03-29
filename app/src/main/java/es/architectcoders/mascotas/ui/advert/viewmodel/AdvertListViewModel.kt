@@ -39,7 +39,7 @@ class AdvertListViewModel(
     }
 
     fun refresh() {
-        viewModelScope.launch {
+        launch {
             _loading.value = true
             _adverts.value = findRelevantAdverts.invoke()
             _loading.value = false

@@ -47,7 +47,6 @@ class AdvertListViewModelTest {
             val adverts = listOf(Advert(id = "1"), Advert(id = "2"))
             whenever(findRelevantAdverts.invoke()).thenReturn(adverts)
             vm.adverts.observeForever(advertsObserver)
-            vm.refresh()
             verify(advertsObserver).onChanged(adverts)
         }
     }
