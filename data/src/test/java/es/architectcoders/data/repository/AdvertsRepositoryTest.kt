@@ -1,4 +1,4 @@
-package es.architectcoders.mascotas
+package es.architectcoders.data.repository
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
