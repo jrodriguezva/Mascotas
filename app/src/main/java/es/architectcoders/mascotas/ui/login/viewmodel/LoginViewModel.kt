@@ -4,6 +4,7 @@ import android.text.TextUtils
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.orNull
 import es.architectcoders.data.repository.ErrorLoginRepository
@@ -14,15 +15,12 @@ import es.architectcoders.domain.User
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.common.ResourceProvider
-import es.architectcoders.mascotas.ui.viewmodel.ScopedViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val repository: LoginRepository,
-    private val resourceProvider: ResourceProvider,
-    uiDispatcher: CoroutineDispatcher
-) : ScopedViewModel(uiDispatcher) {
+    private val resourceProvider: ResourceProvider
+) : ViewModel() {
 
     companion object {
         private const val PASSWORD_MAX_LENGTH = 6

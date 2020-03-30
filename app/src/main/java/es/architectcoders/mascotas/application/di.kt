@@ -11,10 +11,10 @@ import es.architectcoders.data.repository.LoginRepository
 import es.architectcoders.data.repository.UserRepository
 import es.architectcoders.mascotas.datasource.FirestoreDataSourceImpl
 import es.architectcoders.mascotas.datasource.LoginDataSourceImpl
-import es.architectcoders.mascotas.ui.advert.fragment.AdvertListFragment
 import es.architectcoders.mascotas.ui.advert.fragment.AdvertDetailFragment
-import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertDetailViewModel
+import es.architectcoders.mascotas.ui.advert.fragment.AdvertListFragment
 import es.architectcoders.mascotas.ui.advert.fragment.NewAdvertFragment
+import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertDetailViewModel
 import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertListViewModel
 import es.architectcoders.mascotas.ui.advert.viewmodel.NewAdvertViewModel
 import es.architectcoders.mascotas.ui.common.ResourceProvider
@@ -65,7 +65,7 @@ val dataModule = module {
 
 private val scopesModule = module {
     scope(named<LoginFragment>()) {
-        viewModel { LoginViewModel(get(), get(), get()) }
+        viewModel { LoginViewModel(get(), get()) }
     }
 
     scope(named<NewAdvertFragment>()) {
