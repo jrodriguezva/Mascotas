@@ -2,8 +2,6 @@ package es.architectcoders.mascotas.ui.advert.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import es.architectcoders.domain.Advert
 import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.advert.viewmodel.event.AdvertNavigationEvent
@@ -17,7 +15,7 @@ class AdvertListViewModel(
     uiDispatcher: CoroutineDispatcher
 ) : ScopedViewModel(uiDispatcher) {
 
-    private val _loading = MutableLiveData<Boolean>(true)
+    private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
     private val _adverts = MutableLiveData<List<Advert>>()
     val adverts: LiveData<List<Advert>>
@@ -38,7 +36,7 @@ class AdvertListViewModel(
         super.onCleared()
     }
 
-    fun refresh() {
+    private fun refresh() {
         launch {
             _loading.value = true
             _adverts.value = findRelevantAdverts.invoke()

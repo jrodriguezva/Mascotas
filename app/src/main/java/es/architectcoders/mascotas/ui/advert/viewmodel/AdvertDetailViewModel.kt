@@ -18,10 +18,10 @@ class AdvertDetailViewModel(
     private val mError = MutableLiveData<Event<String>>()
     val error: LiveData<Event<String>> = mError
 
-    private val mLoading = MutableLiveData(false)
+    private val mLoading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = mLoading
 
-    private val mAdvert = MutableLiveData(Advert())
+    private val mAdvert = MutableLiveData<Advert>()
     val advert: LiveData<Advert>
     get() {
         if (mAdvert.value == null) refresh()

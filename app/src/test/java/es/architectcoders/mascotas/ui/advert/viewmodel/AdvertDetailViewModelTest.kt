@@ -1,11 +1,10 @@
-package es.architectcoders.mascotas.ui.advert
+package es.architectcoders.mascotas.ui.advert.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import es.architectcoders.domain.Advert
-import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertDetailViewModel
 import es.architectcoders.usescases.GetAdvert
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -38,17 +37,13 @@ class AdvertDetailViewModelTest {
         vm = AdvertDetailViewModel(id, getAdvert, Dispatchers.Unconfined)
     }
     @Test
-    fun `observing LiveData show loading progress`() {
-        vm.loading.observeForever(loadingObserver)
-        verify(loadingObserver).onChanged(true)
-    }
-    @Test
     fun `observing LiveData launches get advert by id`() {
         runBlocking {
             val advert = Advert(id = id)
             whenever(getAdvert.invoke(id)).thenReturn(advert)
             vm.loading.observeForever(loadingObserver)
             vm.advert.observeForever(advertsObserver)
+            verify(loadingObserver).onChanged(true)
             verify(advertsObserver).onChanged(advert)
             verify(loadingObserver).onChanged(false)
         }
