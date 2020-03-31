@@ -74,12 +74,12 @@ private val scopesModule = module {
     }
 
     scope(named<AdvertDetailFragment>()) {
-        viewModel { (id: String) -> AdvertDetailViewModel(id, get()) }
+        viewModel { (id: String) -> AdvertDetailViewModel(id, get(), get()) }
         scoped { GetAdvert(get()) }
     }
 
     scope(named<AdvertListFragment>()) {
-        viewModel { AdvertListViewModel(get()) }
+        viewModel { AdvertListViewModel(get(), get()) }
         scoped { FindRelevantAdverts(get()) }
     }
 

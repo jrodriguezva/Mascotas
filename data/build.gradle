@@ -5,6 +5,8 @@ dependencies {
     implementation project(":domain")
 
     implementation kotlinLibs.values()
+    implementation testLibs.values()
+
     implementation 'com.google.firebase:firebase-auth:19.3.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4'
     implementation 'io.arrow-kt:arrow-core-data:0.10.3'
