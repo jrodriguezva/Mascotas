@@ -25,6 +25,9 @@ import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
 import es.architectcoders.mascotas.ui.profile.viewmodel.EditProfileViewModel
 import es.architectcoders.mascotas.ui.profile.viewmodel.ProfileViewModel
 import es.architectcoders.usescases.*
+import es.architectcoders.usescases.account.CreateAccountInteractor
+import es.architectcoders.usescases.login.GetCurrentUserInteractor
+import es.architectcoders.usescases.login.SignInInteractor
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
@@ -65,7 +68,10 @@ val dataModule = module {
 
 private val scopesModule = module {
     scope(named<LoginFragment>()) {
-        viewModel { LoginViewModel(get(), get()) }
+        viewModel { LoginViewModel(get(), get(), get(), get()) }
+        scoped { GetCurrentUserInteractor(get()) }
+        scoped { SignInInteractor(get()) }
+        scoped { CreateAccountInteractor(get()) }
     }
 
     scope(named<NewAdvertFragment>()) {

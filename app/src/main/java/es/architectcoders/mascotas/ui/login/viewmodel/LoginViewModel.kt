@@ -10,15 +10,19 @@ import arrow.core.orNull
 import es.architectcoders.data.repository.ErrorLoginRepository
 import es.architectcoders.data.repository.ErrorLoginRepository.AuthenticationError
 import es.architectcoders.data.repository.ErrorLoginRepository.UserNotFoundError
-import es.architectcoders.data.repository.LoginRepository
 import es.architectcoders.domain.User
 import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.ui.Event
 import es.architectcoders.mascotas.ui.common.ResourceProvider
+import es.architectcoders.usescases.account.CreateAccountInteractor
+import es.architectcoders.usescases.login.GetCurrentUserInteractor
+import es.architectcoders.usescases.login.SignInInteractor
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val repository: LoginRepository,
+    private val signInInteractor: SignInInteractor,
+    private val getCurrentUserInteractor: GetCurrentUserInteractor,
+    private val createAccountInteractor: CreateAccountInteractor,
     private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
@@ -26,23 +30,23 @@ class LoginViewModel(
         private const val PASSWORD_MAX_LENGTH = 6
     }
 
-    private val _emailError = MutableLiveData<String?>()
-    val emailError: LiveData<String?> = _emailError
+    private val mEmailError = MutableLiveData<String?>()
+    val emailError: LiveData<String?> = mEmailError
 
-    private val _passError = MutableLiveData<String?>()
-    val passError: LiveData<String?> = _passError
+    private val mPassError = MutableLiveData<String?>()
+    val passError: LiveData<String?> = mPassError
 
-    private val _loading = MutableLiveData<Boolean>(false)
-    val loading: LiveData<Boolean> = _loading
+    private val mLoading = MutableLiveData(false)
+    val loading: LiveData<Boolean> = mLoading
 
-    private val _user = MutableLiveData<User>()
-    val user: LiveData<User> = _user
+    private val mUser = MutableLiveData<User>()
+    val user: LiveData<User> = mUser
 
-    private val _nav = MutableLiveData<Event<Int>>()
-    val nav: LiveData<Event<Int>> = _nav
+    private val mNav = MutableLiveData<Event<Int>>()
+    val nav: LiveData<Event<Int>> = mNav
 
-    private val _error = MutableLiveData<Event<String>>()
-    val error: LiveData<Event<String>> = _error
+    private val mError = MutableLiveData<Event<String>>()
+    val error: LiveData<Event<String>> = mError
 
     init {
         refresh()
@@ -50,11 +54,11 @@ class LoginViewModel(
 
     private fun refresh() {
         viewModelScope.launch {
-            _loading.value = true
-            repository.getCurrentUser().orNull()?.let {
-                _nav.value = Event(0)
+            mLoading.value = true
+            getCurrentUserInteractor().orNull()?.let {
+                mNav.value = Event(0)
             }
-            _loading.value = false
+            mLoading.value = false
         }
     }
 
@@ -63,9 +67,9 @@ class LoginViewModel(
             return
         }
         viewModelScope.launch {
-            _loading.value = true
-            repository.signIn(email, password).fold(::handleFailure) { handleSuccess() }
-            _loading.value = false
+            mLoading.value = true
+            signInInteractor(email, password).fold(::handleFailure) { handleSuccess() }
+            mLoading.value = false
         }
     }
 
@@ -74,22 +78,22 @@ class LoginViewModel(
             return
         }
         viewModelScope.launch {
-            _loading.value = true
-            repository.createAccount(email, password).fold(::handleFailure) { handleSuccess() }
-            _loading.value = false
+            mLoading.value = true
+            createAccountInteractor(email, password).fold(::handleFailure) { handleSuccess() }
+            mLoading.value = false
         }
     }
 
     private fun handleSuccess() {
-        _nav.value = Event(0)
+        mNav.value = Event(0)
     }
 
     private fun handleFailure(error: ErrorLoginRepository) {
         when (error) {
             is AuthenticationError ->
-                _error.value = Event(error.errorString ?: resourceProvider.getString(R.string.error_authentication))
+                mError.value = Event(error.errorString ?: resourceProvider.getString(R.string.error_authentication))
             is UserNotFoundError ->
-                _error.value = Event(resourceProvider.getString(R.string.error_user_not_found))
+                mError.value = Event(resourceProvider.getString(R.string.error_user_not_found))
         }
     }
 
@@ -105,15 +109,15 @@ class LoginViewModel(
         var valid1 = valid
         when {
             TextUtils.isEmpty(password) -> {
-                _passError.value = resourceProvider.getString(R.string.required)
+                mPassError.value = resourceProvider.getString(R.string.required)
                 valid1 = false
             }
             password.length < PASSWORD_MAX_LENGTH -> {
-                _passError.value = resourceProvider.getString(R.string.error_password_length)
+                mPassError.value = resourceProvider.getString(R.string.error_password_length)
                 valid1 = false
             }
             else -> {
-                _passError.value = null
+                mPassError.value = null
             }
         }
         return valid1
@@ -123,15 +127,15 @@ class LoginViewModel(
         var valid1 = valid
         when {
             TextUtils.isEmpty(email) -> {
-                _emailError.value = resourceProvider.getString(R.string.required)
+                mEmailError.value = resourceProvider.getString(R.string.required)
                 valid1 = false
             }
             !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                _emailError.value = resourceProvider.getString(R.string.error_email_format)
+                mEmailError.value = resourceProvider.getString(R.string.error_email_format)
                 valid1 = false
             }
             else -> {
-                _emailError.value = null
+                mEmailError.value = null
             }
         }
         return valid1
