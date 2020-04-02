@@ -8,7 +8,5 @@ class LoginRepository(private val loginDataSource: LoginDataSource) {
 
     suspend fun createAccount(email: String, password: String) = loginDataSource.createAccount(email, password)
 
-    suspend fun signOut() = loginDataSource.signOut()
-
     suspend fun getCurrentUser() = loginDataSource.getCurrentUser()
 }
