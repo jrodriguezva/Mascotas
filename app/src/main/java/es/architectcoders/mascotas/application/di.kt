@@ -18,6 +18,7 @@ import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertDetailViewModel
 import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertListViewModel
 import es.architectcoders.mascotas.ui.advert.viewmodel.NewAdvertViewModel
 import es.architectcoders.mascotas.ui.common.ResourceProvider
+import es.architectcoders.mascotas.ui.common.ValidatorUtil
 import es.architectcoders.mascotas.ui.login.fragment.LoginFragment
 import es.architectcoders.mascotas.ui.login.viewmodel.LoginViewModel
 import es.architectcoders.mascotas.ui.profile.fragments.EditProfileFragment
@@ -58,6 +59,7 @@ private val appModule = module {
     factory<LoginDataSource> { LoginDataSourceImpl(get()) }
     factory<FirestoreDataSource> { FirestoreDataSourceImpl(get()) }
     single<CoroutineDispatcher> { Dispatchers.Main }
+    single { ValidatorUtil() }
 }
 
 val dataModule = module {
@@ -68,7 +70,7 @@ val dataModule = module {
 
 private val scopesModule = module {
     scope(named<LoginFragment>()) {
-        viewModel { LoginViewModel(get(), get(), get(), get()) }
+        viewModel { LoginViewModel(get(), get(), get(), get(), get()) }
         scoped { GetCurrentUserInteractor(get()) }
         scoped { SignInInteractor(get()) }
         scoped { CreateAccountInteractor(get()) }
