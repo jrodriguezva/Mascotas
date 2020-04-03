@@ -1,6 +1,5 @@
 package es.architectcoders.mascotas.datasource
 
-import android.net.Uri
 import arrow.core.Either
 import arrow.core.Right
 import com.google.firebase.auth.FirebaseAuth
@@ -41,10 +40,6 @@ class LoginDataSourceImpl(private val auth: FirebaseAuth) : LoginDataSource {
                 }
             }
         }
-
-    override suspend fun signOut() = withContext(Dispatchers.IO) {
-        auth.signOut()
-    }
 
     override suspend fun getCurrentUser() = withContext(Dispatchers.IO) {
         auth.currentUser?.let {

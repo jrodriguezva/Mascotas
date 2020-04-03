@@ -11,13 +11,14 @@ import es.architectcoders.data.repository.LoginRepository
 import es.architectcoders.data.repository.UserRepository
 import es.architectcoders.mascotas.datasource.FirestoreDataSourceImpl
 import es.architectcoders.mascotas.datasource.LoginDataSourceImpl
-import es.architectcoders.mascotas.ui.advert.fragment.AdvertListFragment
 import es.architectcoders.mascotas.ui.advert.fragment.AdvertDetailFragment
-import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertDetailViewModel
+import es.architectcoders.mascotas.ui.advert.fragment.AdvertListFragment
 import es.architectcoders.mascotas.ui.advert.fragment.NewAdvertFragment
+import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertDetailViewModel
 import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertListViewModel
 import es.architectcoders.mascotas.ui.advert.viewmodel.NewAdvertViewModel
 import es.architectcoders.mascotas.ui.common.ResourceProvider
+import es.architectcoders.mascotas.ui.common.ValidatorUtil
 import es.architectcoders.mascotas.ui.login.fragment.LoginFragment
 import es.architectcoders.mascotas.ui.login.viewmodel.LoginViewModel
 import es.architectcoders.mascotas.ui.profile.fragments.EditProfileFragment
@@ -25,6 +26,9 @@ import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
 import es.architectcoders.mascotas.ui.profile.viewmodel.EditProfileViewModel
 import es.architectcoders.mascotas.ui.profile.viewmodel.ProfileViewModel
 import es.architectcoders.usescases.*
+import es.architectcoders.usescases.account.CreateAccountInteractor
+import es.architectcoders.usescases.login.GetCurrentUserInteractor
+import es.architectcoders.usescases.login.SignInInteractor
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
@@ -55,6 +59,7 @@ private val appModule = module {
     factory<LoginDataSource> { LoginDataSourceImpl(get()) }
     factory<FirestoreDataSource> { FirestoreDataSourceImpl(get()) }
     single<CoroutineDispatcher> { Dispatchers.Main }
+    single { ValidatorUtil() }
 }
 
 val dataModule = module {
@@ -65,7 +70,10 @@ val dataModule = module {
 
 private val scopesModule = module {
     scope(named<LoginFragment>()) {
-        viewModel { LoginViewModel(get(), get(), get()) }
+        viewModel { LoginViewModel(get(), get(), get(), get(), get()) }
+        scoped { GetCurrentUserInteractor(get()) }
+        scoped { SignInInteractor(get()) }
+        scoped { CreateAccountInteractor(get()) }
     }
 
     scope(named<NewAdvertFragment>()) {
