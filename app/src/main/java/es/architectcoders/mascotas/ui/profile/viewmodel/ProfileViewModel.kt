@@ -14,9 +14,11 @@ import es.architectcoders.mascotas.ui.advert.viewmodel.event.AdvertNavigationEve
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.common.intToRating
 import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
+import es.architectcoders.mascotas.ui.viewmodel.ScopedViewModel
 import es.architectcoders.usescases.FindAdvertsByAuthor
 import es.architectcoders.usescases.GetUser
 import es.architectcoders.usescases.SaveUser
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
@@ -24,7 +26,9 @@ class ProfileViewModel(
     private val loginRepository: LoginRepository,
     private var getUser: GetUser,
     private var saveUser: SaveUser,
-    private val resourceProvider: ResourceProvider) : ViewModel() {
+    private val resourceProvider: ResourceProvider,
+    uiDispatcher: CoroutineDispatcher
+) : ScopedViewModel(uiDispatcher) {
 
     private val _loading = MutableLiveData(true)
     val loading: LiveData<Boolean> = _loading
@@ -49,6 +53,7 @@ class ProfileViewModel(
     lateinit var userData: User
 
     init {
+        initScope()
         getUserData()
         refresh(ProfileFragment.TYPES.ON_SALE)
     }
@@ -107,4 +112,10 @@ class ProfileViewModel(
     fun onAdvertFavClicked(advert: Advert) {
         _nav.value = Event(AdvertNavigationEvent.AdvertDetailNavigation(advert.id))
     }
+
+    override fun onCleared() {
+        destroyScope()
+        super.onCleared()
+    }
+
 }
