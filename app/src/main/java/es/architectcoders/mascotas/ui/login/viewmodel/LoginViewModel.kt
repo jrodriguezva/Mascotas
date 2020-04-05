@@ -78,7 +78,7 @@ class LoginViewModel(
 
     private fun checkForm(email: String, password: String): Boolean {
         validatorUtil.validateEmail(email)?.let {
-            mPassError.value = resourceProvider.getString(it)
+            mEmailError.value = resourceProvider.getString(it)
             return false
         }
 
