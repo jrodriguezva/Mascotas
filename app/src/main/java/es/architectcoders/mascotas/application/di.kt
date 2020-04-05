@@ -99,7 +99,7 @@ private val scopesModule = module {
     }
 
     scope(named<EditProfileFragment>()) {
-        viewModel { EditProfileViewModel(get(), get(), get(), get()) }
+        viewModel { EditProfileViewModel(get(), get(), get(), get(), get()) }
         scoped { GetUser(get()) }
         scoped { SaveUser(get()) }
     }

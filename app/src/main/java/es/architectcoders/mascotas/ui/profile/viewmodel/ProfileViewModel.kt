@@ -30,10 +30,14 @@ class ProfileViewModel(
     uiDispatcher: CoroutineDispatcher
 ) : ScopedViewModel(uiDispatcher) {
 
-    private val _loading = MutableLiveData(true)
-    val loading: LiveData<Boolean> = _loading
+    private val mLoading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = mLoading
     private val _adverts = MutableLiveData<List<Advert>>()
-    val adverts: LiveData<List<Advert>> = _adverts
+    val adverts: LiveData<List<Advert>>
+        get() {
+            if (_adverts.value == null) refresh(ProfileFragment.TYPES.ON_SALE)
+            return _adverts
+        }
 
     private val _photoUrl = MutableLiveData<String>()
     val photoUrl: LiveData<String> = _photoUrl
@@ -92,7 +96,7 @@ class ProfileViewModel(
 
     fun refresh(tabSelected: ProfileFragment.TYPES) {
         viewModelScope.launch {
-            _loading.value = true
+            mLoading.value = true
             when(tabSelected) {
                 ProfileFragment.TYPES.ON_SALE -> {
                     loginRepository.getCurrentUser().orNull().let { user ->
@@ -101,7 +105,7 @@ class ProfileViewModel(
                 }
                 ProfileFragment.TYPES.FAVORITES -> _adverts.value = emptyList()
             }
-            _loading.value = false
+            mLoading.value = false
         }
     }
 

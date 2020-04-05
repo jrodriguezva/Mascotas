@@ -1,24 +1,18 @@
 package es.architectcoders.mascotas.ui.profile.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
 import arrow.core.right
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import es.architectcoders.data.repository.LoginRepository
-import es.architectcoders.domain.Advert
-import es.architectcoders.domain.User
 import es.architectcoders.mascotas.ui.common.ResourceProvider
-import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
+import es.architectcoders.mascotas.ui.common.ValidatorUtil
 import es.architectcoders.mascotas.utils.*
-import es.architectcoders.usescases.FindAdvertsByAuthor
 import es.architectcoders.usescases.GetUser
 import es.architectcoders.usescases.SaveUser
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,11 +22,9 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
-
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
-class ProfileViewModelTest {
-
+class EditProfileViewModelTest {
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
@@ -40,7 +32,7 @@ class ProfileViewModelTest {
     var coroutinesTestRule = MainCoroutineScopeRule()
 
     @Mock
-    lateinit var findAdvertsByAuthor: FindAdvertsByAuthor
+    lateinit var validatorUtil: ValidatorUtil
 
     @Mock
     lateinit var loginRepository: LoginRepository
@@ -54,10 +46,10 @@ class ProfileViewModelTest {
     @Mock
     lateinit var resourceProvider: ResourceProvider
 
-    private lateinit var vm: ProfileViewModel
+    private lateinit var vm: EditProfileViewModel
 
     private fun createViewModel() {
-        vm = ProfileViewModel(findAdvertsByAuthor, loginRepository, getUser, saveUser, resourceProvider, Dispatchers.Unconfined)
+        vm = EditProfileViewModel(validatorUtil, loginRepository, getUser, saveUser, resourceProvider)
     }
 
     @Test
@@ -68,31 +60,37 @@ class ProfileViewModelTest {
         createViewModel()
         vm.loading.captureValues {
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, true, false))
+            assertEquals(values, listOf(true, false))
             verify(getUser).invoke(MockEmail)
             assertNotNull(vm.userData)
         }
     }
 
     @Test
-    fun `refresh to find adverts on sale`() = coroutinesTestRule.runBlockingTest {
+    fun `on save when name is not valid should be get error`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
-
-        val listAdvertsByAuthor = listOf(MockAdvert, MockAdvert, MockAdvert)
-        whenever(findAdvertsByAuthor.invoke(MockEmail)).thenReturn(listAdvertsByAuthor)
 
         whenever(loginRepository.getCurrentUser()).thenReturn(MuckUser.right())
         whenever(getUser.invoke(MockEmail)).thenReturn(MuckUser)
+        whenever(validatorUtil.validateName(any())).thenReturn(1)
+        whenever(validatorUtil.validateSurname(any())).thenReturn(null)
+        whenever(validatorUtil.validateCity(any())).thenReturn(null)
+        whenever(validatorUtil.validateCountry(any())).thenReturn(null)
 
+        val textError = "error"
+        whenever(resourceProvider.getString(1)).thenReturn(textError)
+        val name = "a"
+        val surname = "Palotes"
+        val city = "Madrid"
+        val country = "España"
         createViewModel()
+
         vm.loading.captureValues {
-            assertNull(vm.adverts.value)
+            assertNull(vm.nav.getValueForTest())
             coroutinesTestRule.resumeDispatcher()
-            vm.refresh(ProfileFragment.TYPES.ON_SALE)
-            assertEquals(values, listOf(true, true, false, true, false))
-            assertNotNull(vm.userData)
-            assertNotNull(vm.adverts.value)
+            assertEquals(values, listOf(true, false))
+            vm.updateUser(name, surname, city, country)
+            assertEquals(values, listOf(true, false))
         }
     }
-
 }
