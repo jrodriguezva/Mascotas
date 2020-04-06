@@ -3,9 +3,11 @@ package es.architectcoders.mascotas.ui.profile.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import arrow.core.right
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import es.architectcoders.data.repository.LoginRepository
+import es.architectcoders.domain.User
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.common.ValidatorUtil
 import es.architectcoders.mascotas.utils.*
@@ -73,16 +75,15 @@ class EditProfileViewModelTest {
         whenever(loginRepository.getCurrentUser()).thenReturn(MuckUser.right())
         whenever(getUser.invoke(MockEmail)).thenReturn(MuckUser)
         whenever(validatorUtil.validateName(any())).thenReturn(1)
-        whenever(validatorUtil.validateSurname(any())).thenReturn(null)
-        whenever(validatorUtil.validateCity(any())).thenReturn(null)
-        whenever(validatorUtil.validateCountry(any())).thenReturn(null)
 
         val textError = "error"
         whenever(resourceProvider.getString(1)).thenReturn(textError)
+
         val name = "a"
         val surname = "Palotes"
         val city = "Madrid"
         val country = "España"
+
         createViewModel()
 
         vm.loading.captureValues {
@@ -90,7 +91,37 @@ class EditProfileViewModelTest {
             coroutinesTestRule.resumeDispatcher()
             assertEquals(values, listOf(true, false))
             vm.updateUser(name, surname, city, country)
+            assertEquals(vm.nameError.getValueForTest(), textError)
             assertEquals(values, listOf(true, false))
+            verify(saveUser, never()).invoke(MuckUser)
+        }
+    }
+
+    @Test
+    fun `save user data`() = coroutinesTestRule.runBlockingTest {
+        coroutinesTestRule.pauseDispatcher()
+
+        whenever(loginRepository.getCurrentUser()).thenReturn(MuckUser.right())
+        whenever(getUser.invoke(MockEmail)).thenReturn(MuckUser)
+        whenever(saveUser.invoke(MuckUser)).thenReturn(User().right())
+        whenever(validatorUtil.validateName(any())).thenReturn(null)
+        whenever(validatorUtil.validateSurname(any())).thenReturn(null)
+        whenever(validatorUtil.validateCity(any())).thenReturn(null)
+        whenever(validatorUtil.validateCountry(any())).thenReturn(null)
+
+        val name = "Pepito"
+        val surname = "Palotes"
+        val city = "Madrid"
+        val country = "España"
+
+        createViewModel()
+
+        vm.loading.captureValues {
+            assertNull(vm.nav.getValueForTest())
+            coroutinesTestRule.resumeDispatcher()
+            assertEquals(values, listOf(true, false))
+            vm.updateUser(name, surname, city, country)
+            assertEquals(values, listOf(true, false, true, false))
         }
     }
 }
