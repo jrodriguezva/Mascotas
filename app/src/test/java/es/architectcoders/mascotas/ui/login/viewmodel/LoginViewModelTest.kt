@@ -153,7 +153,7 @@ class LoginViewModelTest {
             assertEquals(values, listOf(true, false))
             vm.createAccount(email, pass)
             assertEquals(values, listOf(true, false))
-            assertEquals(vm.passError.getValueForTest(), textError)
+            assertEquals(vm.emailError.getValueForTest(), textError)
             verify(createAccountInteractor, never()).invoke(email, pass)
         }
     }
