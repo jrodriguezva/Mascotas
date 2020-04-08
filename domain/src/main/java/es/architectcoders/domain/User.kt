@@ -8,6 +8,6 @@ data class User(
     val rating: Int? = 0,
     val ratingCount: Int? = 0,
     var level: String? = "",
-    val city : String? = "",
+    val city: String? = "",
     val country: String? = ""
 )

@@ -57,8 +57,8 @@ class EditProfileViewModelTest {
     @Test
     fun `get user data`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
-        whenever(loginRepository.getCurrentUser()).thenReturn(MuckUser.right())
-        whenever(getUser.invoke(MockEmail)).thenReturn(MuckUser)
+        whenever(loginRepository.getCurrentUser()).thenReturn(mockUser.right())
+        whenever(getUser.invoke(MockEmail)).thenReturn(mockUser)
         createViewModel()
         vm.loading.captureValues {
             coroutinesTestRule.resumeDispatcher()
@@ -72,13 +72,12 @@ class EditProfileViewModelTest {
     fun `on save when name is not valid should be get error`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
 
-        whenever(loginRepository.getCurrentUser()).thenReturn(MuckUser.right())
-        whenever(getUser.invoke(MockEmail)).thenReturn(MuckUser)
+        whenever(loginRepository.getCurrentUser()).thenReturn(mockUser.right())
+        whenever(getUser.invoke(MockEmail)).thenReturn(mockUser)
         whenever(validatorUtil.validateName(any())).thenReturn(1)
 
         val textError = "error"
         whenever(resourceProvider.getString(1)).thenReturn(textError)
-
         val name = "a"
         val surname = "Palotes"
         val city = "Madrid"
@@ -93,7 +92,7 @@ class EditProfileViewModelTest {
             vm.updateUser(name, surname, city, country)
             assertEquals(vm.nameError.getValueForTest(), textError)
             assertEquals(values, listOf(true, false))
-            verify(saveUser, never()).invoke(MuckUser)
+            verify(saveUser, never()).invoke(mockUser)
         }
     }
 
@@ -101,9 +100,9 @@ class EditProfileViewModelTest {
     fun `save user data`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
 
-        whenever(loginRepository.getCurrentUser()).thenReturn(MuckUser.right())
-        whenever(getUser.invoke(MockEmail)).thenReturn(MuckUser)
-        whenever(saveUser.invoke(MuckUser)).thenReturn(User().right())
+        whenever(loginRepository.getCurrentUser()).thenReturn(mockUser.right())
+        whenever(getUser.invoke(MockEmail)).thenReturn(mockUser)
+        whenever(saveUser.invoke(mockUser)).thenReturn(User().right())
         whenever(validatorUtil.validateName(any())).thenReturn(null)
         whenever(validatorUtil.validateSurname(any())).thenReturn(null)
         whenever(validatorUtil.validateCity(any())).thenReturn(null)
