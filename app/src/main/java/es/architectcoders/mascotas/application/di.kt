@@ -18,7 +18,9 @@ import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertDetailViewModel
 import es.architectcoders.mascotas.ui.advert.viewmodel.AdvertListViewModel
 import es.architectcoders.mascotas.ui.advert.viewmodel.NewAdvertViewModel
 import es.architectcoders.mascotas.ui.common.ResourceProvider
+import es.architectcoders.mascotas.ui.common.ResourceProviderImpl
 import es.architectcoders.mascotas.ui.common.ValidatorUtil
+import es.architectcoders.mascotas.ui.common.ValidatorUtilImpl
 import es.architectcoders.mascotas.ui.login.fragment.LoginFragment
 import es.architectcoders.mascotas.ui.login.viewmodel.LoginViewModel
 import es.architectcoders.mascotas.ui.profile.fragments.EditProfileFragment
@@ -55,11 +57,11 @@ fun Application.initDI() {
 private val appModule = module {
     factory { FirebaseAuth.getInstance() }
     factory { Firebase.firestore }
-    factory { ResourceProvider(androidContext().resources) }
+    factory<ResourceProvider> { ResourceProviderImpl(androidContext().resources) }
     factory<LoginDataSource> { LoginDataSourceImpl(get()) }
     factory<FirestoreDataSource> { FirestoreDataSourceImpl(get()) }
     single<CoroutineDispatcher> { Dispatchers.Main }
-    single { ValidatorUtil() }
+    single<ValidatorUtil> { ValidatorUtilImpl() }
 }
 
 val dataModule = module {

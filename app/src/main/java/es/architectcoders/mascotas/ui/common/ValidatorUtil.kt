@@ -4,7 +4,7 @@ import android.text.TextUtils
 import android.util.Patterns
 import es.architectcoders.mascotas.R
 
-class ValidatorUtil {
+class ValidatorUtilImpl : ValidatorUtil {
 
     companion object {
         private const val PASSWORD_MAX_LENGTH = 6
@@ -19,7 +19,7 @@ class ValidatorUtil {
         const val MAX_LENGTH_CITY = 15
     }
 
-    fun validateEmail(email: String): Int? {
+    override fun validateEmail(email: String): Int? {
         return when {
             TextUtils.isEmpty(email) -> R.string.required
             !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> R.string.error_email_format
@@ -27,7 +27,7 @@ class ValidatorUtil {
         }
     }
 
-    fun validatePassword(password: String): Int? {
+    override fun validatePassword(password: String): Int? {
         return when {
             TextUtils.isEmpty(password) -> R.string.required
             password.length < PASSWORD_MAX_LENGTH -> R.string.error_password_length
@@ -35,7 +35,7 @@ class ValidatorUtil {
         }
     }
 
-    fun validateName(name: String): Int? {
+    override fun validateName(name: String): Int? {
         return when {
             TextUtils.isEmpty(name) -> R.string.required
             name.length < MIN_LENGTH_NAME -> R.string.error_min_name_length
@@ -44,7 +44,7 @@ class ValidatorUtil {
         }
     }
 
-    fun validateSurname(surname: String): Int? {
+    override fun validateSurname(surname: String): Int? {
         return when {
             TextUtils.isEmpty(surname) -> R.string.required
             surname.length < MIN_LENGTH_SURNAME -> R.string.error_min_surname_length
@@ -53,7 +53,7 @@ class ValidatorUtil {
         }
     }
 
-    fun validateCity(city: String): Int? {
+    override fun validateCity(city: String): Int? {
         return when {
             TextUtils.isEmpty(city) -> R.string.required
             city.length < MIN_LENGTH_CITY -> R.string.error_min_city_length
@@ -62,7 +62,7 @@ class ValidatorUtil {
         }
     }
 
-    fun validateCountry(country: String): Int? {
+    override fun validateCountry(country: String): Int? {
         return when {
             TextUtils.isEmpty(country) -> R.string.required
             country.length < MIN_LENGTH_COUNTRY -> R.string.error_min_country_length
@@ -70,4 +70,14 @@ class ValidatorUtil {
             else -> null
         }
     }
+}
+
+interface ValidatorUtil {
+
+    fun validateEmail(email: String): Int?
+    fun validatePassword(password: String): Int?
+    fun validateName(name: String): Int?
+    fun validateSurname(surname: String): Int?
+    fun validateCity(city: String): Int?
+    fun validateCountry(country: String): Int?
 }

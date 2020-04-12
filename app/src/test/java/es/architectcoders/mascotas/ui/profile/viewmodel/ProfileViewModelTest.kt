@@ -1,13 +1,10 @@
 package es.architectcoders.mascotas.ui.profile.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
 import arrow.core.right
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import es.architectcoders.data.repository.LoginRepository
-import es.architectcoders.domain.Advert
-import es.architectcoders.domain.User
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
 import es.architectcoders.mascotas.utils.*
@@ -16,9 +13,7 @@ import es.architectcoders.usescases.GetUser
 import es.architectcoders.usescases.SaveUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,7 +22,6 @@ import org.mockito.junit.MockitoJUnitRunner
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
-
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
@@ -63,8 +57,8 @@ class ProfileViewModelTest {
     @Test
     fun `get user data`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
-        whenever(loginRepository.getCurrentUser()).thenReturn(MuckUser.right())
-        whenever(getUser.invoke(MockEmail)).thenReturn(MuckUser)
+        whenever(loginRepository.getCurrentUser()).thenReturn(mockUser.right())
+        whenever(getUser.invoke(MockEmail)).thenReturn(mockUser)
         createViewModel()
         vm.loading.captureValues {
             coroutinesTestRule.resumeDispatcher()
@@ -78,11 +72,11 @@ class ProfileViewModelTest {
     fun `refresh to find adverts on sale`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
 
-        val listAdvertsByAuthor = listOf(MockAdvert, MockAdvert, MockAdvert)
+        val listAdvertsByAuthor = listOf(mockAdvert, mockAdvert, mockAdvert)
         whenever(findAdvertsByAuthor.invoke(MockEmail)).thenReturn(listAdvertsByAuthor)
 
-        whenever(loginRepository.getCurrentUser()).thenReturn(MuckUser.right())
-        whenever(getUser.invoke(MockEmail)).thenReturn(MuckUser)
+        whenever(loginRepository.getCurrentUser()).thenReturn(mockUser.right())
+        whenever(getUser.invoke(MockEmail)).thenReturn(mockUser)
 
         createViewModel()
         vm.loading.captureValues {
@@ -94,5 +88,4 @@ class ProfileViewModelTest {
             assertNotNull(vm.adverts.value)
         }
     }
-
 }

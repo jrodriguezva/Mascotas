@@ -5,7 +5,7 @@ import es.architectcoders.domain.User
 
 const val MockEmail = "test@a.com"
 
-val MuckUser = User(
+val mockUser = User(
     email = "test@a.com",
     name = "Pepito",
     surname = "Palotes",
@@ -14,9 +14,10 @@ val MuckUser = User(
     rating = 1,
     level = "Lactante, superaste nivel cachorro pero solo te alimentas de leche materna aún",
     city = "Madrid",
-    country = "España")
+    country = "España"
+)
 
-val MockAdvert = Advert(
+val mockAdvert = Advert(
     id = "0",
     title = "Nuevo",
     photoBase64 = null,
@@ -24,3 +25,5 @@ val MockAdvert = Advert(
     recent = false,
     author = MockEmail
 )
+
+val loading = listOf(true, false)
