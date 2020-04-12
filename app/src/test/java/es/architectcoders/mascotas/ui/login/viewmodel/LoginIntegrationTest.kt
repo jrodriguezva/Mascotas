@@ -1,10 +1,7 @@
 package es.architectcoders.mascotas.ui.login.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import es.architectcoders.mascotas.utils.MainCoroutineScopeRule
-import es.architectcoders.mascotas.utils.captureValues
-import es.architectcoders.mascotas.utils.getValueForTest
-import es.architectcoders.mascotas.utils.initMockedDi
+import es.architectcoders.mascotas.utils.*
 import es.architectcoders.usescases.account.CreateAccountInteractor
 import es.architectcoders.usescases.login.GetCurrentUserInteractor
 import es.architectcoders.usescases.login.SignInInteractor
@@ -13,7 +10,6 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module
 import org.koin.test.AutoCloseKoinTest
 import org.koin.test.get
@@ -41,7 +37,7 @@ class LoginIntegrationTest : AutoCloseKoinTest() {
         vm.loading.captureValues {
             assertNull(vm.nav.getValueForTest())
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             assertNotNull(vm.nav.getValueForTest())
         }
     }
@@ -57,9 +53,9 @@ class LoginIntegrationTest : AutoCloseKoinTest() {
         vm.loading.captureValues {
             assertNull(vm.nav.getValueForTest())
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             vm.createAccount(email, pass)
-            assertEquals(values, listOf(true, false, true, false))
+            assertEquals(values, loading + loading)
             assertNotNull(vm.nav.getValueForTest())
         }
     }
@@ -75,9 +71,9 @@ class LoginIntegrationTest : AutoCloseKoinTest() {
         vm.loading.captureValues {
             assertNull(vm.nav.getValueForTest())
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             vm.signIn(email, pass)
-            assertEquals(values, listOf(true, false, true, false))
+            assertEquals(values, loading + loading)
             assertNotNull(vm.nav.getValueForTest())
         }
     }

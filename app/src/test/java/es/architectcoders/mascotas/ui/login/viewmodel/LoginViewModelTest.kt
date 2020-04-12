@@ -12,6 +12,7 @@ import es.architectcoders.mascotas.ui.common.ValidatorUtil
 import es.architectcoders.mascotas.utils.MainCoroutineScopeRule
 import es.architectcoders.mascotas.utils.captureValues
 import es.architectcoders.mascotas.utils.getValueForTest
+import es.architectcoders.mascotas.utils.loading
 import es.architectcoders.usescases.account.CreateAccountInteractor
 import es.architectcoders.usescases.login.GetCurrentUserInteractor
 import es.architectcoders.usescases.login.SignInInteractor
@@ -61,7 +62,7 @@ class LoginViewModelTest {
         vm.loading.captureValues {
             assertNull(vm.nav.getValueForTest())
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             verify(getCurrentUserInteractor).invoke()
             assertNotNull(vm.nav.getValueForTest())
         }
@@ -82,9 +83,9 @@ class LoginViewModelTest {
         vm.loading.captureValues {
             assertNull(vm.nav.getValueForTest())
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             vm.createAccount(email, pass)
-            assertEquals(values, listOf(true, false, true, false))
+            assertEquals(values, loading + loading)
             verify(createAccountInteractor).invoke(email, pass)
             assertNotNull(vm.nav.getValueForTest())
         }
@@ -105,9 +106,9 @@ class LoginViewModelTest {
         vm.loading.captureValues {
             assertNull(vm.nav.getValueForTest())
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             vm.signIn(email, pass)
-            assertEquals(values, listOf(true, false, true, false))
+            assertEquals(values, loading + loading)
             verify(signInInteractor).invoke(email, pass)
             assertNotNull(vm.nav.getValueForTest())
         }
@@ -129,9 +130,9 @@ class LoginViewModelTest {
         vm.loading.captureValues {
             assertNull(vm.nav.getValueForTest())
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             vm.signIn(email, pass)
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             verify(signInInteractor, never()).invoke(email, pass)
         }
     }
@@ -150,9 +151,9 @@ class LoginViewModelTest {
 
         vm.loading.captureValues {
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             vm.createAccount(email, pass)
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             assertEquals(vm.emailError.getValueForTest(), textError)
             verify(createAccountInteractor, never()).invoke(email, pass)
         }

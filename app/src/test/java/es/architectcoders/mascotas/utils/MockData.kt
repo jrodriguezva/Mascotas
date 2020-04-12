@@ -25,3 +25,5 @@ val mockAdvert = Advert(
     recent = false,
     author = MockEmail
 )
+
+val loading = listOf(true, false)
