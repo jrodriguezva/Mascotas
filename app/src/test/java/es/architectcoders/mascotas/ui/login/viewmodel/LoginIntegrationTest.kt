@@ -35,7 +35,7 @@ class LoginIntegrationTest : AutoCloseKoinTest() {
     private lateinit var vm: LoginViewModel
 
     @Test
-    fun `on init should be get current user`() = coroutinesTestRule.runBlockingTest {
+    fun `on init should be called get current user`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
         createViewModel()
         vm.loading.captureValues {
