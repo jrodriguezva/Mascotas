@@ -32,27 +32,27 @@ class ProfileViewModel(
 
     private val mLoading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = mLoading
-    private val _adverts = MutableLiveData<List<Advert>>()
+    private val mAdverts = MutableLiveData<List<Advert>>()
     val adverts: LiveData<List<Advert>>
         get() {
-            if (_adverts.value == null) refresh(ProfileFragment.TYPES.ON_SALE)
-            return _adverts
+            if (mAdverts.value == null) refresh(ProfileFragment.TYPES.ON_SALE)
+            return mAdverts
         }
 
-    private val _photoUrl = MutableLiveData<String>()
-    val photoUrl: LiveData<String> = _photoUrl
-    private val _textName = MutableLiveData<String>()
-    val textName: LiveData<String> = _textName
-    private val _address = MutableLiveData<String>()
-    val address: LiveData<String> = _address
-    private val _rating = MutableLiveData<Int>()
-    val rating: LiveData<Int> = _rating
-    private val _ratingCount = MutableLiveData<String>()
-    val ratingCount: LiveData<String> = _ratingCount
-    private val _level = MutableLiveData<String>()
-    val level: LiveData<String> = _level
-    private val _nav = MutableLiveData<Event<AdvertNavigationEvent>>()
-    val nav: LiveData<Event<AdvertNavigationEvent>> = _nav
+    private val mPhotoUrl = MutableLiveData<String>()
+    val photoUrl: LiveData<String> = mPhotoUrl
+    private val mTextName = MutableLiveData<String>()
+    val textName: LiveData<String> = mTextName
+    private val mAddress = MutableLiveData<String>()
+    val address: LiveData<String> = mAddress
+    private val mRating = MutableLiveData<Int>()
+    val rating: LiveData<Int> = mRating
+    private val mRatingCount = MutableLiveData<String>()
+    val ratingCount: LiveData<String> = mRatingCount
+    private val mLevel = MutableLiveData<String>()
+    val level: LiveData<String> = mLevel
+    private val mNav = MutableLiveData<Event<AdvertNavigationEvent>>()
+    val nav: LiveData<Event<AdvertNavigationEvent>> = mNav
 
     lateinit var userData: User
 
@@ -80,12 +80,12 @@ class ProfileViewModel(
     }
 
     private fun fillUserData(userData: User) {
-        _textName.value = userData.name + " " + userData.surname
-        _address.value = userData.city + ", " + userData.country
-        _level.value = userData.level
-        _rating.value = userData.rating
-        _ratingCount.value = userData.ratingCount?.intToRating()
-        _photoUrl.value = userData.photoUrl
+        mTextName.value = userData.name + " " + userData.surname
+        mAddress.value = userData.city + ", " + userData.country
+        mLevel.value = userData.level
+        mRating.value = userData.rating
+        mRatingCount.value = userData.ratingCount?.intToRating()
+        mPhotoUrl.value = userData.photoUrl
     }
 
     private fun handleFailure() {}
@@ -100,26 +100,25 @@ class ProfileViewModel(
             when(tabSelected) {
                 ProfileFragment.TYPES.ON_SALE -> {
                     loginRepository.getCurrentUser().orNull().let { user ->
-                        _adverts.value = user?.email?.let {
+                        mAdverts.value = user?.email?.let {
                             findAdvertsByAuthor.invoke(it) } }
                 }
-                ProfileFragment.TYPES.FAVORITES -> _adverts.value = emptyList()
+                ProfileFragment.TYPES.FAVORITES -> mAdverts.value = emptyList()
             }
             mLoading.value = false
         }
     }
 
     fun onAdvertClicked(advert: Advert) {
-        _nav.value = Event(AdvertNavigationEvent.AdvertDetailNavigation(advert.id))
+        mNav.value = Event(AdvertNavigationEvent.AdvertDetailNavigation(advert.id))
     }
 
     fun onAdvertFavClicked(advert: Advert) {
-        _nav.value = Event(AdvertNavigationEvent.AdvertDetailNavigation(advert.id))
+        mNav.value = Event(AdvertNavigationEvent.AdvertDetailNavigation(advert.id))
     }
 
     override fun onCleared() {
         destroyScope()
         super.onCleared()
     }
-
 }

@@ -25,53 +25,53 @@ class EditProfileViewModel(
     private var saveUser: SaveUser,
     private val resourceProvider: ResourceProvider) : ViewModel() {
 
-    private val _error = MutableLiveData<Event<String>>()
-    val error: LiveData<Event<String>> = _error
+    private val mError = MutableLiveData<Event<String>>()
+    val error: LiveData<Event<String>> = mError
 
-    private val _nav = MutableLiveData<Event<ProfileNavigationEvent>>()
-    val nav: LiveData<Event<ProfileNavigationEvent>> = _nav
+    private val mNav = MutableLiveData<Event<ProfileNavigationEvent>>()
+    val nav: LiveData<Event<ProfileNavigationEvent>> = mNav
 
     private val mLoading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = mLoading
 
-    private val _nameError = MutableLiveData<String?>()
-    val nameError: LiveData<String?> = _nameError
+    private val mNameError = MutableLiveData<String?>()
+    val nameError: LiveData<String?> = mNameError
 
-    private val _surnameError = MutableLiveData<String?>()
-    val surnameError: LiveData<String?> = _surnameError
+    private val mSurnameError = MutableLiveData<String?>()
+    val surnameError: LiveData<String?> = mSurnameError
 
-    private val _cityError = MutableLiveData<String?>()
-    val cityError: LiveData<String?> = _cityError
+    private val mCityError = MutableLiveData<String?>()
+    val cityError: LiveData<String?> = mCityError
 
-    private val _countryError = MutableLiveData<String?>()
-    val countryError: LiveData<String?> = _countryError
+    private val mCountryError = MutableLiveData<String?>()
+    val countryError: LiveData<String?> = mCountryError
 
-    private val _name = MutableLiveData<String>()
-    val name: LiveData<String> = _name
+    private val mName = MutableLiveData<String>()
+    val name: LiveData<String> = mName
 
-    private val _surname = MutableLiveData<String>()
-    val surname: LiveData<String> = _surname
+    private val mSurname = MutableLiveData<String>()
+    val surname: LiveData<String> = mSurname
 
-    private val _city = MutableLiveData<String>()
-    val city: LiveData<String> = _city
+    private val mCity = MutableLiveData<String>()
+    val city: LiveData<String> = mCity
 
-    private val _country = MutableLiveData<String>()
-    val country: LiveData<String> = _country
+    private val mCountry = MutableLiveData<String>()
+    val country: LiveData<String> = mCountry
 
-    private val _rating = MutableLiveData<Int>()
-    val rating: LiveData<Int> = _rating
+    private val mRating = MutableLiveData<Int>()
+    val rating: LiveData<Int> = mRating
 
-    private val _ratingCount = MutableLiveData<String>()
-    val ratingCount: LiveData<String> = _ratingCount
+    private val mRatingCount = MutableLiveData<String>()
+    val ratingCount: LiveData<String> = mRatingCount
 
-    private val _level = MutableLiveData<String>()
-    val level: LiveData<String> = _level
+    private val mLevel = MutableLiveData<String>()
+    val level: LiveData<String> = mLevel
 
-    private val _email = MutableLiveData<String>()
-    val email: LiveData<String> = _email
+    private val mEmail = MutableLiveData<String>()
+    val email: LiveData<String> = mEmail
 
-    private val _photoUrl = MutableLiveData<String>()
-    val photoUrl: LiveData<String> = _photoUrl
+    private val mPhotoUrl = MutableLiveData<String>()
+    val photoUrl: LiveData<String> = mPhotoUrl
 
     lateinit var userData: User
 
@@ -86,15 +86,15 @@ class EditProfileViewModel(
                 user.email?.let {
                     userData = getUser.invoke(it)
 
-                    _name.value = userData.name
-                    _surname.value = userData.surname
-                    _city.value = userData.city
-                    _country.value = userData.country
-                    _level.value = userData.level
-                    _email.value = it
-                    _rating.value = userData.rating
-                    _ratingCount.value = userData.ratingCount?.intToRating()
-                    _photoUrl.value = userData.photoUrl
+                    mName.value = userData.name
+                    mSurname.value = userData.surname
+                    mCity.value = userData.city
+                    mCountry.value = userData.country
+                    mLevel.value = userData.level
+                    mEmail.value = it
+                    mRating.value = userData.rating
+                    mRatingCount.value = userData.ratingCount?.intToRating()
+                    mPhotoUrl.value = userData.photoUrl
                 }
             }.toString())
             mLoading.value = false
@@ -111,8 +111,8 @@ class EditProfileViewModel(
             mLoading.value = true
 
             userData = User(name = name, surname = surname, country = country, city = city,
-                email = _email.value, level = _level.value, rating = _rating.value?.toInt(),
-                ratingCount = _ratingCount.value?.ratingCountToInt(), photoUrl = _photoUrl.value)
+                email = mEmail.value, level = mLevel.value, rating = mRating.value?.toInt(),
+                ratingCount = mRatingCount.value?.ratingCountToInt(), photoUrl = mPhotoUrl.value)
             
             saveUser.invoke(userData).fold( { handleFailure() }, { handleSuccess() } )
 
@@ -121,39 +121,39 @@ class EditProfileViewModel(
     }
 
     private fun handleSuccess() {
-        _nav.value = Event(ProfileNavigationEvent.ProfileNavigation)
+        mNav.value = Event(ProfileNavigationEvent.ProfileNavigation)
     }
 
     private fun handleFailure() {
-        _error.value = Event(resourceProvider.getString(R.string.error_save_user))
+        mError.value = Event(resourceProvider.getString(R.string.error_save_user))
     }
 
     private fun checkForm(name: String, surname: String, city: String, country: String): Boolean {
         validatorUtil.validateName(name)?.let {
-            _nameError.value = resourceProvider.getString(it)
+            mNameError.value = resourceProvider.getString(it)
             return false
         }
 
         validatorUtil.validateSurname(surname)?.let {
-            _surnameError.value = resourceProvider.getString(it)
+            mSurnameError.value = resourceProvider.getString(it)
             return false
         }
         validatorUtil.validateCity(city)?.let {
-            _cityError.value = resourceProvider.getString(it)
+            mCityError.value = resourceProvider.getString(it)
             return false
         }
         validatorUtil.validateCountry(country)?.let {
-            _countryError.value = resourceProvider.getString(it)
+            mCountryError.value = resourceProvider.getString(it)
             return false
         }
         return true
     }
 
     fun clickOnPicker() {
-        _nav.value = Event(ProfileNavigationEvent.PickerNavigation)
+        mNav.value = Event(ProfileNavigationEvent.PickerNavigation)
     }
 
     fun setImage(image: String?) {
-        _photoUrl.value = image
+        mPhotoUrl.value = image
     }
 }
