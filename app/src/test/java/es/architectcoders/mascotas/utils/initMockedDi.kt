@@ -30,7 +30,7 @@ private val mockedAppModule = module {
     single { Dispatchers.Unconfined }
 }
 
-val defaultFakeMovies = listOf(
+val defaultFakeAdverts = listOf(
     mockAdvert.copy("1"),
     mockAdvert.copy("2"),
     mockAdvert.copy("3"),
@@ -76,11 +76,11 @@ class FakeRemoteDataSource : FirestoreDataSource {
 
     override suspend fun addAdvert(advert: Advert) = Right(mockAdvert)
 
-    override suspend fun getAdverts() = defaultFakeMovies
+    override suspend fun getAdverts() = defaultFakeAdverts
 
-    override suspend fun getAdvert(id: String) = defaultFakeMovies.first { it.id == id }
+    override suspend fun getAdvert(id: String) = defaultFakeAdverts.first { it.id == id }
 
-    override suspend fun getAdvertsByAuthor(author: String) = defaultFakeMovies.filter { it.author == author }
+    override suspend fun getAdvertsByAuthor(author: String) = defaultFakeAdverts.filter { it.author == author }
 
     override suspend fun getUser(email: String) = defaultFakeUsers.first { it.email == email }
 

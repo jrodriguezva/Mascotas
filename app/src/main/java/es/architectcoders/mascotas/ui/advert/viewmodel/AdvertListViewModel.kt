@@ -15,13 +15,13 @@ class AdvertListViewModel(
     uiDispatcher: CoroutineDispatcher
 ) : ScopedViewModel(uiDispatcher) {
 
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = _loading
-    private val _adverts = MutableLiveData<List<Advert>>()
+    private val mLoading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = mLoading
+    private val mAdverts = MutableLiveData<List<Advert>>()
     val adverts: LiveData<List<Advert>>
         get() {
-            if (_adverts.value == null) refresh()
-            return _adverts
+            if (mAdverts.value == null) refresh()
+            return mAdverts
         }
 
     private val _nav = MutableLiveData<Event<AdvertNavigationEvent>>()
@@ -38,9 +38,9 @@ class AdvertListViewModel(
 
     private fun refresh() {
         launch {
-            _loading.value = true
-            _adverts.value = findRelevantAdverts.invoke()
-            _loading.value = false
+            mLoading.value = true
+            mAdverts.value = findRelevantAdverts.invoke()
+            mLoading.value = false
         }
     }
 
