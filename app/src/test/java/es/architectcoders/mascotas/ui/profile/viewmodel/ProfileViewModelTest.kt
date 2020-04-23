@@ -62,7 +62,7 @@ class ProfileViewModelTest {
         createViewModel()
         vm.loading.captureValues {
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             verify(getUser).invoke(MockEmail)
             assertNotNull(vm.userData)
         }
@@ -83,7 +83,7 @@ class ProfileViewModelTest {
             assertNull(vm.adverts.value)
             coroutinesTestRule.resumeDispatcher()
             vm.refresh(ProfileFragment.TYPES.ON_SALE)
-            assertEquals(values, listOf(true, false, true, false, true, false))
+            assertEquals(values, loading + loading + loading)
             assertNotNull(vm.userData)
             assertNotNull(vm.adverts.value)
         }

@@ -62,7 +62,7 @@ class EditProfileViewModelTest {
         createViewModel()
         vm.loading.captureValues {
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             verify(getUser).invoke(MockEmail)
             assertNotNull(vm.userData)
         }
@@ -88,10 +88,10 @@ class EditProfileViewModelTest {
         vm.loading.captureValues {
             assertNull(vm.nav.getValueForTest())
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             vm.updateUser(name, surname, city, country)
             assertEquals(vm.nameError.getValueForTest(), textError)
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             verify(saveUser, never()).invoke(mockUser)
         }
     }
@@ -118,9 +118,9 @@ class EditProfileViewModelTest {
         vm.loading.captureValues {
             assertNull(vm.nav.getValueForTest())
             coroutinesTestRule.resumeDispatcher()
-            assertEquals(values, listOf(true, false))
+            assertEquals(values, loading)
             vm.updateUser(name, surname, city, country)
-            assertEquals(values, listOf(true, false, true, false))
+            assertEquals(values, loading + loading)
         }
     }
 }
