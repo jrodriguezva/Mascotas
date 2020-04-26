@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
 import es.architectcoders.mascotas.R
 import org.hamcrest.Description
 import org.hamcrest.Matcher
@@ -17,18 +15,20 @@ import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
+import org.koin.test.KoinTest
 
-@LargeTest
-@RunWith(AndroidJUnit4::class)
-class UpdateUserActivityTest {
+class UpdateUserActivityTest  : KoinTest {
 
-    @Rule
-    @JvmField
-    var mActivityTestRule = ActivityTestRule(LoginActivity::class.java, false, false)
+    @get:Rule
+    val activityTestRule = ActivityTestRule(LoginActivity::class.java, false, false)
 
     @Test
     fun updateUserActivityTest() {
+
+        // launch initial Activity
+        activityTestRule.launchActivity(null)
+
+        // fill username
         val textInputEditText = onView(
             allOf(
                 withId(R.id.usernameEdit),
@@ -44,6 +44,7 @@ class UpdateUserActivityTest {
         )
         textInputEditText.perform(replaceText("a@a.com"), closeSoftKeyboard())
 
+        // fill password
         val textInputEditText2 = onView(
             allOf(
                 withId(R.id.passwordEdit),
@@ -59,6 +60,7 @@ class UpdateUserActivityTest {
         )
         textInputEditText2.perform(replaceText("123456"), closeSoftKeyboard())
 
+        // click login button
         val extendedFloatingActionButton = onView(
             allOf(
                 withId(R.id.login), withText("Sign in"),
@@ -77,7 +79,8 @@ class UpdateUserActivityTest {
         )
         extendedFloatingActionButton.perform(click())
 
-        val actionMenuItemView = onView(
+        // Click toolbar profile button
+        val actionMenuItemViewProfile = onView(
             allOf(
                 withId(R.id.btnProfile), withContentDescription("Profile"),
                 childAtPosition(
@@ -90,24 +93,10 @@ class UpdateUserActivityTest {
                 isDisplayed()
             )
         )
-        actionMenuItemView.perform(click())
+        actionMenuItemViewProfile.perform(click())
 
-        val actionMenuItemView2 = onView(
-            allOf(
-                withId(R.id.btnProfile), withContentDescription("Profile"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.toolbarAdvert),
-                        1
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        actionMenuItemView2.perform(click())
-
-        val actionMenuItemView3 = onView(
+        // Click toolbar edit profile button
+        val actionMenuItemViewEditProfile = onView(
             allOf(
                 withId(R.id.btnEdit), withContentDescription("Edit"),
                 childAtPosition(
@@ -120,23 +109,9 @@ class UpdateUserActivityTest {
                 isDisplayed()
             )
         )
-        actionMenuItemView3.perform(click())
+        actionMenuItemViewEditProfile.perform(click())
 
-        val actionMenuItemView4 = onView(
-            allOf(
-                withId(R.id.btnEdit), withContentDescription("Edit"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.toolbarProfile),
-                        1
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        actionMenuItemView4.perform(click())
-
+        // focus on name edit test
         val textInputEditText3 = onView(
             allOf(
                 withId(R.id.nameEdit), withText("Antonio"),
@@ -151,6 +126,7 @@ class UpdateUserActivityTest {
         )
         textInputEditText3.perform(scrollTo(), replaceText("Antonio test"))
 
+        // focus on name edit test to fill Antonio test
         val textInputEditText4 = onView(
             allOf(
                 withId(R.id.nameEdit), withText("Antonio test"),
@@ -166,6 +142,7 @@ class UpdateUserActivityTest {
         )
         textInputEditText4.perform(closeSoftKeyboard())
 
+        // click Save button to retrieve data
         val extendedFloatingActionButton2 = onView(
             allOf(
                 withId(R.id.updateUserButton), withText("Save"),
