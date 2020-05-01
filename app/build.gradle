@@ -33,6 +33,7 @@ dependencies {
     implementation project(":data")
     implementation project(":domain")
     implementation project(":usescases")
+    implementation project(":sharedTest")
 
     implementation androidLibs.values()
     implementation androidKtxLibs.values()

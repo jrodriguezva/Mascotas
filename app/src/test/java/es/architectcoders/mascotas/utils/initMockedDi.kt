@@ -8,6 +8,8 @@ import es.architectcoders.data.repository.ErrorLoginRepository
 import es.architectcoders.data.repository.RepositoryException
 import es.architectcoders.domain.Advert
 import es.architectcoders.domain.User
+import es.architectcoders.macotas.sharedtest.utils.mockAdvert
+import es.architectcoders.macotas.sharedtest.utils.mockUser
 import es.architectcoders.mascotas.application.dataModule
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.common.ValidatorUtil

@@ -5,9 +5,14 @@ import arrow.core.right
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import es.architectcoders.data.repository.LoginRepository
+import es.architectcoders.macotas.sharedtest.utils.MockEmail
+import es.architectcoders.macotas.sharedtest.utils.loading
+import es.architectcoders.macotas.sharedtest.utils.mockAdvert
+import es.architectcoders.macotas.sharedtest.utils.mockUser
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
-import es.architectcoders.mascotas.utils.*
+import es.architectcoders.mascotas.utils.MainCoroutineScopeRule
+import es.architectcoders.mascotas.utils.captureValues
 import es.architectcoders.usescases.FindAdvertsByAuthor
 import es.architectcoders.usescases.GetUser
 import es.architectcoders.usescases.SaveUser
@@ -58,7 +63,9 @@ class ProfileViewModelTest {
     fun `get user data`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
         whenever(loginRepository.getCurrentUser()).thenReturn(mockUser.right())
-        whenever(getUser.invoke(MockEmail)).thenReturn(mockUser)
+        whenever(getUser.invoke(MockEmail)).thenReturn(
+            mockUser
+        )
         createViewModel()
         vm.loading.captureValues {
             coroutinesTestRule.resumeDispatcher()
@@ -72,11 +79,17 @@ class ProfileViewModelTest {
     fun `refresh to find adverts on sale`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
 
-        val listAdvertsByAuthor = listOf(mockAdvert, mockAdvert, mockAdvert)
+        val listAdvertsByAuthor = listOf(
+            mockAdvert,
+            mockAdvert,
+            mockAdvert
+        )
         whenever(findAdvertsByAuthor.invoke(MockEmail)).thenReturn(listAdvertsByAuthor)
 
         whenever(loginRepository.getCurrentUser()).thenReturn(mockUser.right())
-        whenever(getUser.invoke(MockEmail)).thenReturn(mockUser)
+        whenever(getUser.invoke(MockEmail)).thenReturn(
+            mockUser
+        )
 
         createViewModel()
         vm.loading.captureValues {
