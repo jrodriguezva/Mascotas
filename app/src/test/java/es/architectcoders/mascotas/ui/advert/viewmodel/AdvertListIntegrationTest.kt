@@ -1,8 +1,13 @@
 package es.architectcoders.mascotas.ui.advert.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import es.architectcoders.macotas.sharedtest.utils.defaultFakeAdverts
+import es.architectcoders.macotas.sharedtest.utils.loading
 import es.architectcoders.mascotas.ui.advert.viewmodel.event.AdvertNavigationEvent
-import es.architectcoders.mascotas.utils.*
+import es.architectcoders.mascotas.utils.MainCoroutineScopeRule
+import es.architectcoders.mascotas.utils.captureValues
+import es.architectcoders.mascotas.utils.getValueForTest
+import es.architectcoders.mascotas.utils.initMockedDi
 import es.architectcoders.usescases.FindRelevantAdverts
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -63,6 +68,7 @@ class AdvertListIntegrationTest : AutoCloseKoinTest() {
             assert(vm.nav.getValueForTest()?.peekContent() is AdvertNavigationEvent.CreateAdvertNavigation)
         }
     }
+
     @Test
     fun `on click advert click should navigate to detail advert`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
@@ -74,8 +80,10 @@ class AdvertListIntegrationTest : AutoCloseKoinTest() {
             assertEquals(values, loading)
             vm.onAdvertClicked(defaultFakeAdverts[0])
             assert(vm.nav.getValueForTest()?.peekContent() is AdvertNavigationEvent.AdvertDetailNavigation)
-            assertEquals((vm.nav.getValueForTest()?.peekContent() as
-                    AdvertNavigationEvent.AdvertDetailNavigation).id, defaultFakeAdverts[0].id)
+            assertEquals(
+                (vm.nav.getValueForTest()?.peekContent() as
+                        AdvertNavigationEvent.AdvertDetailNavigation).id, defaultFakeAdverts[0].id
+            )
         }
     }
 }
