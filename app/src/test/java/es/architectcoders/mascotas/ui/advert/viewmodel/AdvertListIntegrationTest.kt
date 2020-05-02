@@ -1,13 +1,9 @@
 package es.architectcoders.mascotas.ui.advert.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import es.architectcoders.macotas.sharedtest.utils.defaultFakeAdverts
 import es.architectcoders.macotas.sharedtest.utils.loading
 import es.architectcoders.mascotas.ui.advert.viewmodel.event.AdvertNavigationEvent
-import es.architectcoders.mascotas.utils.MainCoroutineScopeRule
-import es.architectcoders.mascotas.utils.captureValues
-import es.architectcoders.mascotas.utils.getValueForTest
-import es.architectcoders.mascotas.utils.initMockedDi
+import es.architectcoders.mascotas.utils.*
 import es.architectcoders.usescases.FindRelevantAdverts
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
