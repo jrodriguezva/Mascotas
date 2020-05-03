@@ -1,6 +1,7 @@
 package es.architectcoders.mascotas.ui.login.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import es.architectcoders.macotas.sharedtest.utils.loading
 import es.architectcoders.mascotas.utils.*
 import es.architectcoders.usescases.account.CreateAccountInteractor
 import es.architectcoders.usescases.login.GetCurrentUserInteractor

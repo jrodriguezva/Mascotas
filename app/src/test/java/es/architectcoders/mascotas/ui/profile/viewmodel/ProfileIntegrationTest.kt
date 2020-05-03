@@ -1,7 +1,7 @@
 package es.architectcoders.mascotas.ui.profile.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import es.architectcoders.data.repository.LoginRepository
+import es.architectcoders.macotas.sharedtest.utils.loading
 import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
 import es.architectcoders.mascotas.utils.*
 import es.architectcoders.usescases.FindAdvertsByAuthor
@@ -17,7 +17,6 @@ import org.koin.test.AutoCloseKoinTest
 import org.koin.test.get
 import org.mockito.junit.MockitoJUnitRunner
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 
