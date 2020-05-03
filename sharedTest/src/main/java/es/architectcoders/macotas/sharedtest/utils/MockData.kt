@@ -1,4 +1,4 @@
-package es.architectcoders.mascotas.utils
+package es.architectcoders.macotas.sharedtest.utils
 
 import es.architectcoders.domain.Advert
 import es.architectcoders.domain.User

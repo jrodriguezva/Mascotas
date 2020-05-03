@@ -8,6 +8,9 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import es.architectcoders.data.repository.LoginRepository
 import es.architectcoders.domain.User
+import es.architectcoders.macotas.sharedtest.utils.MockEmail
+import es.architectcoders.macotas.sharedtest.utils.loading
+import es.architectcoders.macotas.sharedtest.utils.mockUser
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.common.ValidatorUtil
 import es.architectcoders.mascotas.utils.*
@@ -58,7 +61,9 @@ class EditProfileViewModelTest {
     fun `get user data`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
         whenever(loginRepository.getCurrentUser()).thenReturn(mockUser.right())
-        whenever(getUser.invoke(MockEmail)).thenReturn(mockUser)
+        whenever(getUser.invoke(MockEmail)).thenReturn(
+            mockUser
+        )
         createViewModel()
         vm.loading.captureValues {
             coroutinesTestRule.resumeDispatcher()
@@ -73,7 +78,9 @@ class EditProfileViewModelTest {
         coroutinesTestRule.pauseDispatcher()
 
         whenever(loginRepository.getCurrentUser()).thenReturn(mockUser.right())
-        whenever(getUser.invoke(MockEmail)).thenReturn(mockUser)
+        whenever(getUser.invoke(MockEmail)).thenReturn(
+            mockUser
+        )
         whenever(validatorUtil.validateName(any())).thenReturn(1)
 
         val textError = "error"
@@ -101,7 +108,9 @@ class EditProfileViewModelTest {
         coroutinesTestRule.pauseDispatcher()
 
         whenever(loginRepository.getCurrentUser()).thenReturn(mockUser.right())
-        whenever(getUser.invoke(MockEmail)).thenReturn(mockUser)
+        whenever(getUser.invoke(MockEmail)).thenReturn(
+            mockUser
+        )
         whenever(saveUser.invoke(mockUser)).thenReturn(User().right())
         whenever(validatorUtil.validateName(any())).thenReturn(null)
         whenever(validatorUtil.validateSurname(any())).thenReturn(null)

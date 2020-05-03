@@ -12,7 +12,7 @@ import es.architectcoders.mascotas.ui.common.ValidatorUtil
 import es.architectcoders.mascotas.utils.MainCoroutineScopeRule
 import es.architectcoders.mascotas.utils.captureValues
 import es.architectcoders.mascotas.utils.getValueForTest
-import es.architectcoders.mascotas.utils.loading
+import es.architectcoders.macotas.sharedtest.utils.loading
 import es.architectcoders.usescases.account.CreateAccountInteractor
 import es.architectcoders.usescases.login.GetCurrentUserInteractor
 import es.architectcoders.usescases.login.SignInInteractor
