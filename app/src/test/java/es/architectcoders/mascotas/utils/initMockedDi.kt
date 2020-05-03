@@ -28,6 +28,7 @@ fun initMockedDi(vararg modules: Module) {
 private val mockedAppModule = module {
     single<LoginDataSource> { FakeLocalDataSource() }
     single<FirestoreDataSource> { FakeRemoteDataSource() }
+    single<UserDataSource> { FakeRemoteDataSource() }
     single<ValidatorUtil> { FakeValidatorUtil() }
     single<ResourceProvider> { FakeResourceProvider() }
     single { Dispatchers.Unconfined }
