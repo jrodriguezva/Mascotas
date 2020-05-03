@@ -4,6 +4,7 @@ import arrow.core.Either
 import arrow.core.Right
 import es.architectcoders.data.datasource.FirestoreDataSource
 import es.architectcoders.data.datasource.LoginDataSource
+import es.architectcoders.data.datasource.UserDataSource
 import es.architectcoders.data.repository.ErrorLoginRepository
 import es.architectcoders.data.repository.RepositoryException
 import es.architectcoders.domain.Advert
@@ -74,7 +75,7 @@ class FakeLocalDataSource : LoginDataSource {
     override suspend fun getCurrentUser(): Either<ErrorLoginRepository, User> = Right(user)
 }
 
-class FakeRemoteDataSource : FirestoreDataSource {
+class FakeRemoteDataSource : FirestoreDataSource, UserDataSource {
 
     override suspend fun addAdvert(advert: Advert) = Right(mockAdvert)
 
