@@ -1,0 +1,18 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="space_8dp">8dp</dimen>
+    <dimen name="space_16dp">16dp</dimen>
+    <dimen name="space_40dp">40dp</dimen>
+
+    <dimen name="advert_image_padding">8dp</dimen>
+    <dimen name="advert_text_padding">8dp</dimen>
+    <dimen name="advert_margin">6dp</dimen>
+    <dimen name="advert_image_margin">6dp</dimen>
+
+    <!--Emphasis modifiers for "on" colors-->
+    <dimen name="alpha_emphasis_high">@dimen/material_emphasis_high_type</dimen>
+    <dimen name="alpha_emphasis_medium">@dimen/material_emphasis_medium</dimen>
+    <dimen name="alpha_emphasis_disabled">@dimen/material_emphasis_disabled</dimen>
+</resources>
