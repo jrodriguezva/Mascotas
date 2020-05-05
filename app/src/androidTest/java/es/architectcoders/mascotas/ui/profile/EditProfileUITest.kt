@@ -18,7 +18,7 @@ import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 import org.koin.test.KoinTest
 
-class EditProfileTest : KoinTest {
+class EditProfileUITest : KoinTest {
 
     @get:Rule
     val activityTestRule = ActivityTestRule(EditProfileActivity::class.java, false, false)
