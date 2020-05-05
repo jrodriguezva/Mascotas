@@ -6,11 +6,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import es.architectcoders.data.datasource.FirestoreDataSource
 import es.architectcoders.data.datasource.LoginDataSource
+import es.architectcoders.data.datasource.UserDataSource
 import es.architectcoders.data.repository.AdvertRepository
 import es.architectcoders.data.repository.LoginRepository
 import es.architectcoders.data.repository.UserRepository
 import es.architectcoders.mascotas.datasource.FirestoreDataSourceImpl
 import es.architectcoders.mascotas.datasource.LoginDataSourceImpl
+import es.architectcoders.mascotas.datasource.UserDataSourceImpl
 import es.architectcoders.mascotas.ui.advert.fragment.AdvertDetailFragment
 import es.architectcoders.mascotas.ui.advert.fragment.AdvertListFragment
 import es.architectcoders.mascotas.ui.advert.fragment.NewAdvertFragment
@@ -60,6 +62,7 @@ private val appModule = module {
     factory<ResourceProvider> { ResourceProviderImpl(androidContext().resources) }
     factory<LoginDataSource> { LoginDataSourceImpl(get()) }
     factory<FirestoreDataSource> { FirestoreDataSourceImpl(get()) }
+    factory<UserDataSource> { UserDataSourceImpl(get()) }
     single<CoroutineDispatcher> { Dispatchers.Main }
     single<ValidatorUtil> { ValidatorUtilImpl() }
 }

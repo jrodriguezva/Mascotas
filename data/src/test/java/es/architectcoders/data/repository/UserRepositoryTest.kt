@@ -3,6 +3,7 @@ package es.architectcoders.data.repository
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import es.architectcoders.data.datasource.FirestoreDataSource
+import es.architectcoders.data.datasource.UserDataSource
 import es.architectcoders.domain.User
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
@@ -16,12 +17,12 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class UserRepositoryTest {
     @Mock
-    lateinit var firestoreDataSource: FirestoreDataSource
+    lateinit var userDataSource: UserDataSource
     private lateinit var userRepository: UserRepository
 
     @Before
     fun setUp() {
-        userRepository = UserRepository(firestoreDataSource)
+        userRepository = UserRepository(userDataSource)
     }
 
     @Test
@@ -41,7 +42,7 @@ class UserRepositoryTest {
                 country = "España")
 
             userRepository.saveUser(user)
-            verify(firestoreDataSource).saveUser(user)
+            verify(userDataSource).saveUser(user)
         }
     }
 
@@ -60,7 +61,7 @@ class UserRepositoryTest {
                 city = "Madrid",
                 country = "España")
 
-            whenever(firestoreDataSource.getUser("test@a.com")).thenReturn(user)
+            whenever(userDataSource.getUser("test@a.com")).thenReturn(user)
             val result = userRepository.getUser("test@a.com")
             Assert.assertEquals(user, result)
         }
