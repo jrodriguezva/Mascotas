@@ -28,7 +28,7 @@ fun initMockedDi(vararg modules: Module) {
 private val mockedAppModule = module {
     single<LoginDataSource> { FakeLocalDataSource() }
     single<FirestoreDataSource> { FakeRemoteDataSource() }
-    single<UserDataSource> { FakeRemoteDataSource() }
+    single<UserDataSource> { FakeRemoteUserDataSource() }
     single<ValidatorUtil> { FakeValidatorUtil() }
     single<ResourceProvider> { FakeResourceProvider() }
     single { Dispatchers.Unconfined }
@@ -76,7 +76,7 @@ class FakeLocalDataSource : LoginDataSource {
     override suspend fun getCurrentUser(): Either<ErrorLoginRepository, User> = Right(user)
 }
 
-class FakeRemoteDataSource : FirestoreDataSource, UserDataSource {
+class FakeRemoteDataSource : FirestoreDataSource {
 
     override suspend fun addAdvert(advert: Advert) = Right(mockAdvert)
 
@@ -85,11 +85,14 @@ class FakeRemoteDataSource : FirestoreDataSource, UserDataSource {
     override suspend fun getAdvert(id: String) = defaultFakeAdverts.first { it.id == id }
 
     override suspend fun getAdvertsByAuthor(author: String) = defaultFakeAdverts.filter { it.author == author }
-
-    override suspend fun getUser(email: String) = defaultFakeUsers.first { it.email == email }
-
-    override suspend fun saveUser(user: User): Either<RepositoryException, User> {
-        defaultFakeUsers + user
-        return Right(user)
-    }
 }
+ class FakeRemoteUserDataSource : UserDataSource {
+
+     override suspend fun getUser(email: String) = defaultFakeUsers.first { it.email == email }
+
+     override suspend fun saveUser(user: User): Either<RepositoryException, User> {
+         defaultFakeUsers + user
+         return Right(user)
+     }
+
+ }

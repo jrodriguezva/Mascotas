@@ -5,10 +5,7 @@ import arrow.core.right
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import es.architectcoders.data.repository.LoginRepository
-import es.architectcoders.macotas.sharedtest.utils.MockEmail
-import es.architectcoders.macotas.sharedtest.utils.loading
-import es.architectcoders.macotas.sharedtest.utils.mockAdvert
-import es.architectcoders.macotas.sharedtest.utils.mockUser
+import es.architectcoders.macotas.sharedtest.utils.*
 import es.architectcoders.mascotas.ui.common.ResourceProvider
 import es.architectcoders.mascotas.ui.profile.fragments.ProfileFragment
 import es.architectcoders.mascotas.utils.MainCoroutineScopeRule
@@ -78,14 +75,7 @@ class ProfileViewModelTest {
     @Test
     fun `refresh to find adverts on sale`() = coroutinesTestRule.runBlockingTest {
         coroutinesTestRule.pauseDispatcher()
-
-        val listAdvertsByAuthor = listOf(
-            mockAdvert,
-            mockAdvert,
-            mockAdvert
-        )
         whenever(findAdvertsByAuthor.invoke(MockEmail)).thenReturn(listAdvertsByAuthor)
-
         whenever(loginRepository.getCurrentUser()).thenReturn(mockUser.right())
         whenever(getUser.invoke(MockEmail)).thenReturn(
             mockUser

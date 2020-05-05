@@ -25,5 +25,10 @@ val mockAdvert = Advert(
     recent = false,
     author = MockEmail
 )
+val listAdvertsByAuthor = listOf(
+    mockAdvert,
+    mockAdvert,
+    mockAdvert
+)
 
 val loading = listOf(true, false)

@@ -5,13 +5,9 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
-import es.architectcoders.data.datasource.FirestoreDataSource
-import es.architectcoders.data.datasource.LoginDataSource
 import es.architectcoders.data.datasource.UserDataSource
 import es.architectcoders.mascotas.R
-import es.architectcoders.mascotas.ui.login.LoginActivity
 import es.architectcoders.mascotas.ui.profile.activities.EditProfileActivity
-import es.architectcoders.mascotas.ui.profile.activities.ProfileActivity
 import es.architectcoders.mascotas.ui.utils.FakeLocalDataSource
 import org.hamcrest.Matchers
 import org.junit.Before
@@ -21,7 +17,7 @@ import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 import org.koin.test.KoinTest
 
-class UpdateProfile : KoinTest {
+class EditProfileTest : KoinTest {
 
     @get:Rule
     val activityTestRule = ActivityTestRule(EditProfileActivity::class.java, false, false)
@@ -32,7 +28,6 @@ class UpdateProfile : KoinTest {
             factory<UserDataSource> { FakeLocalDataSource() }
         }
         loadKoinModules(testModule)
-        activityTestRule.activity
     }
 
     @Test
@@ -52,7 +47,7 @@ class UpdateProfile : KoinTest {
         Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.updateUserButton), ViewMatchers.withText(R.string.save)))
             .perform(ViewActions.scrollTo(), ViewActions.click())
 
-        Espresso.onView(ViewMatchers.withText(activityTestRule.activity.getString(R.string.error_min_name_length)))
+        Espresso.onView(ViewMatchers.withText(R.string.error_min_name_length))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
@@ -223,7 +218,7 @@ class UpdateProfile : KoinTest {
         Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.updateUserButton), ViewMatchers.withText(R.string.save)))
             .perform(ViewActions.click())
 
-        Thread.sleep(500)
-
+        Espresso.onView(ViewMatchers.withId(R.id.toolbarAdvert))
+            .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText(R.string.profile))))
     }
 }
