@@ -10,6 +10,7 @@ import es.architectcoders.mascotas.R
 import es.architectcoders.mascotas.ui.profile.activities.EditProfileActivity
 import es.architectcoders.mascotas.ui.utils.FakeLocalDataSource
 import org.hamcrest.Matchers
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -218,7 +219,7 @@ class EditProfileTest : KoinTest {
         Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.updateUserButton), ViewMatchers.withText(R.string.save)))
             .perform(ViewActions.click())
 
-        Espresso.onView(ViewMatchers.withId(R.id.toolbarAdvert))
-            .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText(R.string.profile))))
+        Thread.sleep(2000)
+        Assert.assertTrue(activityTestRule.activity.isDestroyed)
     }
 }
