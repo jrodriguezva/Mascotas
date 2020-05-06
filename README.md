@@ -17,7 +17,7 @@ git clone https://github.com/jrodriguezva/Mascotas.git
 Then, create a new Firebase project https://console.firebase.google.com/ and generate a google-services.json that allows the app to use a Firebase Database.
 The downloaded file must be stored inside the app module.
 
-To login into the app, you can create an user account using the Firebase app or do it just inside the app. It does not need two steeps verification, so you don't need to use your real email account.
+To login into the app, you can create an user account using Firebase or do it just inside the app. It does not need two steeps verification, so you don't need to use your real email account.
 
 Enjoy!
 
