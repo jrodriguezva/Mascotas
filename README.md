@@ -1,3 +1,5 @@
+[![Build Status](https://app.bitrise.io/app/608515b28f9d4ccd/status.svg?token=4xQGPdkw1fuXzED7xGOC5w&branch=master)](https://app.bitrise.io/app/608515b28f9d4ccd)
+
 # Mascotas
 
 This is an example Android Application that follow up Clean Architecture principles using MVVM pattern with Google architecture components and kotlin.
